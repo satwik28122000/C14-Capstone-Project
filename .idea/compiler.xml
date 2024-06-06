@@ -8,11 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="UserAuthentication" />
         <module name="GateWayAPI" />
+        <module name="EurekaServer" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="EurekaServer" options="-parameters" />
       <module name="GateWayAPI" options="-parameters" />
       <module name="UserAuthentication" options="-parameters" />
     </option>
