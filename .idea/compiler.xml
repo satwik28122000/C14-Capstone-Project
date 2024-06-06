@@ -6,13 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="UserAuthentication" />
-        <module name="GateWayAPI" />
-        <module name="EurekaServer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="kanban-be" target="17" />
+      <module name="EurekaServer" target="17" />
+      <module name="GateWayAPI" target="17" />
+      <module name="kanban-be" target="11" />
       <module name="UserAuthentication" target="17" />
     </bytecodeTargetLevel>
   </component>
