@@ -6,6 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+<<<<<<< HEAD
+=======
+        <module name="GateWayAPI" />
+>>>>>>> 6d8df66a42334b307ad9b5b79eac78418fda3039
         <module name="EurekaServer" />
       </profile>
     </annotationProcessing>

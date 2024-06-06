@@ -20,11 +20,17 @@ public class GateWayApiApplication
 	@Bean
 	public RouteLocator myRoutes(RouteLocatorBuilder builder){
 		return builder.routes()
-				.route(p->p.path("/api/v1/**")
+				.route(p->p.path("/auth/**")
 						.uri("lb://UserAuthentication/"))
+<<<<<<< HEAD
 				.route(p->p.path("/api/v2/**")
 						.uri("lb://  ") )
 						.build();
+=======
+//				.route(p->p.path("/api/v2/**")
+//						.uri("lb://  ") )
+				.build();
+>>>>>>> 6d8df66a42334b307ad9b5b79eac78418fda3039
 	}
 
 }
