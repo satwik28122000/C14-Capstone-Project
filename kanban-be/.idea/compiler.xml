@@ -8,17 +8,12 @@
         <outputRelativeToContentRoot value="true" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="EurekaServer" target="17" />
-      <module name="GateWayAPI" target="17" />
-      <module name="kanban-be" target="11" />
-      <module name="UserAuthentication" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="EurekaServer" options="-parameters" />
       <module name="GateWayAPI" options="-parameters" />
+      <module name="KanbanBoardService" options="-parameters" />
       <module name="UserAuthentication" options="-parameters" />
     </option>
   </component>
