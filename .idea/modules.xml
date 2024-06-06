@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/C-14-Capstone-Project.iml" filepath="$PROJECT_DIR$/.idea/C-14-Capstone-Project.iml" />
-      <module fileurl="file://$PROJECT_DIR$/kanban-be/UserAuthentication/UserAuthentication.iml" filepath="$PROJECT_DIR$/kanban-be/UserAuthentication/UserAuthentication.iml" />
-      <module fileurl="file://$PROJECT_DIR$/kanban-be.iml" filepath="$PROJECT_DIR$/kanban-be.iml" />
     </modules>
   </component>
 </project>

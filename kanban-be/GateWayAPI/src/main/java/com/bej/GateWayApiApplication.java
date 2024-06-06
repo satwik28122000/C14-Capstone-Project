@@ -23,7 +23,8 @@ public class GateWayApiApplication
 				.route(p->p.path("/api/v1/**")
 						.uri("lb://UserAuthentication/"))
 				.route(p->p.path("/api/v2/**")
-						.uri("lb://  ") ).build();
+						.uri("lb://  ") )
+						.build();
 	}
 
 }
