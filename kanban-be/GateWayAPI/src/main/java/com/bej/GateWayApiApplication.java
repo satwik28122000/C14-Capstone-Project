@@ -30,7 +30,7 @@ public class GateWayApiApplication
 //				.route(p->p.path("/api/v2/**")
 //						.uri("lb://  ") )
 				.build();
->>>>>>> 6d8df66a42334b307ad9b5b79eac78418fda3039
+
 	}
 
 }
