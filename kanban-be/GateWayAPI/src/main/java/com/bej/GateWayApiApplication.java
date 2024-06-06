@@ -16,18 +16,6 @@ public class GateWayApiApplication
 		SpringApplication.run(GateWayApiApplication.class, args);
 	}
 
-	@Bean
-	public RouteLocator myRoutes(RouteLocatorBuilder builder){
-		return builder.routes()
-				.route(p -> p
-						.path("/auth/**")
-						.uri("lb://UserAuthentication/"))
-
-				.route(p->p.path("/api/v2/**")
-						.uri("lb://  ") )
-				.build();
-
-	}
 
 
 }

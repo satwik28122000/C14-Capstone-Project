@@ -9,6 +9,22 @@
         <module name="UserAuthentication" />
       </profile>
     </annotationProcessing>
+<<<<<<< HEAD
+=======
+=======
+      </profile>
+    </annotationProcessing>
+<<<<<<< HEAD
+=======
+    <bytecodeTargetLevel>
+      <module name="EurekaServer" target="17" />
+      <module name="GateWayAPI" target="17" />
+      <module name="kanban-be" target="11" />
+      <module name="UserAuthentication" target="17" />
+    </bytecodeTargetLevel>
+>>>>>>> e38ad1455ca6a91687c31858274738b7c86e934c
+>>>>>>> f6af4e5e61b15bacd555484f799a18abe5450fe0
+>>>>>>> df7e3fccbd0919d0664adbd61bb0d09022468630
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
