@@ -48,6 +48,7 @@
     <module>UserAuthentication</module>
     <module>GateWayAPI</module>
     <module>EurekaServer</module>
+    <module>KanbanBoardService</module>
   </modules>
   <build>
     <plugins>
