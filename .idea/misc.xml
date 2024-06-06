@@ -7,9 +7,12 @@
         <option value="$PROJECT_DIR$/kanban-be/pom.xml" />
       </list>
     </option>
-    <option name="workspaceImportForciblyTurnedOn" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">
+>>>>>>> fb23c057e6249fccf30a11f41fe7ef0fefb046d1
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
