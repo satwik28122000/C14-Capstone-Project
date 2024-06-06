@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class TokenGeneratorImpl {
+public class TokenGeneratorImpl implements ITokenGenerator{
     public String createToken(User user){
         // Write logic to create the Jwt
         Map<String,Object> map = new HashMap<>();
