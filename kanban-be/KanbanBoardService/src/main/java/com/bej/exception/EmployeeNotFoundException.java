@@ -1,4 +1,10 @@
 package com.bej.exception;
 
-public class EmployeeNotFoundException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+
+public class EmployeeNotFoundException extends Exception
+{
+
 }
