@@ -24,7 +24,7 @@ public class UserAuthController {
 
     //save user mapping with endpoint /auth/save
     @PostMapping("/save")
-    ResponseEntity<?> saveUser(@RequestBody User user) throws UserAlreadyExistException {
+    public ResponseEntity<?> saveUser(@RequestBody User user) throws UserAlreadyExistException {
         try{
             return new ResponseEntity<>(userAuthService.saveUser(user), HttpStatus.CREATED);
         }
@@ -37,7 +37,7 @@ public class UserAuthController {
     }
     //login user mapping with endpoint "/auth/login"
     @GetMapping("/login")
-    ResponseEntity<?> loginUser(@RequestBody User user) throws UserNotFoundException, InvalidCredentialsException {
+    public ResponseEntity<?> loginUser(@RequestBody User user) throws UserNotFoundException, InvalidCredentialsException {
         try{
             String loggedUser = userAuthService.login(user.getUserId(),user.getPassword());
             String token = tokenGenerator.createToken(user);

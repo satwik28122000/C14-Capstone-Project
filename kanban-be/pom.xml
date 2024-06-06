@@ -12,7 +12,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.3.0</version>
+    <version>3.2.0</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <properties>
@@ -49,6 +49,7 @@
     <module>UserAuthentication</module>
     <module>GateWayAPI</module>
     <module>EurekaServer</module>
+    <module>KanbanBoardService</module>
   </modules>
   <build>
     <plugins>
