@@ -16,8 +16,6 @@ public class ApiConfiguration
                 .route(p->p.path("/auth/**")
                         .uri("lb://UserAuthentication/"))
 
-//				.route(p->p.path("/api/v2/**")
-//						.uri("lb://  ") )
                 .build();
 
     }
