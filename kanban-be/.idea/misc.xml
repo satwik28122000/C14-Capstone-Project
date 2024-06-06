@@ -7,7 +7,12 @@
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
+<<<<<<< HEAD
     <option name="workspaceImportForciblyTurnedOn" value="true" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK" />
+=======
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="17" project-jdk-type="JavaSDK" />
+>>>>>>> 35829655a405769dfc3d844b783ba88a9af7a221
 </project>
