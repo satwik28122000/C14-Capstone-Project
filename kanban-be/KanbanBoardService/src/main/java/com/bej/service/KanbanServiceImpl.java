@@ -1,11 +1,16 @@
 package com.bej.service;
 
 import com.bej.domain.Employee;
+import com.bej.domain.Task;
+import com.bej.exception.EmployeeAlreadyExistsException;
 import com.bej.exception.EmployeeNotFoundException;
+import com.bej.exception.TaskNotFoundException;
 import com.bej.repository.EmployeeRepository;
 import com.bej.repository.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class KanbanServiceImpl implements IKanbanService {
@@ -20,15 +25,44 @@ public class KanbanServiceImpl implements IKanbanService {
 
 
     @Override
-    public Employee registerEmployee(Employee employee) {
-        return null;
+    public Employee registerEmployee(Employee employee) throws EmployeeAlreadyExistsException {
+        if(employeeRepository.findById(employee.getUserId()).isEmpty()){
+            throw new EmployeeAlreadyExistsException();
+        }
+        return employeeRepository.save(employee);
     }
 
     @Override
-    public Employee updateEmployeeTaskInTaskList(String userId, Employee employee) throws EmployeeNotFoundException {
-        //Employee employee1 = employeeRepository.findById(userId).orElseThrow(EmployeeNotFoundException::new);
-        return null;
+    public Employee updateEmployeeTaskInTaskList(String userId, Task task) throws EmployeeNotFoundException, TaskNotFoundException {
+        Employee employee1 = employeeRepository.findById(userId).orElseThrow(EmployeeNotFoundException::new);
+        List<Task> taskList = employee1.getUserTaskList();
+        int ind = taskList.indexOf(task);
+        if(ind < 0){
+            throw new TaskNotFoundException();
+        }
+        for(Task t: taskList){
+            if(t.getTaskId().equals(task.getTaskId())){
+                t.setTaskName(task.getTaskName());
+                t.setStatus(task.getStatus());
+                t.setDueDate(task.getDueDate());
+                t.setEmployee(task.getEmployee());
+                t.setPriority(task.getPriority());
+                t.setTaskdesc(task.getTaskDesc());
+            }
+        }
+        employee1.setUserTaskList(taskList);
+        return employeeRepository.save(employee1);
     }
+
+//    @Override
+//    public List<Employee> getAllEmployee(String userId) {
+//        return null;
+//    }
+//
+//    @Override
+//    public Employee saveEmployeeTaskToTaskList(Task task, String userId) {
+//        return null;
+//    }
 
 
 }
