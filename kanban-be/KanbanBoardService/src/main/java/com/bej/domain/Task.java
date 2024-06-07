@@ -2,7 +2,6 @@ package com.bej.domain;
 
 import org.springframework.data.annotation.Id;
 
-import java.util.UUID;
 
 public class Task {
     @Id
@@ -12,26 +11,26 @@ public class Task {
     private String status ;
     private String priority;
     private String dueDate;
-    private Employee employee;
+
 
     public Task() {
     }
 
-    public Task(String taskName, String taskDesc, String status, String priority, String dueDate, Employee employee) {
+    public Task(String taskId,String taskName, String taskDesc, String status, String priority, String dueDate) {
         this.taskName = taskName;
         this.taskDesc = taskDesc;
         this.status = status;
         this.priority = priority;
         this.dueDate = dueDate;
-        this.employee = employee;
+        this.taskId= taskId;
     }
 
     public String getTaskId() {
         return taskId;
     }
 
-    public void setTaskId() {
-        this.taskId = UUID.randomUUID().toString();
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
     }
 
     public String getTaskName() {
@@ -46,7 +45,7 @@ public class Task {
         return taskDesc;
     }
 
-    public void setTaskdesc(String taskDescesc) {
+    public void setTaskdesc(String taskDesc) {
         this.taskDesc = taskDesc;
     }
 
@@ -74,11 +73,4 @@ public class Task {
         this.dueDate = dueDate;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
 }
