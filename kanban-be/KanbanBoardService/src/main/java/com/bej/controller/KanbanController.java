@@ -27,16 +27,28 @@ public class KanbanController {
 
 
 
-    @GetMapping("/getAllEmployees")
-    public ResponseEntity<?> fetchAllEmployee(@RequestBody String userId) throws EmployeeNotFoundException {
+    @GetMapping("/getEmployeesByUserId/{userId}")
+    public ResponseEntity<?> fetchEmployeeByUserId(@PathVariable String userId, @RequestBody Employee employee) throws EmployeeNotFoundException {
         try {
-            return new ResponseEntity<>(kanbanService.getAllEmployee(userId), HttpStatus.OK);
+            return new ResponseEntity<>(kanbanService.getEmployeeByUserId(userId), HttpStatus.OK);
         }
         catch (EmployeeNotFoundException enf)
         {
             throw new EmployeeNotFoundException();
         }
         catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/getAllEmployee")
+    public ResponseEntity<?> fetchAllEmployee() throws Exception
+    {
+        try {
+            return new ResponseEntity<>(kanbanService.getAllEmployee(), HttpStatus.OK);
+        }
+        catch (Exception e)
+        {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -52,6 +64,7 @@ public class KanbanController {
                     return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             }
+
 
     //Register the employee using endpoint "/api/kanban/register
     @PostMapping("/register")

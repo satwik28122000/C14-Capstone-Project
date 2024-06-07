@@ -44,15 +44,21 @@ public class KanbanServiceImpl implements IKanbanService {
     }
 
     @Override
-
-    public List<Employee> getAllEmployee(String userId) throws EmployeeNotFoundException {
+    public Employee getEmployeeByUserId(String userId) throws EmployeeNotFoundException {
         Optional<Employee> optionalEmployee = employeeRepository.findById(userId);
-        Employee registeredEmployee = optionalEmployee.get();
         if (optionalEmployee.isEmpty()) {
             throw new EmployeeNotFoundException();
         } else {
-            return (List<Employee>) registeredEmployee;
+            return optionalEmployee.get();
         }
+    }
+
+
+    @Override
+    public List<Employee>  getAllEmployee() throws Exception
+    {
+        return employeeRepository.findAll();
+
     }
 
 
@@ -87,7 +93,7 @@ public class KanbanServiceImpl implements IKanbanService {
                         break;
                     }
                 }
-                if (taskAlreadyExist) {
+                if (!taskAlreadyExist) {
                    throw new TaskAlreadyExistsException();
                 }
                 else {
