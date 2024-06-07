@@ -26,7 +26,7 @@ public class KanbanServiceImpl implements IKanbanService {
 
     @Override
     public Employee registerEmployee(Employee employee) throws EmployeeAlreadyExistsException {
-        if(employeeRepository.findById(employee.getUserId()).isEmpty()){
+        if(employeeRepository.findById(employee.getUserId()).isPresent()){
             throw new EmployeeAlreadyExistsException();
         }
         return employeeRepository.save(employee);
@@ -36,16 +36,15 @@ public class KanbanServiceImpl implements IKanbanService {
     public Employee updateEmployeeTaskInTaskList(String userId, Task task) throws EmployeeNotFoundException, TaskNotFoundException {
         Employee employee1 = employeeRepository.findById(userId).orElseThrow(EmployeeNotFoundException::new);
         List<Task> taskList = employee1.getUserTaskList();
-        int ind = taskList.indexOf(task);
-        if(ind < 0){
+        if(taskList == null){
             throw new TaskNotFoundException();
         }
+
         for(Task t: taskList){
             if(t.getTaskId().equals(task.getTaskId())){
                 t.setTaskName(task.getTaskName());
                 t.setStatus(task.getStatus());
                 t.setDueDate(task.getDueDate());
-                t.setEmployee(task.getEmployee());
                 t.setPriority(task.getPriority());
                 t.setTaskdesc(task.getTaskDesc());
             }
@@ -54,15 +53,7 @@ public class KanbanServiceImpl implements IKanbanService {
         return employeeRepository.save(employee1);
     }
 
-//    @Override
-//    public List<Employee> getAllEmployee(String userId) {
-//        return null;
-//    }
-//
-//    @Override
-//    public Employee saveEmployeeTaskToTaskList(Task task, String userId) {
-//        return null;
-//    }
+
 
 
 }

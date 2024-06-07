@@ -13,8 +13,5 @@ public interface IKanbanService {
 
     Employee updateEmployeeTaskInTaskList(String userId, Task task) throws EmployeeNotFoundException, TaskNotFoundException;
 
-    List<Employee> getAllEmployee(String userId);
-
-    Employee saveEmployeeTaskToTaskList(Task task, String userId);
 
 }
