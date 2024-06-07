@@ -28,13 +28,27 @@ public class KanbanServiceImpl implements IKanbanService {
     }
 
     @Override
-    public List<Employee> getAllEmployee(String userId) throws EmployeeNotFoundException {
+    public List<Employee> getAllEmployee() throws Exception
+    {
+        List<Employee> employeeList = employeeRepository.findAll();
+        if (employeeList.isEmpty())
+        {
+            throw new  Exception();
+        }
+        return employeeList;
+    }
+
+    @Override
+    public Employee getEmployeeByUserId(String userId) throws EmployeeNotFoundException
+    {
         Optional<Employee> optionalEmployee = employeeRepository.findById(userId);
-        Employee registeredEmployee = optionalEmployee.get();
-        if (optionalEmployee.isEmpty()) {
+
+        if (optionalEmployee.isEmpty())
+        {
             throw new EmployeeNotFoundException();
-        } else {
-            return (List<Employee>) registeredEmployee;
+        } else
+        {
+            return optionalEmployee.get();
         }
     }
 
@@ -52,7 +66,7 @@ public class KanbanServiceImpl implements IKanbanService {
 
 
         Optional<Employee> optionalEmployee = employeeRepository.findById(userId);
-        Employee employee;
+
         if (optionalEmployee.isPresent()) {
             Employee registeredEmployee = optionalEmployee.get();
             List<Task> taskList = registeredEmployee.getUserTaskList();
@@ -147,6 +161,49 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
     @Override
     public List<Task> getAllEmployeeTaskFromTaskList(String userId) throws EmployeeNotFoundException {
         return null;
+    }
+
+    @Override
+    public Manager saveProjectInManagerProjectList(Project project, String managerId) throws ManagerNotFoundException, ProjectAlreadyExistException
+    {
+        Optional<Manager> optionalManager= managerRepository.findById(managerId);
+        if (optionalManager.isPresent())
+        {
+            Manager registeredManager= optionalManager.get();
+            List<Project> projectList= registeredManager.getProjectList();
+            if (projectList == null)
+            {
+                registeredManager.setProjectList(Arrays.asList(project));
+            }
+            else
+            {
+                boolean projectAlreadyExist = false;
+                for (Project projectObj: projectList)
+                {
+                    if (projectObj.getProjectName().equals(project.getProjectName()))
+                    {
+                        projectAlreadyExist = true;
+                        break;
+                    }
+                }
+                if (!projectAlreadyExist)
+                {
+                    throw new ProjectAlreadyExistException();
+                }
+                else
+                {
+                    projectList.add(project);
+                    registeredManager.setProjectList(projectList);
+                }
+            }
+            managerRepository.save(registeredManager);
+            optionalManager= managerRepository.findById(managerId);
+            if (optionalManager.isPresent())
+            {
+                return optionalManager.get();
+            }
+        }
+        throw new ManagerNotFoundException();
     }
 
     @Override

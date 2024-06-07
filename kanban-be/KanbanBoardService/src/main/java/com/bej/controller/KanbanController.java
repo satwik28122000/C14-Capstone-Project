@@ -1,11 +1,9 @@
 package com.bej.controller;
+import com.bej.domain.Project;
 import com.bej.domain.Task;
 import com.bej.domain.Employee;
 import com.bej.domain.Task;
-import com.bej.exception.EmployeeAlreadyExistsException;
-import com.bej.exception.EmployeeNotFoundException;
-import com.bej.exception.TaskAlreadyExistsException;
-import com.bej.exception.TaskNotFoundException;
+import com.bej.exception.*;
 import com.bej.service.IKanbanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -84,7 +82,7 @@ public class KanbanController {
     }
 
 
-    @PostMapping("/saveTask")
+    @PostMapping("/saveTaskInEmployee")
     public ResponseEntity<?> addEmployeeTaskToTaskList(@RequestBody Task task, String userId) throws EmployeeNotFoundException , TaskAlreadyExistsException{
         try {
 
@@ -106,6 +104,28 @@ public class KanbanController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    @PostMapping("/saveProjectInManager")
+    public ResponseEntity<?> addManagerProjectToProjectList(@RequestBody Project project, String managerId) throws ManagerNotFoundException , ProjectAlreadyExistException
+    {
+        try {
+            return new ResponseEntity<>(kanbanService.saveProjectInManagerProjectList(project, managerId), HttpStatus.CREATED);
+        }
+        catch (ManagerNotFoundException mnf)
+        {
+            throw new ManagerNotFoundException();
+        }
+        catch (ProjectAlreadyExistException pae)
+        {
+            throw new ProjectAlreadyExistException();
+        }
+        catch (Exception e)
+        {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     //update task in task list in employee using endpoint "/api/kanban/{userid}"
     @PutMapping("/updatetask/{userid}")
     public ResponseEntity<?> updateEmployeeTaskInTaskList(@PathVariable String userid,@RequestBody Task task) throws EmployeeNotFoundException, TaskNotFoundException {
