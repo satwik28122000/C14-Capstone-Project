@@ -76,7 +76,7 @@ public class KanbanServiceImpl implements IKanbanService {
             else {
                 boolean taskAlreadyExist = false;
                 for (Task taskObj : taskList) {
-                    if (taskObj.getTaskName().equals(task.getTaskName())) {
+                    if (taskObj.getTaskId().equals(task.getTaskId())) {
                         taskAlreadyExist = true;
                         break;
                     }
@@ -180,13 +180,13 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
                 boolean projectAlreadyExist = false;
                 for (Project projectObj: projectList)
                 {
-                    if (projectObj.getProjectName().equals(project.getProjectName()))
+                    if (projectObj.getProjectId().equals(project.getProjectId()))
                     {
                         projectAlreadyExist = true;
                         break;
                     }
                 }
-                if (!projectAlreadyExist)
+                if (projectAlreadyExist)
                 {
                     throw new ProjectAlreadyExistException();
                 }
@@ -205,6 +205,41 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         }
         throw new ManagerNotFoundException();
     }
+
+//    @Override
+//    public Manager deleteProjectFromManager(String managerId, String projectId) throws ProjectNotFoundException, ManagerNotFoundException
+//    {
+//        Optional<Manager> optionalManager= managerRepository.findById(managerId);
+//        if (optionalManager.isPresent())
+//        {
+//            Manager registeredManager= optionalManager.get();
+//            List<Project> projectList= registeredManager.getProjectList();
+//            boolean projectFound=false;
+//            for (Project existingProject : projectList)
+//            {
+//                if (existingProject.getProjectId().equals(projectId))
+//                {
+//                    projectFound=true;
+//                    projectList.remove(existingProject);
+//                    break;
+//                }
+//            }
+//            if (!projectFound)
+//            {
+//                registeredManager.setProjectList(projectList);
+//                return managerRepository.save(registeredManager);
+//            }
+//            else
+//            {
+//                throw new ProjectNotFoundException();
+//            }
+//        }
+//        else
+//        {
+//            throw new ManagerNotFoundException();
+//        }
+//
+//    }
 
     @Override
     public Manager updateProjectInManagerProjectList(String managerId, Project project) throws ManagerNotFoundException, ProjectNotFoundException {

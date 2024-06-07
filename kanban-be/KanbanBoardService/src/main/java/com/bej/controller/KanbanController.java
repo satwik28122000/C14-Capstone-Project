@@ -1,7 +1,5 @@
 package com.bej.controller;
-import com.bej.domain.Project;
-import com.bej.domain.Task;
-import com.bej.domain.Employee;
+import com.bej.domain.*;
 import com.bej.domain.Task;
 import com.bej.exception.*;
 import com.bej.service.IKanbanService;
@@ -173,6 +171,26 @@ public class KanbanController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+//    @DeleteMapping("/deleteProject/{projectId}")
+//    public ResponseEntity<?> deleteProject(@PathVariable String projectId , @RequestBody String managerId) throws ManagerNotFoundException , ProjectNotFoundException
+//    {
+//        try {
+//            return new ResponseEntity<>(kanbanService.deleteProjectFromManager(projectId , managerId), HttpStatus.OK);
+//        }
+//        catch (ManagerNotFoundException mnf)
+//        {
+//            throw new ManagerNotFoundException();
+//        }
+//        catch (ProjectNotFoundException pnf)
+//        {
+//            throw new ProjectNotFoundException();
+//        }
+//        catch (Exception e)
+//        {
+//            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
     @GetMapping("/manager/{managerId}/projects")
     public ResponseEntity<?> getAllProjectFromManager(@PathVariable String managerId) {
