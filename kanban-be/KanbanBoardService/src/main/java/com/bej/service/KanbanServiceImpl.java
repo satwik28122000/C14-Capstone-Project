@@ -1,10 +1,9 @@
 package com.bej.service;
 import com.bej.domain.Employee;
+import com.bej.domain.Manager;
+import com.bej.domain.Project;
 import com.bej.domain.Task;
-import com.bej.exception.EmployeeNotFoundException;
-import com.bej.exception.TaskAlreadyExistsException;
-import com.bej.exception.EmployeeAlreadyExistsException;
-import com.bej.exception.TaskNotFoundException;
+import com.bej.exception.*;
 import com.bej.repository.EmployeeRepository;
 import com.bej.repository.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class KanbanServiceImpl implements IKanbanService {
         }
     }
 
-
+    //register employee
     @Override
     public Employee registerEmployee (Employee employee) throws EmployeeAlreadyExistsException {
         if (employeeRepository.findById(employee.getUserId()).isPresent()) {
@@ -55,14 +54,11 @@ public class KanbanServiceImpl implements IKanbanService {
         Optional<Employee> optionalEmployee = employeeRepository.findById(userId);
         Employee employee;
         if (optionalEmployee.isPresent()) {
-
-
             Employee registeredEmployee = optionalEmployee.get();
             List<Task> taskList = registeredEmployee.getUserTaskList();
             if (taskList == null) {
                 registeredEmployee.setUserTaskList(Arrays.asList(task));
             }
-
             else {
                 boolean taskAlreadyExist = false;
                 for (Task taskObj : taskList) {
@@ -104,11 +100,11 @@ public class KanbanServiceImpl implements IKanbanService {
         for(Task t:taskList){
             if(t.getTaskId().equals(task.getTaskId())){
                 flag = true;
+                break;
             }
         }
         if(!flag){
             throw new TaskNotFoundException();
-
         }
         for (Task t : taskList) {
             if (t.getTaskId().equals(task.getTaskId())) {
@@ -153,5 +149,32 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         return null;
     }
 
+    @Override
+    public Manager updateProjectInManagerProjectList(String managerId, Project project) throws ManagerNotFoundException, ProjectNotFoundException {
+        Manager manager = managerRepository.findById(managerId).orElseThrow(ManagerNotFoundException::new);
+        List<Project> projectList = manager.getProjectList();
+        if(projectList==null){
+            throw new ProjectNotFoundException();
+        }
+        boolean flag = false;
+        for(Project p:projectList){
+            if(p.getProjectId().equals(project.getProjectId())){
+                flag = true;
+                break;
+            }
+        }
+        if(!flag){
+            throw new ProjectNotFoundException();
+        }
+        for(Project p:projectList){
+            if(p.getProjectId().equals(project.getProjectId())){
+                p.setProjectName(project.getProjectName());
+                p.setProjectDesc(project.getProjectDesc());
+                p.setProjectTasks(project.getProjectTasks());
+            }
+        }
+        manager.setProjectList(projectList);
+        return managerRepository.save(manager);
+    }
 
 }
