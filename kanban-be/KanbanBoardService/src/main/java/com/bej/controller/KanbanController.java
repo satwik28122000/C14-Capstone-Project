@@ -1,5 +1,5 @@
 package com.bej.controller;
-
+import com.bej.domain.Task;
 import com.bej.domain.Employee;
 import com.bej.domain.Task;
 import com.bej.exception.EmployeeAlreadyExistsException;
@@ -7,10 +7,11 @@ import com.bej.exception.EmployeeNotFoundException;
 import com.bej.exception.TaskNotFoundException;
 import com.bej.service.IKanbanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 @RestController
 @RequestMapping("/api/kanban")
 public class KanbanController {
@@ -19,8 +20,16 @@ public class KanbanController {
     public KanbanController(IKanbanService kanbanService) {
         this.kanbanService = kanbanService;
     }
+    @DeleteMapping("/employee/{userId}/task/{taskId}")
+    public void deleteTaskFromEmployee(@PathVariable String userId, @PathVariable String taskId) throws TaskNotFoundException, EmployeeNotFoundException {
+        kanbanService.deleteTaskFromEmployee(userId, taskId);
+    }
 
-    //Register the employee using endpoint "/api/kanban/register"
+    @GetMapping("/employee/{userId}/tasks")
+    public List<Task> getAllEmployeeTaskFromTaskList(@PathVariable String userId) throws EmployeeNotFoundException {
+        return kanbanService.getAllEmployeeTaskFromTaskList(userId);
+    }
+    //Register the employee using endpoint "/api/kanban/register
     @PostMapping("/register")
     public ResponseEntity<?> registerEmployee(@RequestBody Employee employee) throws EmployeeAlreadyExistsException {
         try{

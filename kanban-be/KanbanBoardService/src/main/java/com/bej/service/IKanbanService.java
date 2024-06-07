@@ -11,7 +11,11 @@ import java.util.List;
 public interface IKanbanService {
     Employee registerEmployee(Employee employee) throws EmployeeAlreadyExistsException;
 
-    Employee updateEmployeeTaskInTaskList(String userId, Task task) throws EmployeeNotFoundException, TaskNotFoundException;
+    Employee updateEmployeeTaskInTaskList(String userId, Task employee) throws EmployeeNotFoundException,TaskNotFoundException;
 
 
+    List<Task> deleteTaskFromEmployee(String userId, String taskId) throws TaskNotFoundException, EmployeeNotFoundException;
+
+
+    List<Task> getAllEmployeeTaskFromTaskList(String userId) throws EmployeeNotFoundException;
 }
