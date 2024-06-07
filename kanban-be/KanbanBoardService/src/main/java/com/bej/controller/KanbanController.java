@@ -1,11 +1,9 @@
 package com.bej.controller;
+import com.bej.domain.Project;
 import com.bej.domain.Task;
 import com.bej.domain.Employee;
 import com.bej.domain.Task;
-import com.bej.exception.EmployeeAlreadyExistsException;
-import com.bej.exception.EmployeeNotFoundException;
-import com.bej.exception.TaskAlreadyExistsException;
-import com.bej.exception.TaskNotFoundException;
+import com.bej.exception.*;
 import com.bej.service.IKanbanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -104,6 +102,22 @@ public class KanbanController {
         }
         catch (EmployeeNotFoundException e) {
             throw new EmployeeNotFoundException();
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    //update project in project list
+    @PutMapping("/updateproject/{managerid}")
+    public ResponseEntity<?> updateProjectInManagerProjectList(@PathVariable String managerid, @RequestBody Project project) throws ManagerNotFoundException, ProjectNotFoundException {
+        try{
+            return  new ResponseEntity<>(kanbanService.updateProjectInManagerProjectList(managerid,project),HttpStatus.OK);
+        }
+        catch(ManagerNotFoundException e){
+            throw new ManagerNotFoundException();
+        }
+        catch(ProjectNotFoundException e){
+            throw new ProjectNotFoundException();
         }
         catch(Exception e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
