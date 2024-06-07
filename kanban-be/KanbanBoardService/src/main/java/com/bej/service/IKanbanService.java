@@ -16,7 +16,8 @@ import java.util.List;
 public interface IKanbanService {
 
 
-    List<Employee> getAllEmployee(String userId) throws EmployeeNotFoundException;
+    List<Employee> getAllEmployee() throws Exception;
+    Employee getEmployeeByUserId(String userId) throws EmployeeNotFoundException;
     Employee registerEmployee(Employee employee) throws EmployeeAlreadyExistsException;
     Employee updateEmployeeTaskInTaskList(String userId, Task employee) throws EmployeeNotFoundException,TaskNotFoundException;
 
@@ -28,5 +29,6 @@ public interface IKanbanService {
     List<Project> getAllProjectFromManager(String managerId) throws EmployeeNotFoundException;
 
     Manager updateProjectInManagerProjectList(String managerId, Project project) throws ManagerNotFoundException, ProjectNotFoundException;
+    Manager saveProjectInManagerProjectList(Project project , String managerId) throws ManagerNotFoundException , ProjectAlreadyExistException;
 }
 

@@ -28,15 +28,15 @@ public class KanbanServiceImpl implements IKanbanService {
     }
 
     @Override
-    public List<Employee> getAllEmployee() throws Exception
-    {
+    public List<Employee> getAllEmployee() throws Exception {
         List<Employee> employeeList = employeeRepository.findAll();
-        if (employeeList.isEmpty())
-        {
-            throw new  Exception();
+        if (employeeList.isEmpty()) {
+            throw new Exception();
         }
         return employeeList;
     }
+
+
 
     @Override
     public Employee getEmployeeByUserId(String userId) throws EmployeeNotFoundException
@@ -149,7 +149,8 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
             return updatedTaskList;
         }
     @Override
-    public List<Project> getAllProjectFromManager(String managerId) throws EmployeeNotFoundException {
+    public List<Project> getAllProjectFromManager(String managerId) throws EmployeeNotFoundException
+    {
         return managerRepository.findById(managerId)
                 .orElseThrow(EmployeeNotFoundException::new)
                 .getProjectList();
