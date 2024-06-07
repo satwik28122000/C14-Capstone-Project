@@ -15,18 +15,19 @@ public class Project {
     public Project() {
     }
 
-    public Project(String projectName, String projectDesc, List<Task> projectTasks) {
+    public Project(String projectId,String projectName, String projectDesc, List<Task> projectTasks) {
         this.projectName = projectName;
         this.projectDesc = projectDesc;
         this.projectTasks = projectTasks;
+        this.projectId=projectId;
     }
 
     public String getProjectId() {
         return projectId;
     }
 
-    public void setProjectId() {
-        this.projectId = UUID.randomUUID().toString();
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
     }
 
     public String getProjectName() {

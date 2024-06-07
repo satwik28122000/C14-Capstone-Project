@@ -44,6 +44,7 @@ public class KanbanServiceImpl implements IKanbanService {
     }
 
     @Override
+
     public List<Employee> getAllEmployee(String userId) throws EmployeeNotFoundException {
         Optional<Employee> optionalEmployee = employeeRepository.findById(userId);
         Employee registeredEmployee = optionalEmployee.get();
@@ -54,35 +55,23 @@ public class KanbanServiceImpl implements IKanbanService {
         }
     }
 
-    //        @Override
-//    public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws TaskNotFoundException, EmployeeNotFoundException {
-//        Optional<Employee> optionalEmployee = employeeRepository.findById(userId);
-//        if (optionalEmployee.isPresent()) {
-//            Employee employee = optionalEmployee.get();
-//            List<Task> taskList = employee.getUserTaskList();
-//            boolean taskExists = taskList.stream().anyMatch(task -> task.getTaskId().equals(taskId));
-//            if (!taskExists) {
-//                throw new TaskNotFoundException();
-//            }
-//            List<Task> updatedTaskList = taskList.stream()
-//                    .filter(task -> !task.getTaskId().equals(taskId))
-//                    .collect(Collectors.toList());
-//            employee.setUserTaskList(updatedTaskList);
-//            employeeRepository.save(employee);
-//        } else {
-//            throw new EmployeeNotFoundException();
-//        }
-//
-//    public Employee registerEmployee(Employee employee) throws EmployeeAlreadyExistsException {
-//        if(employeeRepository.findById(employee.getUserId()).isEmpty()){
-//            throw new EmployeeAlreadyExistsException();
-//
-//        }
-//    }
+
+    @Override
+    public Employee registerEmployee (Employee employee) throws EmployeeAlreadyExistsException {
+        if (employeeRepository.findById(employee.getUserId()).isPresent()) {
+            throw new EmployeeAlreadyExistsException();
+        }
+        return employeeRepository.save(employee);
+    }
+
     @Override
     public Employee saveEmployeeTaskToTaskList(Task task, String userId) throws EmployeeNotFoundException, TaskAlreadyExistsException {
+
+
         Optional<Employee> optionalEmployee = employeeRepository.findById(userId);
+        Employee employee;
         if (optionalEmployee.isPresent()) {
+
 
             Employee registeredEmployee = optionalEmployee.get();
             List<Task> taskList = registeredEmployee.getUserTaskList();
@@ -116,31 +105,69 @@ public class KanbanServiceImpl implements IKanbanService {
         }
         throw new EmployeeNotFoundException();
     }
+
+
+
+    @Override
+    public Employee updateEmployeeTaskInTaskList (String userId, Task task) throws EmployeeNotFoundException, TaskNotFoundException
+    {
+        Employee employee1 = employeeRepository.findById(userId).orElseThrow(EmployeeNotFoundException::new);
+        List<Task> taskList = employee1.getUserTaskList();
+        if (taskList == null) {
+            throw new TaskNotFoundException();
+        }
+        boolean flag = false;
+        for(Task t:taskList){
+            if(t.getTaskId().equals(task.getTaskId())){
+                flag = true;
+            }
+        }
+        if(!flag){
+            throw new TaskNotFoundException();
+
+        }
+        for (Task t : taskList) {
+            if (t.getTaskId().equals(task.getTaskId())) {
+                t.setTaskName(task.getTaskName());
+                t.setStatus(task.getStatus());
+                t.setDueDate(task.getDueDate());
+                t.setPriority(task.getPriority());
+                t.setTaskdesc(task.getTaskDesc());
+            }
+        }
+        employee1.setUserTaskList(taskList);
+        return employeeRepository.save(employee1);
+    }
+
+
+@Override
+public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws TaskNotFoundException, EmployeeNotFoundException
+        {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(userId);
+        Employee employee;
+        if (optionalEmployee.isPresent()) {
+        employee = optionalEmployee.get();
+        List<Task> taskList = employee.getUserTaskList();
+        boolean taskExists = taskList.stream().anyMatch(task -> task.getTaskId().equals(taskId));
+        if (!taskExists) {
+        throw new TaskNotFoundException();
+        }
+        List<Task> updatedTaskList = taskList.stream()
+        .filter(task -> !task.getTaskId().equals(taskId))
+        .collect(Collectors.toList());
+        employee.setUserTaskList(updatedTaskList);
+        employeeRepository.save(employee);
+        return updatedTaskList;
+        }
+        else {
+        throw new EmployeeNotFoundException();
+        }
+        }
+
+    @Override
+    public List<Task> getAllEmployeeTaskFromTaskList(String userId) throws EmployeeNotFoundException {
+        return null;
+    }
+
+
 }
-
-
-//    public Employee updateEmployeeTaskInTaskList(String userId, Task task) throws EmployeeNotFoundException, TaskNotFoundException {
-//        Employee employee1 = employeeRepository.findById(userId).orElseThrow(EmployeeNotFoundException::new);
-//        List<Task> taskList = employee1.getUserTaskList();
-//        int ind = taskList.indexOf(task);
-//        if(ind < 0){
-//            throw new TaskNotFoundException();
-//        }
-//        for(Task t: taskList){
-//            if(t.getTaskId().equals(task.getTaskId())){
-//                t.setTaskName(task.getTaskName());
-//                t.setStatus(task.getStatus());
-//                t.setDueDate(task.getDueDate());
-//                t.setEmployee(task.getEmployee());
-//                t.setPriority(task.getPriority());
-//                t.setTaskdesc(task.getTaskDesc());
-
-//            }
-//        }
-//        throw new EmployeeNotFoundException();
-//    }
-//
-//
-//    }
-//}
-

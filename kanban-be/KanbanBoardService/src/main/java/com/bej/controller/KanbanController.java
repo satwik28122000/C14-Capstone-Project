@@ -26,14 +26,43 @@ public class KanbanController {
     }
 
 
+
     @GetMapping("/getAllEmployees")
     public ResponseEntity<?> fetchAllEmployee(@RequestBody String userId) throws EmployeeNotFoundException {
         try {
             return new ResponseEntity<>(kanbanService.getAllEmployee(userId), HttpStatus.OK);
         }
-
-        catch (EmployeeNotFoundException enf) {
+        catch (EmployeeNotFoundException enf)
+        {
             throw new EmployeeNotFoundException();
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/employee/{userId}/tasks")
+    public ResponseEntity<?> fetchAllEmployeeTaskFromTaskList(@PathVariable String userId) throws EmployeeNotFoundException
+            {
+                try {
+                    return new ResponseEntity<>(kanbanService.getAllEmployeeTaskFromTaskList(userId), HttpStatus.OK);
+                } catch (EmployeeNotFoundException enf) {
+                    throw new EmployeeNotFoundException();
+                } catch (Exception e) {
+                    return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            }
+
+    //Register the employee using endpoint "/api/kanban/register
+    @PostMapping("/register")
+    public ResponseEntity<?> registerEmployee(@RequestBody Employee employee) throws EmployeeAlreadyExistsException {
+        try{
+            return new ResponseEntity<>(kanbanService.registerEmployee(employee), HttpStatus.CREATED);
+
+        }
+
+        catch (EmployeeAlreadyExistsException enf) {
+            throw new EmployeeAlreadyExistsException();
         }
 
         catch (Exception e) {
