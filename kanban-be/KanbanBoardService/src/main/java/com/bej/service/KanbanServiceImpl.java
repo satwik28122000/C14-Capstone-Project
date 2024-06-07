@@ -2,20 +2,30 @@ package com.bej.service;
 
 import com.bej.domain.Employee;
 
+
 import com.bej.domain.Task;
 import com.bej.exception.EmployeeNotFoundException;
 import com.bej.exception.TaskAlreadyExistsException;
 
+
+import com.bej.domain.Task;
+import com.bej.exception.EmployeeAlreadyExistsException;
+
 import com.bej.exception.EmployeeNotFoundException;
+import com.bej.exception.TaskNotFoundException;
 import com.bej.repository.EmployeeRepository;
 import com.bej.repository.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
+import java.util.List;
+
 
 @Service
 
@@ -32,13 +42,18 @@ public class KanbanServiceImpl implements IKanbanService
 
 
     @Override
-    public List<Employee> getAllEmployee(String userId) throws Exception
+
+    public List<Employee> getAllEmployee(String userId) throws EmployeeNotFoundException
     {
-        if (employeeRepository.findById(userId).isEmpty())
+        Optional<Employee> optionalEmployee= employeeRepository.findById(userId);
+        Employee registeredEmployee= optionalEmployee.get();
+        if (optionalEmployee.isEmpty())
         {
-            throw new Exception();
+            throw new EmployeeNotFoundException();
         }
-        return employeeRepository.findAll();
+        else {
+            return (List<Employee>) registeredEmployee;
+        }
     }
 
     @Override
@@ -80,4 +95,9 @@ public class KanbanServiceImpl implements IKanbanService
         }
         throw new EmployeeNotFoundException();
     }
-}
+
+
+    }
+
+
+

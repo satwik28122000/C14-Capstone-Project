@@ -6,34 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-<<<<<<< HEAD
-        <module name="EurekaServer" />
-        <module name="GateWayAPI" />
-=======
->>>>>>> e0fada5dc1c984b8f59929f3df34295e6f2e9d5e
-        <module name="UserAuthentication" />
-        <module name="KanbanBoardService" />
       </profile>
     </annotationProcessing>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-      </profile>
-    </annotationProcessing>
-<<<<<<< HEAD
-=======
-    <bytecodeTargetLevel>
-      <module name="EurekaServer" target="17" />
-      <module name="GateWayAPI" target="17" />
-      <module name="kanban-be" target="11" />
-      <module name="UserAuthentication" target="17" />
-    </bytecodeTargetLevel>
->>>>>>> e38ad1455ca6a91687c31858274738b7c86e934c
->>>>>>> f6af4e5e61b15bacd555484f799a18abe5450fe0
->>>>>>> df7e3fccbd0919d0664adbd61bb0d09022468630
->>>>>>> e0fada5dc1c984b8f59929f3df34295e6f2e9d5e
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
