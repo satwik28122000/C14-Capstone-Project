@@ -52,12 +52,13 @@ public class KanbanController {
     }
 
     @GetMapping("/employee/{userId}/tasks")
-    public ResponseEntity<?> fetchAllEmployeeTaskFromTaskList(@PathVariable String userId) throws EmployeeNotFoundException
+    public ResponseEntity<?> getAllEmployeeTaskFromTaskList(@PathVariable String userId) throws EmployeeNotFoundException
             {
                 try {
-                    return new ResponseEntity<>(kanbanService.getAllEmployeeTaskFromTaskList(userId), HttpStatus.OK);
-                } catch (EmployeeNotFoundException enf) {
-                    throw new EmployeeNotFoundException();
+                    List<Task> tasks = kanbanService.getAllEmployeeTaskFromTaskList(userId);
+                    return new ResponseEntity<>(tasks, HttpStatus.OK);
+                } catch (EmployeeNotFoundException e) {
+                    return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
                 } catch (Exception e) {
                     return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
                 }
@@ -142,5 +143,48 @@ public class KanbanController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    //update project in project list
+    @PutMapping("/updateproject/{managerid}")
+    public ResponseEntity<?> updateProjectInManagerProjectList(@PathVariable String managerid, @RequestBody Project project) throws ManagerNotFoundException, ProjectNotFoundException {
+        try{
+            return  new ResponseEntity<>(kanbanService.updateProjectInManagerProjectList(managerid,project),HttpStatus.OK);
+        }
+        catch(ManagerNotFoundException e){
+            throw new ManagerNotFoundException();
+        }
+        catch(ProjectNotFoundException e){
+            throw new ProjectNotFoundException();
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/deleteTask/{userId}/{taskId}")
+    public ResponseEntity<?> deleteTaskFromEmployee(@PathVariable String userId, @PathVariable String taskId) {
+        try {
+            List<Task> updatedTaskList = kanbanService.deleteTaskFromEmployee(userId, taskId);
+            return new ResponseEntity<>(updatedTaskList, HttpStatus.OK);
+        } catch (EmployeeNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (TaskNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/manager/{managerId}/projects")
+    public ResponseEntity<?> getAllProjectFromManager(@PathVariable String managerId) {
+        try {
+            List<Project> projects = kanbanService.getAllProjectFromManager(managerId);
+            return new ResponseEntity<>(projects, HttpStatus.OK);
+        } catch (EmployeeNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
 
