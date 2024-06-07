@@ -20,41 +20,54 @@ public class KanbanController {
     public KanbanController(IKanbanService kanbanService) {
         this.kanbanService = kanbanService;
     }
+
     @DeleteMapping("/employee/{userId}/task/{taskId}")
-    public void deleteTaskFromEmployee(@PathVariable String userId, @PathVariable String taskId) throws TaskNotFoundException, EmployeeNotFoundException {
-        kanbanService.deleteTaskFromEmployee(userId, taskId);
+    public ResponseEntity<List<Task>> deleteTaskFromEmployee(@PathVariable String userId, @PathVariable String taskId) {
+        try {
+            List<Task> updatedTaskList = kanbanService.deleteTaskFromEmployee(userId, taskId);
+            return ResponseEntity.ok(updatedTaskList);
+        } catch (TaskNotFoundException | EmployeeNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @GetMapping("/employee/{userId}/tasks")
-    public List<Task> getAllEmployeeTaskFromTaskList(@PathVariable String userId) throws EmployeeNotFoundException {
-        return kanbanService.getAllEmployeeTaskFromTaskList(userId);
-    //Register the employee using endpoint "/api/kanban/register
+    public ResponseEntity<List<Task>> getAllEmployeeTaskFromTaskList(@PathVariable String userId) {
+        try {
+            List<Task> tasks = kanbanService.getAllEmployeeTaskFromTaskList(userId);
+            return ResponseEntity.ok(tasks);
+        } catch (EmployeeNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+   //Register the employee using endpoint "/api/kanban/register
     @PostMapping("/register")
-    public ResponseEntity<?> registerEmployee(@RequestBody Employee employee) throws EmployeeAlreadyExistsException {
+   public ResponseEntity<?> registerEmployee(@RequestBody Employee employee) throws EmployeeAlreadyExistsException {
         try{
             return new ResponseEntity<>(kanbanService.registerEmployee(employee), HttpStatus.CREATED);
         }
         catch(EmployeeAlreadyExistsException e){
-            throw new EmployeeAlreadyExistsException();
+           throw new EmployeeAlreadyExistsException();
         }
         catch(Exception e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    //update task in task list in employee using endpoint "/api/kanban/{userid}"
-    @PutMapping("/updatetask/{userid}")
-    public ResponseEntity<?> updateEmployeeTaskInTaskList(@PathVariable String userid,@RequestBody Task task) throws EmployeeNotFoundException, TaskNotFoundException {
-        try{
-            return new ResponseEntity<>(kanbanService.updateEmployeeTaskInTaskList(userid,task),HttpStatus.OK);
-        }
-        catch (TaskNotFoundException e) {
-            throw new TaskNotFoundException();
-        }
-        catch (EmployeeNotFoundException e) {
-            throw new EmployeeNotFoundException();
-        }
-        catch(Exception e){
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+   //update task in task list in employee using endpoint "/api/kanban/{userid}"
+//    @PutMapping("/updatetask/{userid}")
+//    public ResponseEntity<?> updateEmployeeTaskInTaskList(@PathVariable String userid,@RequestBody Task task) throws EmployeeNotFoundException, TaskNotFoundException {
+//        try{
+//            return new ResponseEntity<>(kanbanService.updateEmployeeTaskInTaskList(userid,task),HttpStatus.OK);
+//        }
+//        catch (TaskNotFoundException e) {
+//            throw new TaskNotFoundException();
+//        }
+//        catch (EmployeeNotFoundException e) {
+//            throw new EmployeeNotFoundException();
+//        }
+//        catch(Exception e){
+//            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 }
