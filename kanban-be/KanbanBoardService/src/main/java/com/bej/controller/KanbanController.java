@@ -93,5 +93,21 @@ public class KanbanController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    //update task in task list in employee using endpoint "/api/kanban/{userid}"
+    @PutMapping("/updatetask/{userid}")
+    public ResponseEntity<?> updateEmployeeTaskInTaskList(@PathVariable String userid,@RequestBody Task task) throws EmployeeNotFoundException, TaskNotFoundException {
+        try{
+            return new ResponseEntity<>(kanbanService.updateEmployeeTaskInTaskList(userid,task),HttpStatus.OK);
+        }
+        catch (TaskNotFoundException e) {
+            throw new TaskNotFoundException();
+        }
+        catch (EmployeeNotFoundException e) {
+            throw new EmployeeNotFoundException();
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
 
