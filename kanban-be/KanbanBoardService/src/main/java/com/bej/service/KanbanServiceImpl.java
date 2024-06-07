@@ -1,5 +1,6 @@
 package com.bej.service;
 import com.bej.domain.Employee;
+import com.bej.domain.Project;
 import com.bej.domain.Task;
 import com.bej.exception.EmployeeNotFoundException;
 import com.bej.exception.TaskAlreadyExistsException;
@@ -123,35 +124,31 @@ public class KanbanServiceImpl implements IKanbanService {
         return employeeRepository.save(employee1);
     }
 
-
-@Override
-public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws TaskNotFoundException, EmployeeNotFoundException
-        {
-        Optional<Employee> optionalEmployee = employeeRepository.findById(userId);
-        Employee employee;
-        if (optionalEmployee.isPresent()) {
-        employee = optionalEmployee.get();
+    @Override
+    public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws TaskNotFoundException, EmployeeNotFoundException {
+        Employee employee = employeeRepository.findById(userId).orElseThrow(EmployeeNotFoundException::new);
         List<Task> taskList = employee.getUserTaskList();
-        boolean taskExists = taskList.stream().anyMatch(task -> task.getTaskId().equals(taskId));
-        if (!taskExists) {
-        throw new TaskNotFoundException();
+        if (taskList == null || taskList.stream().noneMatch(t -> t.getTaskId().equals(taskId))) {
+            throw new TaskNotFoundException();
         }
-        List<Task> updatedTaskList = taskList.stream()
-        .filter(task -> !task.getTaskId().equals(taskId))
-        .collect(Collectors.toList());
+
+        List<Task> updatedTaskList = taskList.stream().filter(task -> !task.getTaskId().equals(taskId)).collect(Collectors.toList());
         employee.setUserTaskList(updatedTaskList);
         employeeRepository.save(employee);
         return updatedTaskList;
-        }
-        else {
-        throw new EmployeeNotFoundException();
-        }
-        }
+    }
 
     @Override
     public List<Task> getAllEmployeeTaskFromTaskList(String userId) throws EmployeeNotFoundException {
-        return null;
+        Employee employee = employeeRepository.findById(userId).orElseThrow(EmployeeNotFoundException::new);
+        return employee.getUserTaskList();
     }
 
+    @Override
+    public List<Project> getAllProjectFromManager(String managerId) throws EmployeeNotFoundException {
+        return managerRepository.findById(managerId)
+                .orElseThrow(EmployeeNotFoundException::new)
+                .getProjectList();
+    }
 
 }
