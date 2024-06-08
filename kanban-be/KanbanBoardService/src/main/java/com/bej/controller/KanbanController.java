@@ -294,5 +294,25 @@ public class KanbanController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/findTaskByIdFromEmployee/{taskId}/{userId}")
+    public ResponseEntity<?> fetchTaskByIdFromEmployee(@PathVariable String taskId , @PathVariable String userId) throws TaskNotFoundException , EmployeeNotFoundException
+    {
+        try {
+            return new ResponseEntity<>(kanbanService.getTaskByIdFromEmployee(taskId , userId), HttpStatus.OK);
+        }
+        catch (TaskNotFoundException tnf)
+        {
+            throw new TaskNotFoundException();
+        }
+        catch (EmployeeNotFoundException enf)
+        {
+            throw new EmployeeNotFoundException();
+        }
+        catch (Exception e)
+        {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
 

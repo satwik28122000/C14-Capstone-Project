@@ -370,4 +370,24 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         throw new ProjectNotFoundException();
     }
 
+    @Override
+    public Task getTaskByIdFromEmployee(String taskId, String userId) throws TaskNotFoundException, EmployeeNotFoundException
+    {
+        Employee employee = employeeRepository.findById(userId).orElseThrow( EmployeeNotFoundException::new);
+        List<Task> taskList = employee.getUserTaskList();
+        if (taskList == null || taskList.isEmpty())
+        {
+            throw new TaskNotFoundException();
+        }
+        for (Task task : taskList)
+        {
+            if (task.getTaskId().equals(taskId))
+            {
+                return task;
+            }
+        }
+
+        throw new TaskNotFoundException();
+    }
+
 }
