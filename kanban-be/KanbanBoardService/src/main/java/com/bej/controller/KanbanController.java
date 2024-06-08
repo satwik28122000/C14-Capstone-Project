@@ -282,6 +282,17 @@ public class KanbanController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @GetMapping("/manager/{managerId}/{projectId}")
+    public ResponseEntity<?> fetchProjectByIdFromManager(@PathVariable String managerId,@PathVariable String projectId) throws ProjectNotFoundException, ManagerNotFoundException {
+        try{
+            return new ResponseEntity<>(kanbanService.getProjectByIdFromManager(managerId, projectId),HttpStatus.OK);
+        } catch (ProjectNotFoundException e) {
+            throw new ProjectNotFoundException();
+        } catch (ManagerNotFoundException e) {
+            throw new ManagerNotFoundException();
+        } catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
 

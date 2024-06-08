@@ -355,4 +355,19 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         throw new TaskNotFoundException();
     }
 
+    @Override
+    public Project getProjectByIdFromManager(String managerId,String projectId) throws ManagerNotFoundException, ProjectNotFoundException {
+        Manager manager = managerRepository.findById(managerId).orElseThrow(ManagerNotFoundException::new);
+        List<Project> projectList = manager.getProjectList();
+        if(projectList==null || projectList.isEmpty()){
+            throw new ProjectNotFoundException();
+        }
+        for(Project project:projectList){
+            if(project.getProjectId().equals(projectId)){
+                return project;
+            }
+        }
+        throw new ProjectNotFoundException();
+    }
+
 }
