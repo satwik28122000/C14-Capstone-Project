@@ -195,7 +195,7 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
                     registeredManager.setProjectList(projectList);
                 }
             }
-            return   managerRepository.save(registeredManager);
+
         }
         throw new ManagerNotFoundException();
     }
