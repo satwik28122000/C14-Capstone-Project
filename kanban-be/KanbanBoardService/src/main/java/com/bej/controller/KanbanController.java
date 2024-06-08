@@ -233,5 +233,46 @@ public class KanbanController {
         }
     }
 
+    @PostMapping("/saveTaskToProject/{projectId}")
+    public ResponseEntity<?> addTaskToProject(@PathVariable String projectId, @RequestBody Task task) throws ProjectNotFoundException , TaskAlreadyExistsException
+    {
+        try {
+            return new ResponseEntity<>(kanbanService.saveTaskInProjectTaskList(task , projectId), HttpStatus.CREATED);
+        }
+        catch (ProjectNotFoundException pnf)
+        {
+            throw new ProjectNotFoundException();
+        }
+
+        catch (TaskAlreadyExistsException tae)
+        {
+            throw new TaskAlreadyExistsException();
+        }
+        catch (Exception e)
+        {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/findTaskByIdFromProject/{projectId}/{taskId}")
+    public ResponseEntity<?> fetchTaskByIdFromProject(@PathVariable String taskId , @PathVariable String projectId) throws TaskNotFoundException, ProjectNotFoundException
+    {
+        try {
+            return new ResponseEntity<>(kanbanService.getTaskByIdFromProject(taskId, projectId), HttpStatus.OK);
+        }
+        catch (TaskNotFoundException tnf)
+        {
+            throw new TaskNotFoundException();
+        }
+        catch (ProjectNotFoundException pnf)
+        {
+            throw new ProjectNotFoundException();
+        }
+        catch (Exception e)
+        {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
 

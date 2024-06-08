@@ -313,4 +313,54 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         return taskList;
     }
 
+    @Override
+    public Project saveTaskInProjectTaskList(Task task, String projectId) throws  TaskAlreadyExistsException, ProjectNotFoundException
+    {
+        Project project= projectRepository.findById(projectId).orElseThrow(ProjectNotFoundException::new);
+
+        List<Task> taskList= project.getProjectTasks();
+        if (taskList == null)
+        {
+            project.setProjectTasks(Arrays.asList(task));
+        }
+        else
+        {
+            for (Task taskObj : taskList)
+            {
+                if (taskObj.getTaskId().equals(task.getTaskId()))
+                {
+                    throw new TaskAlreadyExistsException();
+                }
+            }
+            taskList.add(task);
+            project.setProjectTasks(taskList);
+
+        }
+        return projectRepository.save(project);
+    }
+
+    @Override
+    public Task getTaskByIdFromProject(String taskId, String projectId) throws TaskNotFoundException, ProjectNotFoundException {
+        // Retrieve the project by its ID
+        Project project = projectRepository.findById(projectId).orElseThrow(ProjectNotFoundException::new);
+
+        // Get the list of tasks from the project
+        List<Task> taskList = project.getProjectTasks();
+
+        // If the task list is null or empty, throw TaskNotFoundException
+        if (taskList == null || taskList.isEmpty()) {
+            throw new TaskNotFoundException();
+        }
+
+        // Iterate through the task list to find the task with the specified ID
+        for (Task task : taskList) {
+            if (task.getTaskId().equals(taskId)) {
+                return task;
+            }
+        }
+
+        // If the task is not found, throw TaskNotFoundException
+        throw new TaskNotFoundException();
+    }
+
 }

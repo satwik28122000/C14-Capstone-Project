@@ -34,5 +34,8 @@ public interface IKanbanService {
 
     Project updateTaskInProjectTaskList(String projectId,Task task) throws ProjectNotFoundException, TaskNotFoundException;
     List<Task> getAllTaskFromProject(String projectId) throws ProjectNotFoundException;
+
+    Project saveTaskInProjectTaskList(Task task , String projectId) throws  TaskAlreadyExistsException , ProjectNotFoundException;
+    Task getTaskByIdFromProject(String taskId , String projectId) throws TaskNotFoundException , ProjectNotFoundException;
 }
 
