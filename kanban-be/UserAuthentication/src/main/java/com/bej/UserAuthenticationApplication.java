@@ -9,7 +9,7 @@ public class UserAuthenticationApplication {
 	public static void main(String[] args)
 	{
 		SpringApplication.run(UserAuthenticationApplication.class, args);
-		System.out.println("User Authentication service is running");
+		System.out.println("Employee Authentication service is running");
 	}
 
 }

@@ -1,7 +1,7 @@
 package com.bej.security;
 
-import com.bej.domain.User;
+import com.bej.domain.Employee;
 
 public interface ITokenGenerator {
-    String createToken(User user);
+    String createToken(Employee employee);
 }

@@ -4,17 +4,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class User {
+public class Employee {
     @Id
     private String userId;
     private String password;
 
     //default constructor
-    public User() {
+    public Employee() {
     }
 
     //parameterized constructor
-    public User(String userId, String password) {
+    public Employee(String userId, String password) {
         this.userId = userId;
         this.password = password;
     }
@@ -38,7 +38,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Employee{" +
                 "userId='" + userId + '\'' +
                 ", password='" + password + '\'' +
                 '}';

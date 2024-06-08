@@ -1,5 +1,5 @@
 package com.bej.RepositoryTest;
-import com.bej.domain.User;
+import com.bej.domain.Employee;
 import com.bej.repository.UserAuthRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,28 +14,28 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RepoTestClass {
     @Autowired
     private UserAuthRepository userRepository;
-    private User user;
+    private Employee employee;
     @BeforeEach
     public void setUp() throws Exception {
-        user = new User("psk", "111");
-        userRepository.save(user);
+        employee = new Employee("psk", "111");
+        userRepository.save(employee);
     }
 
     @AfterEach
     public void tearDown() throws Exception {
         userRepository.deleteAll();
-        user = null;
+        employee = null;
     }
 
     @Test
     public void testSaveUserSuccess() {
-        User object = userRepository.findById(user.getUserId()).get();
-        assertEquals(user.getUserId(), object.getUserId());
+        Employee object = userRepository.findById(employee.getUserId()).get();
+        assertEquals(employee.getUserId(), object.getUserId());
     }
 
     @Test
     public void testLoginUserSuccess() {
-        User object = userRepository.findById(user.getUserId()).get();
-        assertEquals(user.getUserId(), object.getUserId());
+        Employee object = userRepository.findById(employee.getUserId()).get();
+        assertEquals(employee.getUserId(), object.getUserId());
     }
 }

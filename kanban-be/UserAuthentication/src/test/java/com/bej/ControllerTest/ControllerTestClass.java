@@ -1,7 +1,6 @@
 package com.bej.ControllerTest;
 import com.bej.controller.UserAuthController;
-import com.bej.domain.User;
-import com.bej.exception.InvalidCredentialsException;
+import com.bej.domain.Employee;
 import com.bej.exception.UserAlreadyExistException;
 import com.bej.service.IUserAuthService;
 import com.bej.security.ITokenGenerator;
@@ -11,18 +10,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -49,17 +42,17 @@ public class ControllerTestClass {
 
     @Test
     public void givenUserToSaveReturnUserSuccess() throws Exception, UserAlreadyExistException {
-        User user = new User("p@gmail.com", "password");
+        Employee employee = new Employee("p@gmail.com", "password");
 
-        when(userAuthService.saveUser(any(User.class))).thenReturn(user);
+        when(userAuthService.saveUser(any(Employee.class))).thenReturn(employee);
         mockMvc.perform(post("/auth/save")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(user)))
+                        .content(asJsonString(employee)))
                 .andExpect(status().isCreated());
     }
 //    @Test
 //    public void givenInvalidLoginCredentialsReturnUnauthorized() throws Exception, UserAlreadyExistException {
-//        User user = new User("p@gmail.com", "wrong_password");
+//        Employee user = new Employee("p@gmail.com", "wrong_password");
 //
 //        when(userAuthService.login(anyString(), anyString())).thenThrow(new InvalidCredentialsException());
 //

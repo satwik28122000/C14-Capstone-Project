@@ -1,6 +1,6 @@
 package com.bej.controller;
 
-import com.bej.domain.User;
+import com.bej.domain.Employee;
 import com.bej.exception.InvalidCredentialsException;
 import com.bej.exception.UserAlreadyExistException;
 import com.bej.exception.UserNotFoundException;
@@ -25,11 +25,11 @@ public class UserAuthController {
         this.tokenGenerator = tokenGenerator;
     }
 
-    //save user mapping with endpoint /auth/save
+    //save employee mapping with endpoint /auth/save
     @PostMapping("/save")
-    public ResponseEntity<?> saveUser(@RequestBody User user) throws UserAlreadyExistException {
+    public ResponseEntity<?> saveUser(@RequestBody Employee employee) throws UserAlreadyExistException {
         try{
-            return new ResponseEntity<>(userAuthService.saveUser(user), HttpStatus.CREATED);
+            return new ResponseEntity<>(userAuthService.saveUser(employee), HttpStatus.CREATED);
         }
         catch(UserAlreadyExistException e){
             throw new UserAlreadyExistException();
@@ -38,12 +38,12 @@ public class UserAuthController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    //login user mapping with endpoint "/auth/login"
+    //login employee mapping with endpoint "/auth/login"
     @GetMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody User user) throws UserNotFoundException, InvalidCredentialsException {
+    public ResponseEntity<?> loginUser(@RequestBody Employee employee) throws UserNotFoundException, InvalidCredentialsException {
         try{
-            String loggedUser = userAuthService.login(user.getUserId(),user.getPassword());
-            String token = tokenGenerator.createToken(user);
+            String loggedUser = userAuthService.login(employee.getUserId(), employee.getPassword());
+            String token = tokenGenerator.createToken(employee);
             Map<String,String> map = new HashMap<>();
             map.put("Message",loggedUser);
             map.put("Token",token);

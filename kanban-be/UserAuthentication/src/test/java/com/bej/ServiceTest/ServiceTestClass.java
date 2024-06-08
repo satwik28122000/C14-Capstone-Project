@@ -1,5 +1,5 @@
 package com.bej.ServiceTest;
-import com.bej.domain.User;
+import com.bej.domain.Employee;
 import com.bej.exception.InvalidCredentialsException;
 import com.bej.exception.UserAlreadyExistException;
 import com.bej.exception.UserNotFoundException;
@@ -21,23 +21,23 @@ public class ServiceTestClass {
     private UserAuthService userService;
     @Test
     public void whenSaveUser_thenUserSaved() throws UserAlreadyExistException {
-        User user = new User("testUser", "testPassword");
-        when(userRepository.findById(user.getUserId())).thenReturn(java.util.Optional.empty());
-        when(userRepository.save(user)).thenReturn(user);
-        User savedUser = userService.saveUser(user);
-        assertNotNull(savedUser);
-        assertEquals(user.getUserId(), savedUser.getUserId());
-        assertEquals(user.getPassword(), savedUser.getPassword());
+        Employee employee = new Employee("testUser", "testPassword");
+        when(userRepository.findById(employee.getUserId())).thenReturn(java.util.Optional.empty());
+        when(userRepository.save(employee)).thenReturn(employee);
+        Employee savedEmployee = userService.saveUser(employee);
+        assertNotNull(savedEmployee);
+        assertEquals(employee.getUserId(), savedEmployee.getUserId());
+        assertEquals(employee.getPassword(), savedEmployee.getPassword());
     }
 
     @Test
     public void whenLoginWithValidCredentials_thenLoggedIn() throws UserNotFoundException, InvalidCredentialsException {
         String userId = "testUser";
         String password = "testPassword";
-        User user = new User(userId, password);
-        when(userRepository.findById(userId)).thenReturn(java.util.Optional.of(user));
-        when(userRepository.findByUserIdAndPassword(userId, password)).thenReturn(user);
+        Employee employee = new Employee(userId, password);
+        when(userRepository.findById(userId)).thenReturn(java.util.Optional.of(employee));
+        when(userRepository.findByUserIdAndPassword(userId, password)).thenReturn(employee);
         String result = userService.login(userId, password);
-        assertEquals("User logged in successfully!!", result);
+        assertEquals("Employee logged in successfully!!", result);
     }
 }

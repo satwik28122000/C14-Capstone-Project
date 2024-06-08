@@ -1,6 +1,6 @@
 package com.bej.security;
 
-import com.bej.domain.User;
+import com.bej.domain.Employee;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Service;
@@ -11,12 +11,12 @@ import java.util.Map;
 
 @Service
 public class TokenGeneratorImpl implements ITokenGenerator{
-    public String createToken(User user){
+    public String createToken(Employee employee){
         // Write logic to create the Jwt
         Map<String,Object> map = new HashMap<>();
-        String userId = user.getUserId();
+        String userId = employee.getUserId();
         map.put("userId",userId);
-        return generateToken(map, user.getUserId());
+        return generateToken(map, employee.getUserId());
     }
 
     public String generateToken(Map<String,Object> claims,String subject) {

@@ -1,6 +1,6 @@
 package com.bej.service;
 
-import com.bej.domain.User;
+import com.bej.domain.Employee;
 import com.bej.exception.InvalidCredentialsException;
 import com.bej.exception.UserAlreadyExistException;
 import com.bej.exception.UserNotFoundException;
@@ -17,13 +17,13 @@ public class UserAuthService implements IUserAuthService{
         this.repository = repository;
     }
 
-    //register user
+    //register employee
     @Override
-    public User saveUser(User user) throws UserAlreadyExistException {
-        if(repository.findById(user.getUserId()).isPresent()){
+    public Employee saveUser(Employee employee) throws UserAlreadyExistException {
+        if(repository.findById(employee.getUserId()).isPresent()){
             throw new UserAlreadyExistException();
         }
-        return repository.save(user);
+        return repository.save(employee);
     }
 
     //login user
@@ -32,10 +32,10 @@ public class UserAuthService implements IUserAuthService{
         if(repository.findById(userId).isEmpty()){
             throw new UserNotFoundException();
         }
-        User user = repository.findByUserIdAndPassword(userId,password);
-        if(user == null){
+        Employee employee = repository.findByUserIdAndPassword(userId,password);
+        if(employee == null){
             throw new InvalidCredentialsException();
         }
-        return "User logged in successfully!!";
+        return "Employee logged in successfully!!";
     }
 }
