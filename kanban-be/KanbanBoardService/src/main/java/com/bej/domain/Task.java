@@ -11,18 +11,18 @@ public class Task {
     private String status ;
     private String priority;
     private String dueDate;
-
-
+    private Employee assignedTo;
     public Task() {
     }
 
-    public Task(String taskId,String taskName, String taskDesc, String status, String priority, String dueDate) {
+    public Task(String taskId,String taskName, String taskDesc, String status, String priority, String dueDate,Employee assignedTo) {
         this.taskName = taskName;
         this.taskDesc = taskDesc;
         this.status = status;
         this.priority = priority;
         this.dueDate = dueDate;
         this.taskId= taskId;
+        this.assignedTo=assignedTo;
     }
 
     public String getTaskId() {
@@ -43,10 +43,6 @@ public class Task {
 
     public String getTaskDesc() {
         return taskDesc;
-    }
-
-    public void setTaskdesc(String taskDesc) {
-        this.taskDesc = taskDesc;
     }
 
     public String getStatus() {
@@ -73,4 +69,15 @@ public class Task {
         this.dueDate = dueDate;
     }
 
+    public void setTaskDesc(String taskDesc) {
+        this.taskDesc = taskDesc;
+    }
+
+    public Employee getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(Employee assignedTo) {
+        this.assignedTo = assignedTo;
+    }
 }

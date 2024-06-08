@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
 public class EmployeeRepositoryTest {
-    private EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Autowired
     public EmployeeRepositoryTest(EmployeeRepository employeeRepository) {
@@ -31,8 +32,11 @@ public class EmployeeRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        task1=new Task("101","Generate token","Generate token in user auth service","Assigned","High","09-06-2024");
-        task2=new Task("102","Kanban Service","Implement register employee method","Assigned","High","10-06-2024");
+        taskList=new ArrayList<>();
+        task1=new Task("101","Generate token","Generate token in user auth service","Assigned","High","09-06-2024",employee1);
+        task2=new Task("102","Kanban Service","Implement register employee method","Assigned","High","10-06-2024",employee2);
+        taskList.add(task1);
+        taskList.add(task2);
         employee1 = new Employee("pallavi@12","Pallavi","qwerty123", "Full Stack Developer","pallavi@gmail.com",taskList);
         employee2 = new Employee("priya@12","Priyanka","qwerty123", "Full Stack Developer","priya@gmail.com",taskList);
     }

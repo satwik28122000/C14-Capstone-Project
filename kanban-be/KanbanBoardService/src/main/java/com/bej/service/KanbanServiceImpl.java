@@ -126,7 +126,8 @@ public class KanbanServiceImpl implements IKanbanService {
                 t.setStatus(task.getStatus());
                 t.setDueDate(task.getDueDate());
                 t.setPriority(task.getPriority());
-                t.setTaskdesc(task.getTaskDesc());
+                t.setTaskDesc(task.getTaskDesc());
+                t.setAssignedTo(task.getAssignedTo());
             }
         }
         employee1.setUserTaskList(taskList);

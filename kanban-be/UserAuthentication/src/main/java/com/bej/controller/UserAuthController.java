@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/auth")
 public class UserAuthController {
@@ -41,7 +44,10 @@ public class UserAuthController {
         try{
             String loggedUser = userAuthService.login(user.getUserId(),user.getPassword());
             String token = tokenGenerator.createToken(user);
-            return new ResponseEntity<>(token,HttpStatus.OK);
+            Map<String,String> map = new HashMap<>();
+            map.put("Message",loggedUser);
+            map.put("Token",token);
+            return new ResponseEntity<>(map,HttpStatus.OK);
         }
         catch(UserNotFoundException e){
             throw new UserNotFoundException();

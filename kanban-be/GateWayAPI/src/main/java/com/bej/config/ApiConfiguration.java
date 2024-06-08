@@ -15,6 +15,8 @@ public class ApiConfiguration
         return builder.routes()
                 .route(p->p.path("/auth/**")
                         .uri("lb://UserAuthentication/"))
+                .route(p->p.path("/api/kanban/**")
+                        .uri("lb://KanbanBoardService/"))
 
                 .build();
 
