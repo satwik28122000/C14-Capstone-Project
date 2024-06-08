@@ -390,4 +390,9 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         throw new TaskNotFoundException();
     }
 
+    @Override
+    public Task updateTaskInManagerAndEmployee(String taskId, String userId, String managerId) throws ProjectNotFoundException, EmployeeNotFoundException, TaskNotFoundException, ManagerNotFoundException {
+        return null;
+    }
+
 }
