@@ -26,11 +26,17 @@ public interface IKanbanService {
 
     List<Task> getAllEmployeeTaskFromTaskList(String userId) throws EmployeeNotFoundException;
 
-    List<Project> getAllProjectFromManager(String managerId) throws EmployeeNotFoundException;
+    List<Project> getAllProjectFromManager(String managerId) throws ManagerNotFoundException;
 
     Manager updateProjectInManagerProjectList(String managerId, Project project) throws ManagerNotFoundException, ProjectNotFoundException;
     Manager saveProjectInManagerProjectList(Project project , String managerId) throws ManagerNotFoundException , ProjectAlreadyExistException;
     void deleteTaskInProjectTaskList(String projectId, String taskId) throws ProjectNotFoundException;
    // Manager deleteProjectFromManager(String managerId , String projectId) throws ProjectNotFoundException , ManagerNotFoundException;
+
+    Project updateTaskInProjectTaskList(String projectId,Task task) throws ProjectNotFoundException, TaskNotFoundException;
+    List<Task> getAllTaskFromProject(String projectId) throws ProjectNotFoundException;
+
+    Project saveTaskInProjectTaskList(Task task , String projectId) throws  TaskAlreadyExistsException , ProjectNotFoundException;
+    Task getTaskByIdFromProject(String taskId , String projectId) throws TaskNotFoundException , ProjectNotFoundException;
 }
 
