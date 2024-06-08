@@ -30,6 +30,7 @@ public interface IKanbanService {
 
     Manager updateProjectInManagerProjectList(String managerId, Project project) throws ManagerNotFoundException, ProjectNotFoundException;
     Manager saveProjectInManagerProjectList(Project project , String managerId) throws ManagerNotFoundException , ProjectAlreadyExistException;
+    void deleteTaskInProjectTaskList(String projectId, String taskId) throws ProjectNotFoundException;
    // Manager deleteProjectFromManager(String managerId , String projectId) throws ProjectNotFoundException , ManagerNotFoundException;
 }
 

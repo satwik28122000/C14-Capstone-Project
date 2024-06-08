@@ -203,6 +203,15 @@ public class KanbanController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @DeleteMapping("/projects/{projectId}/tasks/{taskId}")
+    public ResponseEntity<String> deleteTaskInProjectTaskList(@PathVariable String projectId, @PathVariable String taskId) {
+        try {
+            kanbanService.deleteTaskInProjectTaskList(projectId, taskId);
+            return new ResponseEntity<>("Task deleted successfully", HttpStatus.OK);
+        } catch (ProjectNotFoundException e) {
+            return new ResponseEntity<>("Project not found", HttpStatus.NOT_FOUND);
+        }
+    }
 
 }
 

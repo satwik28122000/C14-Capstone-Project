@@ -6,6 +6,7 @@ import com.bej.domain.Task;
 import com.bej.exception.*;
 import com.bej.repository.EmployeeRepository;
 import com.bej.repository.ManagerRepository;
+import com.bej.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Arrays;
@@ -20,11 +21,17 @@ public class KanbanServiceImpl implements IKanbanService {
 
     private EmployeeRepository employeeRepository;
     private ManagerRepository managerRepository;
-
+    private final ProjectRepository projectRepository;
     @Autowired
-    public KanbanServiceImpl(EmployeeRepository employeeRepository, ManagerRepository managerRepository) {
+    public KanbanServiceImpl(EmployeeRepository employeeRepository, ManagerRepository managerRepository, ProjectRepository projectRepository) {
         this.employeeRepository = employeeRepository;
         this.managerRepository = managerRepository;
+        this.projectRepository = projectRepository;
+    }
+
+    @Autowired
+    public KanbanServiceImpl(ProjectRepository projectRepository) {
+        this.projectRepository = projectRepository;
     }
 
     @Override
@@ -207,6 +214,14 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         throw new ManagerNotFoundException();
     }
 
+    @Override
+    public void deleteTaskInProjectTaskList(String projectId, String taskId) throws ProjectNotFoundException {
+        Project project = projectRepository.findById(projectId).orElseThrow(() -> new ProjectNotFoundException());
+        project.getProjectTasks().removeIf(task -> task.getTaskId().equals(taskId));
+        projectRepository.save(project);
+
+    }
+
 //    @Override
 //    public Manager deleteProjectFromManager(String managerId, String projectId) throws ProjectNotFoundException, ManagerNotFoundException
 //    {
@@ -269,6 +284,7 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         manager.setProjectList(projectList);
         return managerRepository.save(manager);
     }
-
-
 }
+
+
+
