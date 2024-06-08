@@ -95,12 +95,8 @@ public class KanbanServiceImpl implements IKanbanService {
                 }
             }
 
-            employeeRepository.save(registeredEmployee);
-            optionalEmployee = employeeRepository.findById(userId);
-            if (optionalEmployee.isPresent()) {
-                return optionalEmployee.get();
+           return employeeRepository.save(registeredEmployee);
 
-            }
         }
         throw new EmployeeNotFoundException();
     }
@@ -199,12 +195,7 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
                     registeredManager.setProjectList(projectList);
                 }
             }
-            managerRepository.save(registeredManager);
-            optionalManager= managerRepository.findById(managerId);
-            if (optionalManager.isPresent())
-            {
-                return optionalManager.get();
-            }
+            return   managerRepository.save(registeredManager);
         }
         throw new ManagerNotFoundException();
     }
