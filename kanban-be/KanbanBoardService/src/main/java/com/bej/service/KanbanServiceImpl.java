@@ -380,10 +380,6 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
     }
 
     @Override
-    public Task updateTaskInManagerAndEmployee(String taskId, String userId, String managerId) throws ProjectNotFoundException, EmployeeNotFoundException, TaskNotFoundException, ManagerNotFoundException {
-        return null;
-    }
-    @Override
     public Manager saveManager(Manager manager){
         return managerRepository.save(manager);
     }
@@ -393,5 +389,13 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         Employee employee = saveEmployeeTaskToTaskList(task, task.getAssignedTo().getUserId());
         return task;
     }
+    @Override
+    public Task updateTaskFromManagerToEmployee(String projectId,Task task) throws ProjectNotFoundException, TaskNotFoundException,EmployeeNotFoundException {
+        updateTaskInProjectTaskList(projectId, task);
+        updateEmployeeTaskInTaskList(task.getAssignedTo().getUserId(),task);
+        return task;
+    }
+
+
 
 }
