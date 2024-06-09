@@ -1,15 +1,19 @@
 package com.bej.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import lombok.*;
-import org.springframework.data.annotation.Id;
+
 
 @Entity
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString
+
 public class Manager {
     @Id
     private String managerId;
