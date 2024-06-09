@@ -1,9 +1,8 @@
 package com.bej.controller;
 
 import com.bej.domain.Employee;
-import com.bej.exception.InvalidCredentialsException;
-import com.bej.exception.UserAlreadyExistException;
-import com.bej.exception.UserNotFoundException;
+import com.bej.domain.Manager;
+import com.bej.exception.*;
 import com.bej.security.ITokenGenerator;
 import com.bej.service.IUserAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +50,41 @@ public class UserAuthController {
         }
         catch(UserNotFoundException e){
             throw new UserNotFoundException();
+        }
+        catch(InvalidCredentialsException e){
+            throw new InvalidCredentialsException();
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //save manager mapping with endpoint /auth/saveManager
+    @PostMapping("/saveManager")
+    public ResponseEntity<?> createManager(@RequestBody Manager manager) throws ManagerAlreadyExistException {
+        try{
+            return new ResponseEntity<>(userAuthService.saveManager(manager), HttpStatus.CREATED);
+        }
+        catch(ManagerAlreadyExistException e){
+            throw new ManagerAlreadyExistException();
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    //login manager mapping with endpoint "/auth/loginManager"
+    @GetMapping("/loginManager")
+    public ResponseEntity<?> loginManager(@RequestBody Manager manager) throws ManagerNotFoundException, InvalidCredentialsException {
+        try{
+            String loggedUser = userAuthService.loginManager(manager.getManagerId(),manager.getManagerPassword());
+            String token = tokenGenerator.createTokenForManager(manager);
+            Map<String,String> map = new HashMap<>();
+            map.put("Message",loggedUser);
+            map.put("Token",token);
+            return new ResponseEntity<>(map,HttpStatus.OK);
+        }
+        catch(ManagerNotFoundException e){
+            throw new ManagerNotFoundException();
         }
         catch(InvalidCredentialsException e){
             throw new InvalidCredentialsException();
