@@ -65,5 +65,16 @@ public class EmployeeRepositoryTest {
         assertEquals(1,employeeRepository.findAll().size());
         assertFalse(employeeRepository.findById("priya@12").isPresent());
     }
+    @Test
+    public void testFindByIdMethod() {
+        employeeRepository.save(employee1);
+        assertTrue(employeeRepository.findById("pallavi@12").isPresent());
+    }
 
+    @Test
+    public void testSaveMethod() {
+        Employee savedEmployee = employeeRepository.save(employee1);
+        assertNotNull(savedEmployee);
+        assertEquals("Pallavi", savedEmployee.getUserName());
+    }
 }
