@@ -32,6 +32,8 @@ public class KanbanServiceImpl implements IKanbanService {
         this.projectRepository = projectRepository;
     }
 
+    //done
+
     @Override
     public List<Employee> getAllEmployee() throws Exception {
         List<Employee> employeeList = employeeRepository.findAll();
@@ -41,7 +43,7 @@ public class KanbanServiceImpl implements IKanbanService {
         return employeeList;
     }
 
-
+    //done
 
     @Override
     public Employee getEmployeeByUserId(String userId) throws EmployeeNotFoundException
@@ -57,6 +59,8 @@ public class KanbanServiceImpl implements IKanbanService {
         }
     }
 
+    //done
+
     //register employee in employee db
     @Override
     public Employee registerEmployee (Employee employee) throws EmployeeAlreadyExistsException {
@@ -65,6 +69,8 @@ public class KanbanServiceImpl implements IKanbanService {
         }
         return employeeRepository.save(employee);
     }
+
+    //done
 
     @Override
     public Employee saveEmployeeTaskToTaskList(Task task, String userId) throws EmployeeNotFoundException, TaskAlreadyExistsException {
@@ -103,6 +109,9 @@ public class KanbanServiceImpl implements IKanbanService {
 
 
     //update task in task list of employee document
+
+    //done
+
     @Override
     public Employee updateEmployeeTaskInTaskList (String userId, Task task) throws EmployeeNotFoundException, TaskNotFoundException
     {
@@ -132,6 +141,7 @@ public class KanbanServiceImpl implements IKanbanService {
         return employeeRepository.save(employee1);
     }
 
+    //done
 
 @Override
 public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws TaskNotFoundException, EmployeeNotFoundException
@@ -156,6 +166,7 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
     }
 
 
+    //done
     @Override
     public List<Task> getAllEmployeeTaskFromTaskList(String userId) throws EmployeeNotFoundException {
         Employee employee = employeeRepository.findById(userId).orElseThrow(EmployeeNotFoundException::new);
@@ -200,6 +211,8 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         throw new ManagerNotFoundException();
     }
 
+    //done
+
     @Override
     public void deleteTaskInProjectTaskList(String projectId, String taskId) throws ProjectNotFoundException {
         Project project = projectRepository.findById(projectId).orElseThrow(() -> new ProjectNotFoundException());
@@ -208,40 +221,7 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
 
     }
 
-//    @Override
-//    public Manager deleteProjectFromManager(String managerId, String projectId) throws ProjectNotFoundException, ManagerNotFoundException
-//    {
-//        Optional<Manager> optionalManager= managerRepository.findById(managerId);
-//        if (optionalManager.isPresent())
-//        {
-//            Manager registeredManager= optionalManager.get();
-//            List<Project> projectList= registeredManager.getProjectList();
-//            boolean projectFound=false;
-//            for (Project existingProject : projectList)
-//            {
-//                if (existingProject.getProjectId().equals(projectId))
-//                {
-//                    projectFound=true;
-//                    projectList.remove(existingProject);
-//                    break;
-//                }
-//            }
-//            if (!projectFound)
-//            {
-//                registeredManager.setProjectList(projectList);
-//                return managerRepository.save(registeredManager);
-//            }
-//            else
-//            {
-//                throw new ProjectNotFoundException();
-//            }
-//        }
-//        else
-//        {
-//            throw new ManagerNotFoundException();
-//        }
-//
-//    }
+
 
     //update project in project list of manager
     @Override
