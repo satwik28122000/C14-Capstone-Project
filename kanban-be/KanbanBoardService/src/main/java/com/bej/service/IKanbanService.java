@@ -17,11 +17,15 @@ public interface IKanbanService {
 
 
     List<Employee> getAllEmployee() throws Exception;
+
     Employee getEmployeeByUserId(String userId) throws EmployeeNotFoundException;
+
     Employee registerEmployee(Employee employee) throws EmployeeAlreadyExistsException;
-    Employee updateEmployeeTaskInTaskList(String userId, Task employee) throws EmployeeNotFoundException,TaskNotFoundException;
+
+    Employee updateEmployeeTaskInTaskList(String userId, Task employee) throws EmployeeNotFoundException, TaskNotFoundException;
 
     Employee saveEmployeeTaskToTaskList(Task task, String userId) throws EmployeeNotFoundException, TaskAlreadyExistsException;
+
     List<Task> deleteTaskFromEmployee(String userId, String taskId) throws TaskNotFoundException, EmployeeNotFoundException;
 
     List<Task> getAllEmployeeTaskFromTaskList(String userId) throws EmployeeNotFoundException;
@@ -29,19 +33,30 @@ public interface IKanbanService {
     List<Project> getAllProjectFromManager(String managerId) throws ManagerNotFoundException;
 
     Manager updateProjectInManagerProjectList(String managerId, Project project) throws ManagerNotFoundException, ProjectNotFoundException;
-    Manager saveProjectInManagerProjectList(Project project , String managerId) throws ManagerNotFoundException , ProjectAlreadyExistException;
-    void deleteTaskInProjectTaskList(String projectId, String taskId) throws ProjectNotFoundException;
-   // Manager deleteProjectFromManager(String managerId , String projectId) throws ProjectNotFoundException , ManagerNotFoundException;
 
-    Project updateTaskInProjectTaskList(String projectId,Task task) throws ProjectNotFoundException, TaskNotFoundException;
+    Manager saveProjectInManagerProjectList(Project project, String managerId) throws ManagerNotFoundException, ProjectAlreadyExistException;
+
+    void deleteTaskInProjectTaskList(String projectId, String taskId) throws ProjectNotFoundException;
+    // Manager deleteProjectFromManager(String managerId , String projectId) throws ProjectNotFoundException , ManagerNotFoundException;
+
+    Project updateTaskInProjectTaskList(String projectId, Task task) throws ProjectNotFoundException, TaskNotFoundException;
+
     List<Task> getAllTaskFromProject(String projectId) throws ProjectNotFoundException;
 
-    Project saveTaskInProjectTaskList(Task task , String projectId) throws  TaskAlreadyExistsException , ProjectNotFoundException;
-    Task getTaskByIdFromProject(String taskId , String projectId) throws TaskNotFoundException , ProjectNotFoundException;
-    Project getProjectByIdFromManager(String managerId,String projectId) throws ManagerNotFoundException, ProjectNotFoundException;
+    Project saveTaskInProjectTaskList(Task task, String projectId) throws TaskAlreadyExistsException, ProjectNotFoundException;
 
-    Task getTaskByIdFromEmployee(String taskId , String userId) throws TaskNotFoundException , EmployeeNotFoundException;
+    Task getTaskByIdFromProject(String taskId, String projectId) throws TaskNotFoundException, ProjectNotFoundException;
 
-    Task updateTaskInManagerAndEmployee(String taskId, String userId, String managerId) throws ProjectNotFoundException , EmployeeNotFoundException , TaskNotFoundException , ManagerNotFoundException;
+    Project getProjectByIdFromManager(String managerId, String projectId) throws ManagerNotFoundException, ProjectNotFoundException;
+
+    Task getTaskByIdFromEmployee(String taskId, String userId) throws TaskNotFoundException, EmployeeNotFoundException;
+
+    Manager saveManager(Manager manager);
+
+
+    // Crucial methods for this application
+    Task saveTaskInProjectAndEmployee(String projectId, Task task) throws ProjectNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException;
+
+    Task updateTaskFromManagerToEmployee(String projectId, Task task) throws ProjectNotFoundException, TaskNotFoundException, ManagerNotFoundException, EmployeeNotFoundException;
 }
 

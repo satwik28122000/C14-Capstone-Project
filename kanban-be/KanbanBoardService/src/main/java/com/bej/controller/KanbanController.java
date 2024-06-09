@@ -105,8 +105,8 @@ public class KanbanController {
     }
 
 
-    @PostMapping("/saveProjectInManager")
-    public ResponseEntity<?> addManagerProjectToProjectList(@RequestBody Project project, String managerId) throws ManagerNotFoundException , ProjectAlreadyExistException
+    @PostMapping("manager/{managerId}/saveProjectInManager")
+    public ResponseEntity<?> addManagerProjectToProjectList(@RequestBody Project project,@PathVariable String managerId) throws ManagerNotFoundException , ProjectAlreadyExistException
     {
         try {
             return new ResponseEntity<>(kanbanService.saveProjectInManagerProjectList(project, managerId), HttpStatus.CREATED);
@@ -312,6 +312,39 @@ public class KanbanController {
         catch (Exception e)
         {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/manager")
+    public ResponseEntity createManager(@RequestBody Manager manager){
+        try {
+            return new ResponseEntity(kanbanService.saveManager(manager), HttpStatus.CREATED);
+        }catch(Exception e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    //Crucial methods for this application
+    @PostMapping("/project/{projectId}")
+    public ResponseEntity<?> createTaskInProjectAndEmployee(@PathVariable String projectId,@RequestBody Task task){
+        try{
+            return new ResponseEntity<>(kanbanService.saveTaskInProjectAndEmployee(projectId,task),HttpStatus.CREATED);
+        } catch (ProjectNotFoundException | TaskAlreadyExistsException | EmployeeNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/updateTask/{projectId}")
+    public ResponseEntity<?> modifyTaskInProjectAndEmployee(@PathVariable String projectId,@RequestBody Task task){
+        try{
+            return new ResponseEntity<>(kanbanService.updateTaskFromManagerToEmployee(projectId, task),HttpStatus.OK);
+        } catch (ProjectNotFoundException | TaskNotFoundException | EmployeeNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

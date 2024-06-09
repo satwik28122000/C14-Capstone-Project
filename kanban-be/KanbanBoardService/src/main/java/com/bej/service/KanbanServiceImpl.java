@@ -176,39 +176,28 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
     @Override
     public Manager saveProjectInManagerProjectList(Project project, String managerId) throws ManagerNotFoundException, ProjectAlreadyExistException
     {
-        Optional<Manager> optionalManager= managerRepository.findById(managerId);
-        if (optionalManager.isPresent())
-        {
-            Manager registeredManager= optionalManager.get();
-            List<Project> projectList= registeredManager.getProjectList();
+        Manager manager= managerRepository.findById(managerId).orElseThrow(ManagerNotFoundException::new);
+
+            List<Project> projectList= manager.getProjectList();
             if (projectList == null)
             {
-                registeredManager.setProjectList(Arrays.asList(project));
+                manager.setProjectList(Arrays.asList(project));
             }
             else
             {
-                boolean projectAlreadyExist = false;
                 for (Project projectObj: projectList)
                 {
                     if (projectObj.getProjectId().equals(project.getProjectId()))
                     {
-                        projectAlreadyExist = true;
-                        break;
+                        throw new ProjectAlreadyExistException();
                     }
                 }
-                if (projectAlreadyExist)
-                {
-                    throw new ProjectAlreadyExistException();
-                }
-                else
-                {
-                    projectList.add(project);
-                    registeredManager.setProjectList(projectList);
-                }
+                projectList.add(project);
+                manager.setProjectList(projectList);
+                Project p = projectRepository.save(project);
             }
 
-        }
-        throw new ManagerNotFoundException();
+            return managerRepository.save(manager);
     }
 
     //done
@@ -371,8 +360,22 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
     }
 
     @Override
-    public Task updateTaskInManagerAndEmployee(String taskId, String userId, String managerId) throws ProjectNotFoundException, EmployeeNotFoundException, TaskNotFoundException, ManagerNotFoundException {
-        return null;
+    public Manager saveManager(Manager manager){
+        return managerRepository.save(manager);
     }
+    @Override
+    public Task saveTaskInProjectAndEmployee(String projectId, Task task) throws ProjectNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException {
+        Project project = saveTaskInProjectTaskList(task,projectId);
+        Employee employee = saveEmployeeTaskToTaskList(task, task.getAssignedTo().getUserId());
+        return task;
+    }
+    @Override
+    public Task updateTaskFromManagerToEmployee(String projectId,Task task) throws ProjectNotFoundException, TaskNotFoundException,EmployeeNotFoundException {
+        updateTaskInProjectTaskList(projectId, task);
+        updateEmployeeTaskInTaskList(task.getAssignedTo().getUserId(),task);
+        return task;
+    }
+
+
 
 }
