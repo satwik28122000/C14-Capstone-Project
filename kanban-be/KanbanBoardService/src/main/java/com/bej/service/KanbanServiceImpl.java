@@ -4,10 +4,12 @@ import com.bej.domain.Manager;
 import com.bej.domain.Project;
 import com.bej.domain.Task;
 import com.bej.exception.*;
+import com.bej.proxy.UserProxy;
 import com.bej.repository.EmployeeRepository;
 import com.bej.repository.ManagerRepository;
 import com.bej.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,12 +26,13 @@ public class KanbanServiceImpl implements IKanbanService {
     private EmployeeRepository employeeRepository;
     private ManagerRepository managerRepository;
     private ProjectRepository projectRepository;
-
+    private UserProxy userProxy;
     @Autowired
-    public KanbanServiceImpl(EmployeeRepository employeeRepository, ManagerRepository managerRepository,ProjectRepository projectRepository) {
+    public KanbanServiceImpl(UserProxy userProxy,EmployeeRepository employeeRepository, ManagerRepository managerRepository,ProjectRepository projectRepository) {
         this.employeeRepository = employeeRepository;
         this.managerRepository = managerRepository;
         this.projectRepository = projectRepository;
+        this.userProxy=userProxy;
     }
 
     //done
@@ -67,7 +70,13 @@ public class KanbanServiceImpl implements IKanbanService {
         if (employeeRepository.findById(employee.getUserId()).isPresent()) {
             throw new EmployeeAlreadyExistsException();
         }
-        return employeeRepository.save(employee);
+        Employee saveEmp=employeeRepository.save(employee);
+        if(!(saveEmp.getUserId().isEmpty()))
+        {
+            ResponseEntity res=userProxy.saveUser(employee);
+            System.out.println(res.getBody());
+        }
+        return saveEmp;
     }
 
     //done
