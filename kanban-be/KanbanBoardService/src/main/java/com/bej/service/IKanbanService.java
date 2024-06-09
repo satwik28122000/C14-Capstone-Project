@@ -43,5 +43,10 @@ public interface IKanbanService {
     Task getTaskByIdFromEmployee(String taskId , String userId) throws TaskNotFoundException , EmployeeNotFoundException;
 
     Task updateTaskInManagerAndEmployee(String taskId, String userId, String managerId) throws ProjectNotFoundException , EmployeeNotFoundException , TaskNotFoundException , ManagerNotFoundException;
+    Manager saveManager(Manager manager);
+
+
+    // Crucial methods for this application
+    Task saveTaskInProjectAndEmployee(String projectId,Task task) throws ProjectNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException;
 }
 
