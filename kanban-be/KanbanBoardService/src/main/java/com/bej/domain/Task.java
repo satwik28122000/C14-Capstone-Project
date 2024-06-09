@@ -6,16 +6,16 @@ import org.springframework.data.annotation.Id;
 public class Task {
     @Id
     private String taskId;
-    private String taskName ;
+    private String taskName;
     private String taskDesc;
     private String status ;
     private String priority;
     private String dueDate;
     private Employee assignedTo;
-    public Task() {
-    }
+    private String projectId;
 
-    public Task(String taskId,String taskName, String taskDesc, String status, String priority, String dueDate,Employee assignedTo) {
+    public Task(){}
+    public Task(String taskId,String taskName, String taskDesc, String status, String priority, String dueDate,Employee assignedTo,String projectId) {
         this.taskName = taskName;
         this.taskDesc = taskDesc;
         this.status = status;
@@ -23,6 +23,15 @@ public class Task {
         this.dueDate = dueDate;
         this.taskId= taskId;
         this.assignedTo=assignedTo;
+        this.projectId=projectId;
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
     }
 
     public String getTaskId() {

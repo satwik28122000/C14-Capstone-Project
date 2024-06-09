@@ -43,6 +43,13 @@
       <artifactId>jaxb-api</artifactId>
       <version>2.4.0-b180830.0359</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+
   </dependencies>
   <modules>
     <module>UserAuthentication</module>

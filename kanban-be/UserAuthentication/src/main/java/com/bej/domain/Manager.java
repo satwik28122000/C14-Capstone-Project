@@ -1,8 +1,8 @@
 package com.bej.domain;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.*;
+import org.springframework.data.annotation.Id;
 
 @Entity
 @AllArgsConstructor
@@ -10,8 +10,8 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class Employee {
+public class Manager {
     @Id
-    private String userId;
-    private String password;
+    private String managerId;
+    private String managerPassword;
 }

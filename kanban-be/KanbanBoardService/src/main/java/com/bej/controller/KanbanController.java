@@ -337,13 +337,34 @@ public class KanbanController {
     }
 
     @PutMapping("/updateTask/{projectId}")
-    public ResponseEntity<?> modifyTaskInProjectAndEmployee(@PathVariable String projectId,@RequestBody Task task){
+    public ResponseEntity<?> modifyTaskInProjectAndEmployee(@PathVariable String projectId,@RequestBody Task task)
+    throws ProjectNotFoundException, TaskNotFoundException, EmployeeNotFoundException
+    {
         try{
             return new ResponseEntity<>(kanbanService.updateTaskFromManagerToEmployee(projectId, task),HttpStatus.OK);
-        } catch (ProjectNotFoundException | TaskNotFoundException | EmployeeNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (ProjectNotFoundException e) {
+            throw new ProjectNotFoundException();
+        } catch (TaskNotFoundException e){
+            throw new TaskNotFoundException();
+        } catch( EmployeeNotFoundException e){
+            throw new EmployeeNotFoundException();
+        } catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        catch (Exception e){
+    }
+
+    @PutMapping("/updateEmployeeTask/{userId}")
+    public ResponseEntity<?> modifyTaskInEmployeeToProject(@PathVariable String userId,@RequestBody Task task) throws ProjectNotFoundException,
+            TaskNotFoundException, EmployeeNotFoundException {
+        try{
+            return new ResponseEntity<>(kanbanService.updateTaskFromEmployeeToManager(userId, task),HttpStatus.OK);
+        } catch (ProjectNotFoundException e) {
+            throw new ProjectNotFoundException();
+        } catch (TaskNotFoundException e) {
+            throw new TaskNotFoundException();
+        } catch (EmployeeNotFoundException e) {
+            throw new EmployeeNotFoundException();
+        } catch(Exception e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
