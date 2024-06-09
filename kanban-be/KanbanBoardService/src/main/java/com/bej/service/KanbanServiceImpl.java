@@ -166,40 +166,7 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
     }
 
 
-//    @Override
-//    public Manager deleteProjectFromManager(String managerId, String projectId) throws ProjectNotFoundException, ManagerNotFoundException
-//    {
-//        Optional<Manager> optionalManager= managerRepository.findById(managerId);
-//        if (optionalManager.isPresent())
-//        {
-//            Manager registeredManager= optionalManager.get();
-//            List<Project> projectList= registeredManager.getProjectList();
-//            boolean projectFound=false;
-//            for (Project existingProject : projectList)
-//            {
-//                if (existingProject.getProjectId().equals(projectId))
-//                {
-//                    projectFound=true;
-//                    projectList.remove(existingProject);
-//                    break;
-//                }
-//            }
-//            if (!projectFound)
-//            {
-//                registeredManager.setProjectList(projectList);
-//                return managerRepository.save(registeredManager);
-//            }
-//            else
-//            {
-//                throw new ProjectNotFoundException();
-//            }
-//        }
-//        else
-//        {
-//            throw new ManagerNotFoundException();
-//        }
-//
-//    }
+
 
 
     //done
@@ -302,6 +269,7 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         project.setProjectTasks(taskList);
         return projectRepository.save(project);
     }
+
     // get task list from project
     @Override
     public List<Task> getAllTaskFromProject(String projectId) throws ProjectNotFoundException {
@@ -406,7 +374,8 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         return task;
     }
     @Override
-    public Task updateTaskFromManagerToEmployee(String projectId,Task task) throws ProjectNotFoundException, TaskNotFoundException,EmployeeNotFoundException {
+    public Task updateTaskFromManagerToEmployee(String projectId,Task task) throws ProjectNotFoundException, TaskNotFoundException,EmployeeNotFoundException
+    {
         updateTaskInProjectTaskList(projectId, task);
         updateEmployeeTaskInTaskList(task.getAssignedTo().getUserId(),task);
         return task;
