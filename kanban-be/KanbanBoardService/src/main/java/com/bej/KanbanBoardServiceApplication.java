@@ -1,7 +1,11 @@
 package com.bej;
 
+import com.bej.filter.JwtFilter;
+import com.bej.filter.JwtFilterManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class KanbanBoardServiceApplication {
@@ -10,4 +14,19 @@ public class KanbanBoardServiceApplication {
 		SpringApplication.run(KanbanBoardServiceApplication.class, args);
 	}
 
+	@Bean
+	public FilterRegistrationBean jwtFilterBeanForEmployee() {
+		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+		filterRegistrationBean.setFilter(new JwtFilter());
+		filterRegistrationBean.addUrlPatterns("/api/kanban/user/*");
+		return filterRegistrationBean;
+	}
+
+	@Bean
+	public FilterRegistrationBean jwtFilterBeanForManager() {
+		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+		filterRegistrationBean.setFilter(new JwtFilterManager());
+		filterRegistrationBean.addUrlPatterns("/api/kanban/manager/*");
+		return filterRegistrationBean;
+	}
 }
