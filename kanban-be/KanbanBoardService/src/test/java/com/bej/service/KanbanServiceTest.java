@@ -16,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
 
 import java.util.*;
 
@@ -62,6 +63,8 @@ public class KanbanServiceTest {
         project2=null;
         employeeRepository.deleteAll();
     }
+
+
 
     @Test
 
@@ -292,8 +295,8 @@ public class KanbanServiceTest {
     }
 
     @Test
-    public void testDeleteTaskFromEmployeeTaskNotInList() {
-
+    public void testDeleteTaskFromEmployeeTaskNotInList()
+    {
         String userId = "pallavi@12";
         String taskId = "task1";
         Task task1 = new Task();
@@ -455,5 +458,45 @@ public class KanbanServiceTest {
     }
 
 
+    @Test
+    void testSaveManager() {
+        when(managerRepository.save(any(Manager.class))).thenReturn(manager);
+        Manager savedManager = kanbanService.saveManager(manager);
+        verify(managerRepository).save(manager);
+        assertEquals(manager.getManagerId(), savedManager.getManagerId());
+        assertEquals(manager.getManagerPassword(), savedManager.getManagerPassword());
+    }
 
+    @Test
+    void testDeleteTaskFromEmployee() throws EmployeeNotFoundException, TaskNotFoundException {
+        when(employeeRepository.findById("pallavi@12")).thenReturn(Optional.of(employee1));
+
+        List<Task> updatedTaskList = kanbanService.deleteTaskFromEmployee("pallavi@12", "101");
+
+        verify(employeeRepository).save(employee1);
+        assertEquals(1, updatedTaskList.size());
+        assertEquals("task2", updatedTaskList.get(0).getTaskId());
+    }
+
+
+    @Test
+    void testDeleteTaskFromEmployee_TaskNotFound() {
+        when(employeeRepository.findById("user1")).thenReturn(Optional.of(employee2));
+
+        assertThrows(TaskNotFoundException.class, () -> {
+            kanbanService.deleteTaskFromEmployee("user1", "task3");
+        });
+    }
+
+    @Test
+    void testDeleteTaskFromEmployee_EmployeeNotFound() {
+        when(employeeRepository.findById("user1")).thenReturn(Optional.empty());
+
+        assertThrows(EmployeeNotFoundException.class, () -> {
+            kanbanService.deleteTaskFromEmployee("user1", "task1");
+        });
+    }
 }
+
+
+

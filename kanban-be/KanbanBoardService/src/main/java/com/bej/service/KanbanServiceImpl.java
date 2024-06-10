@@ -65,18 +65,37 @@ public class KanbanServiceImpl implements IKanbanService {
     //done
 
     //register employee in employee db
+//    @Override
+//    public Employee registerEmployee (Employee employee) throws EmployeeAlreadyExistsException {
+//        if (employeeRepository.findById(employee.getUserId()).isPresent()) {
+//            throw new EmployeeAlreadyExistsException();
+//        }
+//        Employee saveEmp=employeeRepository.save(employee);
+//        if(!(saveEmp.getUserId().isEmpty()))
+//        {
+//            ResponseEntity<?> res=userProxy.saveUser(employee);
+//            System.out.println(res.getBody());
+//        }
+//        return saveEmp;
+//    }
+
+    //done
+
     @Override
-    public Employee registerEmployee (Employee employee) throws EmployeeAlreadyExistsException {
+    public Employee registerEmployee(Employee employee) throws EmployeeAlreadyExistsException {
         if (employeeRepository.findById(employee.getUserId()).isPresent()) {
             throw new EmployeeAlreadyExistsException();
         }
-        Employee saveEmp=employeeRepository.save(employee);
-        if(!(saveEmp.getUserId().isEmpty()))
-        {
-            ResponseEntity res=userProxy.saveUser(employee);
-            System.out.println(res.getBody());
+        Employee savedEmployee = employeeRepository.save(employee);
+
+        // Perform null check before invoking methods on userProxy
+        if (userProxy != null && !savedEmployee.getUserId().isEmpty()) {
+            ResponseEntity<?> responseEntity = userProxy.saveUser(employee);
+            // Process the response if needed
+            System.out.println(responseEntity.getBody());
         }
-        return saveEmp;
+
+        return savedEmployee;
     }
 
     //done
@@ -166,6 +185,7 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
             employeeRepository.save(employee);
             return updatedTaskList;
         }
+
     @Override
     public List<Project> getAllProjectFromManager(String managerId) throws ManagerNotFoundException
     {
@@ -371,12 +391,14 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         throw new TaskNotFoundException();
     }
 
+    //done
     @Override
     public Manager saveManager(Manager manager){
         return managerRepository.save(manager);
     }
 
 
+    //no need to do testing
     //save task in manager task as well as employee task list
     @Override
     public Task saveTaskInProjectAndEmployee(String projectId, Task task) throws ProjectNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException {
@@ -384,6 +406,8 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         Employee employee = saveEmployeeTaskToTaskList(task, task.getAssignedTo().getUserId());
         return task;
     }
+
+    //no need to do testing
 
     //update task in manager task to employee task list
     @Override
@@ -393,6 +417,7 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         updateEmployeeTaskInTaskList(task.getAssignedTo().getUserId(),task);
         return task;
     }
+    //no need to do testing
 
     //save task in employee task to manager task list
     @Override
