@@ -15,13 +15,13 @@ public class JwtFilterManager extends GenericFilter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String authHeader = request.getHeader("Authorization");
-        if (authHeader == null || !authHeader.startsWith("Bearer")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             throw new ServletException("Missing token or not a bearer token");
         }
         String token = authHeader.substring(7);
 
-        Claims managerId = Jwts.parser().setSigningKey("kanbanboard").parseClaimsJws(token).getBody();
-
+        Claims claims = Jwts.parser().setSigningKey("kanbanboard").parseClaimsJws(token).getBody();
+        String managerId = claims.getSubject();
         request.setAttribute("managerId", managerId);
         filterChain.doFilter(request, response);
     }
