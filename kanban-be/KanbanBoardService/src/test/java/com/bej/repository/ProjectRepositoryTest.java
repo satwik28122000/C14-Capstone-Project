@@ -56,6 +56,7 @@ public class ProjectRepositoryTest {
         projectRepository.save(project1);
         projectRepository.save(project2);
         assertEquals(2, projectRepository.findAll().size());
+
     }
 
     @Test

@@ -40,7 +40,7 @@ public class KanbanController {
         }
     }
 
-    @PostMapping("/saveManager")
+    @PostMapping("/managers/saveManager")
     public ResponseEntity createManager(@RequestBody Manager manager){
         try {
             return new ResponseEntity(kanbanService.saveManager(manager), HttpStatus.CREATED);
