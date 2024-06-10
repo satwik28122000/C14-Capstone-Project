@@ -435,6 +435,53 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         updateTaskInProjectTaskList(task.getProjectId(),task);
         return task;
     }
+    @Override
+    public Manager saveTaskInManagerProjectList(String managerId, String projectId, Task task) throws ManagerNotFoundException, ProjectNotFoundException, TaskAlreadyExistsException {
+        Manager manager = managerRepository.findById(managerId)
+                .orElseThrow(ManagerNotFoundException::new);
+
+        List<Project> projectList = manager.getProjectList();
+
+        if (projectList == null || projectList.isEmpty()) {
+            throw new ProjectNotFoundException();
+        }
+
+        // Finding the project by projectId
+        Project foundProject = projectList.stream()
+                .filter(project -> project.getProjectId().equals(projectId))
+                .findFirst()
+                .orElseThrow(ProjectNotFoundException::new);
+
+        // Debug statement
+        System.out.println("Found Project: " + foundProject);
+
+        List<Task> projectTaskList = foundProject.getProjectTasks();
+
+        // Checking if the task already exists in the project
+        if (projectTaskList != null && projectTaskList.stream().anyMatch(t -> t.getTaskId().equals(task.getTaskId()))) {
+            throw new TaskAlreadyExistsException();
+        }
+
+        // Initializing the task list if it's null
+        if (projectTaskList == null) {
+            projectTaskList = new ArrayList<>();
+        }
+
+        projectTaskList.add(task);
+        foundProject.setProjectTasks(projectTaskList);
+
+        // Saving the updated project and manager
+        projectRepository.save(foundProject);
+        managerRepository.save(manager);
+
+        return manager;
+    }
 
 
+    public Manager saveTaskInManagerAndEmployee(String managerId,String projectId,Task task) throws
+            ProjectNotFoundException, ManagerNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException {
+        Manager manager = saveTaskInManagerProjectList(managerId,projectId,task);
+        saveEmployeeTaskToTaskList(task,task.getAssignedTo().getUserId());
+        return manager;
+    }
 }

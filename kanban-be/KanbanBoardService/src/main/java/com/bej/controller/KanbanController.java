@@ -321,7 +321,18 @@ public class KanbanController {
         }
     }
 
-
+    @PostMapping("/manager/project/{projectId}/saveTask")
+    public ResponseEntity<?> createTaskInManagerAndEmployee(HttpServletRequest request,@PathVariable String projectId,@RequestBody Task task) throws
+            ProjectNotFoundException, ManagerNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException {
+        try{
+            String managerId = getManagerIdClaims(request);
+            return new ResponseEntity<>(kanbanService.saveTaskInManagerAndEmployee(managerId,projectId,task),HttpStatus.CREATED);
+        } catch(ProjectNotFoundException | ManagerNotFoundException | TaskAlreadyExistsException | EmployeeNotFoundException e){
+            throw new RuntimeException(e);
+        } catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
     //can be needed or not
