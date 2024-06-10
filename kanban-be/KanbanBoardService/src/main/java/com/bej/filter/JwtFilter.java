@@ -21,8 +21,7 @@ public class JwtFilter extends GenericFilter {
         String token = authHeader.substring(7);
 
         Claims claims = Jwts.parser().setSigningKey("kanbanboard").parseClaimsJws(token).getBody();
-        String userId = claims.getSubject(); // Assuming the subject contains the user ID
-        request.setAttribute("userId",userId);
+        request.setAttribute("userId",claims);
         filterChain.doFilter(request,response);
     }
 }

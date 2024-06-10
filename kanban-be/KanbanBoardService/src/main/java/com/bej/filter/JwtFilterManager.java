@@ -20,8 +20,7 @@ public class JwtFilterManager extends GenericFilter {
         }
         String token = authHeader.substring(7);
 
-        Claims claims = Jwts.parser().setSigningKey("kanbanboard").parseClaimsJws(token).getBody();
-        String managerId = claims.getSubject();
+        Claims managerId = Jwts.parser().setSigningKey("kanbanboard").parseClaimsJws(token).getBody();
         request.setAttribute("managerId", managerId);
         filterChain.doFilter(request, response);
     }
