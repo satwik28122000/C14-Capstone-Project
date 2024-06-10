@@ -15,24 +15,13 @@ public class JwtFilter extends GenericFilter {
         HttpServletRequest request =(HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String authHeader = request.getHeader("Authorization");
-        if(authHeader==null || !authHeader.startsWith("Bearer")){
+        if(authHeader==null || !authHeader.startsWith("Bearer ")){
             throw new ServletException("Missing token or not a bearer token");
         }
         String token = authHeader.substring(7);
 
         Claims claims = Jwts.parser().setSigningKey("kanbanboard").parseClaimsJws(token).getBody();
-        String userId = claims.getSubject(); // Assuming the subject contains the user ID
-        String role = claims.get("role", String.class); // Assuming there's a role claim to distinguish between Employee and Manager
-
-        if ("manager".equals(role)) {
-            request.setAttribute("managerId", userId);
-        } else if ("employee".equals(role)) {
-            request.setAttribute("employeeId", userId);
-        } else {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid role in token");
-            return;
-        }
-
+        request.setAttribute("userId",claims);
         filterChain.doFilter(request,response);
     }
 }
