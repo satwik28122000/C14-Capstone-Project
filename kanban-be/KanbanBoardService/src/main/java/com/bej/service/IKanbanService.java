@@ -57,11 +57,15 @@ public interface IKanbanService {
     // Crucial methods for this application
     Task saveTaskInProjectAndEmployee(String projectId, Task task) throws ProjectNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException;
 
-    Task updateTaskFromManagerToEmployee(String projectId, Task task) throws ProjectNotFoundException, TaskNotFoundException, ManagerNotFoundException, EmployeeNotFoundException;
-    Task updateTaskFromEmployeeToManager(String userId,Task task) throws TaskNotFoundException, EmployeeNotFoundException, ProjectNotFoundException;
+    Task updateTaskFromManagerToEmployee(String managerId, String projectId, Task task) throws ProjectNotFoundException,
+            TaskNotFoundException, ManagerNotFoundException, EmployeeNotFoundException;
+    Task updateTaskFromEmployeeToManager(String userId,Task task) throws TaskNotFoundException, EmployeeNotFoundException, ProjectNotFoundException, ManagerNotFoundException;
 
     Manager saveTaskInManagerProjectList(String managerId,String projectId,Task task) throws ManagerNotFoundException, ProjectNotFoundException, TaskAlreadyExistsException;
-    Manager saveTaskInManagerAndEmployee(String managerId,String projectId,Task task) throws ProjectNotFoundException, ManagerNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException;
+    Manager saveTaskInManagerAndEmployee(String managerId,String projectId,Task task) throws ProjectNotFoundException, ManagerNotFoundException, TaskAlreadyExistsException,
+            EmployeeNotFoundException;
+
+    Manager updateTaskInManagerProjectList(String managerId, String projectId, Task task) throws ProjectNotFoundException, ManagerNotFoundException, TaskNotFoundException;
 }
 
 

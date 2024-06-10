@@ -405,36 +405,7 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         }
         return savedManager;
     }
-
-
-    //no need to do testing
-    //save task in manager task as well as employee task list
-    @Override
-    public Task saveTaskInProjectAndEmployee(String projectId, Task task) throws ProjectNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException {
-        Project project = saveTaskInProjectTaskList(task,projectId);
-        Employee employee = saveEmployeeTaskToTaskList(task, task.getAssignedTo().getUserId());
-        return task;
-    }
-
-    //no need to do testing
-
-    //update task in manager task to employee task list
-    @Override
-    public Task updateTaskFromManagerToEmployee(String projectId,Task task) throws ProjectNotFoundException, TaskNotFoundException,EmployeeNotFoundException
-    {
-        updateTaskInProjectTaskList(projectId, task);
-        updateEmployeeTaskInTaskList(task.getAssignedTo().getUserId(),task);
-        return task;
-    }
-    //no need to do testing
-
-    //save task in employee task to manager task list
-    @Override
-    public Task updateTaskFromEmployeeToManager(String userId, Task task) throws TaskNotFoundException, EmployeeNotFoundException, ProjectNotFoundException {
-        updateEmployeeTaskInTaskList(userId,task);
-        updateTaskInProjectTaskList(task.getProjectId(),task);
-        return task;
-    }
+    //save task in manager's  project task list
     @Override
     public Manager saveTaskInManagerProjectList(String managerId, String projectId, Task task) throws ManagerNotFoundException, ProjectNotFoundException, TaskAlreadyExistsException {
         Manager manager = managerRepository.findById(managerId)
@@ -477,11 +448,72 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         return manager;
     }
 
+    //update task in manager's project task list
+    @Override
+    public Manager updateTaskInManagerProjectList(String managerId, String projectId, Task task) throws ProjectNotFoundException, ManagerNotFoundException, TaskNotFoundException {
+        Manager manager = managerRepository.findById(managerId).orElseThrow(ManagerNotFoundException::new);
+        Project project = getProjectByIdFromManager(managerId,projectId);
+        List<Task> taskList = project.getProjectTasks();
+        if(taskList==null || taskList.isEmpty() ||
+                taskList.stream().noneMatch(t -> t.getTaskId().equals(task.getTaskId()))){
+            throw new TaskNotFoundException();
+        }
+        else{
+            for(Task t : taskList){
+                if (t.getTaskId().equals(task.getTaskId())){
+                    t.setTaskName(task.getTaskName());
+                    t.setStatus(task.getStatus());
+                    t.setDueDate(task.getDueDate());
+                    t.setPriority(task.getPriority());
+                    t.setTaskDesc(task.getTaskDesc());
+                    t.setAssignedTo(task.getAssignedTo());
+                    t.setProjectId(projectId);
+                    break;
+                }
+            }
+            project.setProjectTasks(taskList);
+            managerRepository.save(manager);
+        }
+        return manager;
+    }
 
+    //no need to do testing
+    //save task in manager task as well as employee task list
+    @Override
+    public Task saveTaskInProjectAndEmployee(String projectId, Task task) throws ProjectNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException {
+        saveTaskInProjectTaskList(task,projectId);
+        saveEmployeeTaskToTaskList(task, task.getAssignedTo().getUserId());
+        return task;
+    }
+
+    //no need to do testing
+
+    //update task in manager task to employee task list
+    @Override
+    public Task updateTaskFromManagerToEmployee(String managerId,String projectId,Task task) throws ProjectNotFoundException,
+            TaskNotFoundException, EmployeeNotFoundException, ManagerNotFoundException {
+        updateTaskInManagerProjectList(managerId,projectId,task);
+        updateEmployeeTaskInTaskList(task.getAssignedTo().getUserId(),task);
+        return task;
+    }
+    //no need to do testing
+
+    //save task in employee task to project task list
+    @Override
+    public Task updateTaskFromEmployeeToManager(String userId, Task task) throws TaskNotFoundException, EmployeeNotFoundException, ProjectNotFoundException, ManagerNotFoundException {
+        Employee employee= employeeRepository.findById(userId).orElseThrow(EmployeeNotFoundException::new);
+        updateEmployeeTaskInTaskList(userId,task);
+        updateTaskInManagerProjectList(employee.getManagerId(),task.getProjectId(), task);
+        updateTaskInProjectTaskList(task.getProjectId(),task);
+        return task;
+    }
+
+    @Override
     public Manager saveTaskInManagerAndEmployee(String managerId,String projectId,Task task) throws
             ProjectNotFoundException, ManagerNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException {
         Manager manager = saveTaskInManagerProjectList(managerId,projectId,task);
         saveEmployeeTaskToTaskList(task,task.getAssignedTo().getUserId());
         return manager;
     }
+
 }

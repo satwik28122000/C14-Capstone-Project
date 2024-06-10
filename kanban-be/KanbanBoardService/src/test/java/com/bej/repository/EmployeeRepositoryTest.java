@@ -37,8 +37,8 @@ public class EmployeeRepositoryTest {
         task2=new Task("102","Kanban Service","Implement register employee method","Assigned","High","10-06-2024",employee2,"12321");
         taskList.add(task1);
         taskList.add(task2);
-        employee1 = new Employee("pallavi@12","Pallavi","qwerty123", "Full Stack Developer","pallavi@gmail.com",taskList);
-        employee2 = new Employee("priya@12","Priyanka","qwerty123", "Full Stack Developer","priya@gmail.com",taskList);
+        employee1 = new Employee("pallavi@12","Pallavi","qwerty123", "Full Stack Developer","pallavi@gmail.com","Sangeetha@123",taskList);
+        employee2 = new Employee("priya@12","Priyanka","qwerty123", "Full Stack Developer","priya@gmail.com","Sangeetha@123",taskList);
     }
 
     @AfterEach

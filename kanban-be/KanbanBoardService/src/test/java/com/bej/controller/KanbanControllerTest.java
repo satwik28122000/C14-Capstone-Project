@@ -46,7 +46,7 @@ public class KanbanControllerTest {
 
     @Test
     public void givenEmployeeWhenRegisterEmployeeThenReturnCreated() throws Exception {
-        Employee employee = new Employee("11", "Anuja", "D123", "designation3", "Anuja@gmail.com", null);
+        Employee employee = new Employee("11", "Anuja", "D123", "designation3", "Anuja@gmail.com","Sangeetha@123", null);
         when(kanbanService.registerEmployee(any(Employee.class))).thenReturn(employee);
 
         mockMvc.perform(post("/api/kanban/register")

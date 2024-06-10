@@ -288,11 +288,13 @@ public class KanbanController {
     }
 
     @PutMapping("/manager/updateTask/{projectId}")
-    public ResponseEntity<?> modifyTaskInProjectAndEmployee(@PathVariable String projectId,@RequestBody Task task)
-    throws ProjectNotFoundException, TaskNotFoundException, EmployeeNotFoundException
-    {
+    public ResponseEntity<?> modifyTaskInProjectAndEmployee(HttpServletRequest request,@PathVariable String projectId,@RequestBody Task task)
+            throws ProjectNotFoundException, TaskNotFoundException, EmployeeNotFoundException, ManagerNotFoundException {
         try{
-            return new ResponseEntity<>(kanbanService.updateTaskFromManagerToEmployee(projectId, task),HttpStatus.OK);
+            String managerId = getManagerIdClaims(request);
+            return new ResponseEntity<>(kanbanService.updateTaskFromManagerToEmployee(managerId,projectId, task),HttpStatus.OK);
+        } catch(ManagerNotFoundException e){
+            throw  new ManagerNotFoundException();
         } catch (ProjectNotFoundException e) {
             throw new ProjectNotFoundException();
         } catch (TaskNotFoundException e){
@@ -306,7 +308,7 @@ public class KanbanController {
 
     @PutMapping("/user/updateEmployeeTask")
     public ResponseEntity<?> modifyTaskInEmployeeToProject(HttpServletRequest request,@RequestBody Task task) throws ProjectNotFoundException,
-            TaskNotFoundException, EmployeeNotFoundException {
+            TaskNotFoundException, EmployeeNotFoundException, ManagerNotFoundException {
         try{
             String userId = getManagerIdClaims(request);
             return new ResponseEntity<>(kanbanService.updateTaskFromEmployeeToManager(userId, task),HttpStatus.OK);
@@ -316,6 +318,8 @@ public class KanbanController {
             throw new TaskNotFoundException();
         } catch (EmployeeNotFoundException e) {
             throw new EmployeeNotFoundException();
+        } catch(ManagerNotFoundException e){
+            throw new ManagerNotFoundException();
         } catch(Exception e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }

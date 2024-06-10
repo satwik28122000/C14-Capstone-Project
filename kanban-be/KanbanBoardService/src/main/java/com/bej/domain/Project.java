@@ -1,10 +1,11 @@
 package com.bej.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 import java.util.UUID;
-
+@Document
 public class Project {
     @Id
     private String projectId;
@@ -12,8 +13,7 @@ public class Project {
     private String projectDesc;
     private List<Task> projectTasks;
 
-    public Project() {
-    }
+    public Project(){}
 
     public Project(String projectId,String projectName, String projectDesc, List<Task> projectTasks) {
         this.projectName = projectName;
