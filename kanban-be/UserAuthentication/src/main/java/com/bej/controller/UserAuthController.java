@@ -25,7 +25,7 @@ public class UserAuthController {
     }
 
     //save employee mapping with endpoint /auth/save
-    @PostMapping("/save")
+    @PostMapping("/users/save")
     public ResponseEntity<?> saveUser(@RequestBody Employee employee) throws UserAlreadyExistException {
         try{
             return new ResponseEntity<>(userAuthService.saveUser(employee), HttpStatus.CREATED);
@@ -60,7 +60,7 @@ public class UserAuthController {
     }
 
     //save manager mapping with endpoint /auth/saveManager
-    @PostMapping("/saveManager")
+    @PostMapping("/managers/saveManager")
     public ResponseEntity<?> createManager(@RequestBody Manager manager) throws ManagerAlreadyExistException {
         try{
             return new ResponseEntity<>(userAuthService.saveManager(manager), HttpStatus.CREATED);

@@ -2,13 +2,17 @@ package com.bej;
 
 import com.bej.filter.JwtFilter;
 import com.bej.filter.JwtFilterManager;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 @EnableFeignClients
 @SpringBootApplication
+@OpenAPIDefinition
 public class KanbanBoardServiceApplication {
 
 	public static void main(String[] args) {

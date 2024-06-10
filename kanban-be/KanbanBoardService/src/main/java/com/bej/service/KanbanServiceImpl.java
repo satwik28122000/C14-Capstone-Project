@@ -4,7 +4,7 @@ import com.bej.domain.Manager;
 import com.bej.domain.Project;
 import com.bej.domain.Task;
 import com.bej.exception.*;
-import com.bej.proxy.ManagerProxy;
+//import com.bej.proxy.ManagerProxy;
 import com.bej.proxy.UserProxy;
 import com.bej.repository.EmployeeRepository;
 import com.bej.repository.ManagerRepository;
@@ -28,14 +28,14 @@ public class KanbanServiceImpl implements IKanbanService {
     private ManagerRepository managerRepository;
     private ProjectRepository projectRepository;
     private UserProxy userProxy;
-    private ManagerProxy managerProxy;
+   // private ManagerProxy managerProxy;
     @Autowired
-    public KanbanServiceImpl(ManagerProxy managerProxy,UserProxy userProxy,EmployeeRepository employeeRepository, ManagerRepository managerRepository,ProjectRepository projectRepository) {
+    public KanbanServiceImpl(UserProxy userProxy,EmployeeRepository employeeRepository, ManagerRepository managerRepository,ProjectRepository projectRepository) {
         this.employeeRepository = employeeRepository;
         this.managerRepository = managerRepository;
         this.projectRepository = projectRepository;
         this.userProxy=userProxy;
-        this.managerProxy=managerProxy;
+       // this.managerProxy=managerProxy;
     }
 
     //done
@@ -399,8 +399,8 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
     public Manager saveManager(Manager manager){
        // return managerRepository.save(manager);
         Manager savedManager = managerRepository.save(manager);
-        if (managerProxy != null && !savedManager.getManagerId().isEmpty()) {
-            ResponseEntity<?> responseEntity = managerProxy.createManager(manager);
+        if (userProxy != null && !savedManager.getManagerId().isEmpty()) {
+            ResponseEntity<?> responseEntity = userProxy.createManager(manager);
             System.out.println(responseEntity.getBody());
         }
         return savedManager;
