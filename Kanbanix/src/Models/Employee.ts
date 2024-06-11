@@ -8,3 +8,4 @@ export class Employee {
     emailId?: string;
     managerId?: string;
     userTaskList?: Task[]; 
+}
