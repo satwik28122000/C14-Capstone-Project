@@ -1,6 +1,4 @@
-
-  
-  .navbar {
+.navbar {
     width: 100%;
     background-color: rgb(3, 76, 76); /* Updated to green */
     color: #fff;
@@ -30,15 +28,13 @@
   }
   
   .navbar-logo a i {
-    margin-right: 2700%;
+    margin-right: 2690%;
   }
   
   .title {
     color: white;
     text-decoration:aquamarine;
-    /* margin-left: 10px; */
-    font-size: 1.2em;
-    text-align: center;
+    font-size: 1.8em;
     
   }
   
