@@ -1,4 +1,4 @@
-import { Task } from "./Task";
+import { Task } from "./task";
 
 export class Project {
     projectId?: string;
