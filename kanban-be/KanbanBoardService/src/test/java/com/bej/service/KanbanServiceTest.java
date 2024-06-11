@@ -469,27 +469,7 @@ public class KanbanServiceTest {
     }
 
 
-//    @Test
-//    public void testDeleteTaskFromEmployee() throws EmployeeNotFoundException, TaskNotFoundException {
-//        // Mock the behavior of the repository
-//        Mockito.when(employeeRepository.findById("pallavi@12")).thenReturn(Optional.of(employee1));
-//
-//        // Call the method under test
-//        List<Task> result = kanbanService.deleteTaskFromEmployee("pallavi@12", "101");
-//
-//        // Verify the updated task list
-//        assertNotNull(result);
-//        assertEquals(1, result.size());
-//        assertEquals("102", result.get(0).getTaskId());
-//
-//        // Verify that the repository methods were called as expected
-//        verify(employeeRepository, times(1)).findById("pallavi@12");
-//        verify(employeeRepository, times(1)).save(employee1);
-//
-//        // Verify the state of employee1 after the operation
-//        assertEquals(1, employee1.getUserTaskList().size());
-//        assertFalse(employee1.getUserTaskList().stream().anyMatch(task -> task.getTaskId().equals("101")));
-//    }
+
 
     @Test
     public void testDeleteTaskFromEmployee_EmployeeNotFound() {
@@ -516,23 +496,7 @@ public class KanbanServiceTest {
     }
 
 
-    //    @Test
-//    public void testGetAllProjectFromManager_Success() throws ManagerNotFoundException {
-//        // Mock the behavior of the repository
-//        when(managerRepository.findById("manager1")).thenReturn(Optional.of(manager));
-//
-//        // Call the method under test
-//        List<Project> result = kanbanService.getAllProjectFromManager("manager1");
-//
-//        // Verify the result
-//        assertNotNull(result);
-//        assertEquals(2, result.size());
-//        assertTrue(result.contains(project1));
-//        assertTrue(result.contains(project2));
-//
-//        // Verify that the repository method was called as expected
-//        verify(managerRepository, times(1)).findById("manager1");
-//    }
+
     @Test
     public void testGetAllProjectFromManager_ManagerNotFound() {
         Mockito.when(managerRepository.findById("manager1")).thenReturn(Optional.empty());
@@ -544,26 +508,7 @@ public class KanbanServiceTest {
         verify(managerRepository, times(1)).findById("manager1");
     }
 
-//    @Test
-//    public void testSaveProjectInManagerProjectList_Success() throws ManagerNotFoundException, ProjectAlreadyExistException {
-//        // Mock the behavior of the repositories
-//        when(managerRepository.findById("manager1")).thenReturn(Optional.of(manager));
-//        when(managerRepository.save(any(Manager.class))).thenReturn(manager);
-//        when(projectRepository.save(any(Project.class))).thenReturn(project2);
-//
-//        // Call the method under test
-//        Manager result = kanbanService.saveProjectInManagerProjectList(project2, "manager1");
-//
-//        // Verify the result
-//        assertNotNull(result);
-//        assertEquals(1, result.getProjectList().size());
-//        assertTrue(result.getProjectList().contains(project2));
-//
-//        // Verify that the repository methods were called as expected
-//        verify(managerRepository, times(1)).findById("manager1");
-//        verify(managerRepository, times(1)).save(manager);
-//        verify(projectRepository, times(1)).save(project2);
-//    }
+
 
     @Test
     public void testSaveProjectInManagerProjectList_ManagerNotFound() {
@@ -578,41 +523,7 @@ public class KanbanServiceTest {
         verify(projectRepository, never()).save(any(Project.class));
     }
 
-//    @Test
-//    public void testSaveProjectInManagerProjectList_ProjectAlreadyExist() {
-//        when(managerRepository.findById("manager1")).thenReturn(Optional.of(manager));
-//
-//        assertThrows(ProjectAlreadyExistException.class, () -> {
-//            kanbanService.saveProjectInManagerProjectList(project1, "manager1");
-//        });
-//
-//        verify(managerRepository, times(1)).findById("manager1");
-//        verify(managerRepository, never()).save(any(Manager.class));
-//        verify(projectRepository, never()).save(any(Project.class));
-//    }
 
-
-//    @Test
-//    public void testUpdateProjectInManagerProjectList_Success() throws ManagerNotFoundException, ProjectNotFoundException {
-//        // Mock the behavior of the repository
-//        when(managerRepository.findById("manager1")).thenReturn(Optional.of(manager));
-//        when(managerRepository.save(any(Manager.class))).thenReturn(manager);
-//
-//        // Call the method under test
-//        Manager result = kanbanService.updateProjectInManagerProjectList("manager1", project1);
-//
-//        // Verify the result
-//        assertNotNull(result);
-//        assertEquals(1, result.getProjectList().size());
-//        Project updatedProjectFromList = result.getProjectList().get(0);
-//        assertEquals("201", updatedProjectFromList.getProjectId());
-//        assertEquals("Updated Project A", updatedProjectFromList.getProjectName());
-//        assertEquals("Updated Description A", updatedProjectFromList.getProjectDesc());
-//
-//        // Verify that the repository methods were called as expected
-//        verify(managerRepository, times(1)).findById("manager1");
-//        verify(managerRepository, times(1)).save(manager);
-//    }
 
     @Test
     public void testUpdateProjectInManagerProjectList_ManagerNotFound() {
@@ -641,20 +552,6 @@ public class KanbanServiceTest {
     }
 
 
-//    @Test
-//    public void testGetTaskByIdFromEmployee_Success() throws EmployeeNotFoundException, TaskNotFoundException {
-//
-//        Mockito.when(employeeRepository.findById("pallavi@12")).thenReturn(Optional.of(employee1));
-//        Task result = kanbanService.getTaskByIdFromEmployee("101", "pallavi@12");
-//
-//
-//        assertNotNull(result);
-//        assertEquals("101", result.getTaskId());
-//        assertEquals("Generate token", result.getTaskName());
-//
-//        // Verify that the repository method was called as expected
-//        verify(employeeRepository, times(1)).findById("pallavi@12");
-//    }
 
     @Test
     public void testGetTaskByIdFromEmployee_EmployeeNotFound() {
@@ -691,52 +588,4 @@ public class KanbanServiceTest {
         verify(employeeRepository, times(1)).findById("pallavi@12");
     }
 
-
-//    @Test
-//    void getTaskByIdFromProject_Success() throws Exception {
-//        Project project = new Project();
-//        Task task = new Task();
-//        project.setProjectTasks(Arrays.asList(task));
-//
-//        when(projectRepository.findById("project1")).thenReturn(Optional.of(project));
-//
-//        Task result = kanbanService.getTaskByIdFromProject("1", "project1");
-//        assertNotNull(result);
-//        assertEquals("1", result.getTaskId());
-//    }
-
-//    @Test
-//    void getTaskByIdFromProject_ProjectNotFound() {
-//        when(projectRepository.findById("project1")).thenThrow(new ProjectNotFoundException());
-//
-//        assertThrows(ProjectNotFoundException.class, () -> {
-//            kanbanService.getTaskByIdFromProject("1", "project1");
-//        });
-//    }
-//
-//    @Test
-//    void getTaskByIdFromProject_TaskNotFound_EmptyList()
-//    {
-//        Project project = new Project();
-//        project.setProjectTasks(Collections.emptyList());
-//
-//        when(projectRepository.findById("project1")).thenReturn(Optional.of(project));
-//
-//        assertThrows(TaskNotFoundException.class, () -> {
-//            kanbanService.getTaskByIdFromProject("1", "project1");
-//        });
-//    }
-
-//    @Test
-//    void getTaskByIdFromProject_TaskNotFound_TaskNotInList() {
-//        Project project = new Project();
-//        Task task = new Task();
-//        project.setProjectTasks(Arrays.asList(task));
-//
-//        when(projectRepository.findById("project1")).thenReturn(Optional.of(project));
-//
-//        assertThrows(TaskNotFoundException.class, () -> {
-//            kanbanService.getTaskByIdFromProject("1", "project1");
-//        });
-//    }
 }
