@@ -1,12 +1,8 @@
- body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-  }
+
   
   .navbar {
     width: 100%;
-    background-color: darkcyan; /* Updated to green */
+    background-color: rgb(3, 76, 76); /* Updated to green */
     color: #fff;
     padding: 10px 0;
   }
