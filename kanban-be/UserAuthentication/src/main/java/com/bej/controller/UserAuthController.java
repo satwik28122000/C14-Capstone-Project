@@ -5,6 +5,8 @@ import com.bej.domain.Manager;
 import com.bej.exception.*;
 import com.bej.security.ITokenGenerator;
 import com.bej.service.IUserAuthService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +25,8 @@ public class UserAuthController {
         this.userAuthService = userAuthService;
         this.tokenGenerator = tokenGenerator;
     }
-
+    @Operation(summary = "Save user", description = "This will save new user")
+    @ApiResponse(responseCode = "201", description = "User saved successfully")
     //save employee mapping with endpoint /auth/save
     @PostMapping("/users/save")
     public ResponseEntity<?> saveUser(@RequestBody Employee employee) throws UserAlreadyExistException {
@@ -37,6 +40,8 @@ public class UserAuthController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @Operation(summary = "login user", description = "This will provide login  for employees")
+    @ApiResponse(responseCode = "200", description = "employee login successfully")
     //login employee mapping with endpoint "/auth/login"
     @GetMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody Employee employee) throws UserNotFoundException, InvalidCredentialsException {
@@ -58,7 +63,8 @@ public class UserAuthController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @Operation(summary = "save Manager", description = "This will save new manager")
+    @ApiResponse(responseCode = "201", description = "Manager saved successfully")
     //save manager mapping with endpoint /auth/saveManager
     @PostMapping("/managers/saveManager")
     public ResponseEntity<?> createManager(@RequestBody Manager manager) throws ManagerAlreadyExistException {
@@ -72,6 +78,8 @@ public class UserAuthController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @Operation(summary = "Login manager", description = "This provide login for manager")
+    @ApiResponse(responseCode = "200", description = "User saved successfully")
     //login manager mapping with endpoint "/auth/loginManager"
     @GetMapping("/loginManager")
     public ResponseEntity<?> loginManager(@RequestBody Manager manager) throws ManagerNotFoundException, InvalidCredentialsException {
