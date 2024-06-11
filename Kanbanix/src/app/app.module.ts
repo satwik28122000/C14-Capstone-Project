@@ -7,12 +7,13 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 // import { FooterComponent } from './footer/footer.component';
 import { FooterComponent } from './footer/footer.component';
-
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    FooterComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

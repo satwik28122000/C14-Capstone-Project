@@ -1,6 +1,7 @@
 import { Employee } from "./Employee";
 
-export class Task {
+
+export type Task = {
     taskId?: string;
     taskName?: string;
     taskDesc?: string;
