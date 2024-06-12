@@ -19,6 +19,8 @@ import { CreateProjectComponent } from './create-project/create-project.componen
 import { ProjectTaskComponent } from './project-task/project-task.component';
 import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
 import { ManagerRegisterComponent } from './manager-register/manager-register.component';
+import { ManagerLoginComponent } from './manager-login/manager-login.component';
+import { EmployeeLoginComponent } from './employee-login/employee-login.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,10 @@ import { ManagerRegisterComponent } from './manager-register/manager-register.co
     CreateProjectComponent,
     ProjectTaskComponent,
     EmployeeRegisterComponent,
-    ManagerRegisterComponent
+    ManagerRegisterComponent,
+    ManagerLoginComponent,
+    ManagerLoginComponent,
+    EmployeeLoginComponent
   ],
   imports: [
     BrowserModule,

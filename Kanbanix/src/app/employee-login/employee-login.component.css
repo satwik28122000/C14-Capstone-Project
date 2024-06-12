@@ -1,0 +1,50 @@
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: black;
+    border-radius: 8px;
+    box-shadow: 0 0 10px darkcyan;
+    margin-top: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input.form-control {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.875em;
+  }
+  
+  .button-row {
+    display: flex;
+    justify-content: center;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: darkcyan;
+  }
+
+  .register-link{
+    margin-top: 10px;
+  }
+  
