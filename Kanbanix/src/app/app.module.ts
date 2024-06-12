@@ -19,6 +19,8 @@ import { CreateProjectComponent } from './create-project/create-project.componen
 import { ProjectTaskComponent } from './project-task/project-task.component';
 import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
 import { ManagerRegisterComponent } from './manager-register/manager-register.component';
+import { UserViewComponent } from './user-view/user-view.component';
+import { TaskCardComponent } from './task-card/task-card.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { ManagerRegisterComponent } from './manager-register/manager-register.co
     CreateProjectComponent,
     ProjectTaskComponent,
     EmployeeRegisterComponent,
-    ManagerRegisterComponent
+    ManagerRegisterComponent,
+    UserViewComponent,
+    TaskCardComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,10 @@
+<section class="card">
+    <div class="title-bar">
+        <h3>Title: {{task.taskName}}</h3>
+        <button class="priority btn btn-md btn-danger" *ngIf="task?.priority == 'High'|| task?.priority == 'high'" disabled>{{ task.priority }}</button>
+      <button class="priority btn btn-md btn-success" *ngIf="task?.priority == 'Low'|| task?.priority == 'low'" disabled>{{ task.priority }}</button>
+      <button class="priority btn btn-md btn-warning" *ngIf="task?.priority == 'Medium'|| task?.priority == 'medium'" disabled>{{ task.priority }}</button>
+    </div>
+    <article>Description: {{task.taskDesc}}</article>
+    <article>Due date: {{task.dueDate}}</article>
+</section>
