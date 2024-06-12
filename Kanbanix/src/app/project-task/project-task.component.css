@@ -1,0 +1,73 @@
+.project-task-component{
+  height: 95vh;
+}
+
+h2 {
+  text-align: center;
+  font-size: 30px;
+}
+h3{
+  color: white;
+}
+.project-form-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 30px;
+  border: 1px solid #447d64;
+  border-radius: 10px;
+  background-color: #0c091b74;
+  color: #faf6f6fc;
+}
+
+.project-form-container label,
+.project-form-container span,
+.task-item div {
+  color: #fbf8f8fe;
+}
+
+.tasks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  color: rgba(240, 255, 255, 0.941);
+}
+
+.tasks-header h3 {
+  margin: 0;
+  color: #8aa7b01c;
+}
+
+.tasks-header .add-task-btn {
+  padding: 8px 12px;
+  background: linear-gradient(to right, darkcyan, cyan, white);
+  margin: 60px 0 0;
+  color: black;
+  font-weight: 500;
+  border: 1px solid darkcyan;
+}
+
+.task-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+  margin: 20px 5px 0;
+  font-weight: 500;
+  border-bottom: 3px solid darkcyan;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+.task-item .edit-btn {
+  background: linear-gradient(to right, darkcyan, cyan, white);
+  color: black;
+  font-weight: 500;
+  border: 1px solid darkcyan;
+  padding: 6px 12px;
+}
+
+.priority{
+  width: 100px;
+}

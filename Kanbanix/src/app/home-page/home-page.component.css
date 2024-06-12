@@ -52,6 +52,7 @@
 .features-card-section{
     display: flex;
     width: 100%;
+    flex-wrap: wrap;
 }
 
 .features-section{
@@ -78,3 +79,9 @@
     border: 2px solid darkcyan;
 }
 
+@media screen and (max-width: 426px) {
+    .card{
+        width: 90%;
+        height: auto;
+    }
+}

@@ -15,6 +15,8 @@ import { MatInputModule} from '@angular/material/input';
 import { MatError } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { CreateProjectComponent } from './create-project/create-project.component';
+import { ProjectTaskComponent } from './project-task/project-task.component';
 import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
 import { ManagerRegisterComponent } from './manager-register/manager-register.component';
 
@@ -26,6 +28,8 @@ import { ManagerRegisterComponent } from './manager-register/manager-register.co
     NavbarComponent,
     ManagerViewComponent,
     ProjectCardComponent,
+    CreateProjectComponent,
+    ProjectTaskComponent,
     EmployeeRegisterComponent,
     ManagerRegisterComponent
   ],
