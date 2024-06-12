@@ -1,7 +1,7 @@
 // src/app/project-task/project-task.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { Project } from '../../Models/Project';
+import { Project } from '../../models/project';
 
 @Component({
   selector: 'app-project-task',

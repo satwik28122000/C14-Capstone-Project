@@ -1,0 +1,43 @@
+   <div class="container">
+    <h2>Manager's Registration</h2>
+    <form>
+      <div class="form-row">
+        <div class="form-group half-width">
+          <label for="managerId">Manager ID</label>
+          <input type="text" id="managerId" class="form-control">
+        </div>
+  
+        <div class="form-group half-width">
+          <label for="managerName">Manager Name</label>
+          <input type="text" id="managerName" class="form-control">
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="managerEmail">Manager Email ID</label>
+        <input type="email" id="managerEmail" class="form-control">
+      </div>
+  
+      <div class="form-row">
+        <div class="form-group half-width">
+          <label for="managerPassword">Manager Password</label>
+          <input type="password" id="managerPassword" class="form-control">
+        </div>
+  
+        <div class="form-group half-width">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" class="form-control">
+        </div>
+      </div>
+  
+      <div class="button-row">
+        
+        <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid">Submit</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
+      </div>
+    </form>
+  </div>
+  
+
+   
+  

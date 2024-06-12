@@ -27,9 +27,7 @@
     align-items: center;
   }
   
-  .navbar-logo a i {
-    margin-right: 2690%;
-  }
+  
   
   .title {
     color: white;
@@ -37,12 +35,6 @@
     font-size: 1.8em;
     
   }
-  
-  /* .navbar-search {
-    flex-grow: 1;
-    text-align: center;
-
-  } */
   
   .navbar-search input {
     width: 60%;
