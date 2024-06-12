@@ -20,6 +20,7 @@ export class ProjectTaskComponent implements OnInit {
         taskId:"1",
         taskName:"Auth Service",
         status:"Assigned",
+        
         taskDesc: "Create auth service domains",
         priority: "High",
         dueDate: "12-06-2024",

@@ -19,7 +19,13 @@ import { CreateProjectComponent } from './create-project/create-project.componen
 import { ProjectTaskComponent } from './project-task/project-task.component';
 import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
 import { ManagerRegisterComponent } from './manager-register/manager-register.component';
-
+import { TaskregisterComponent } from './taskregister/taskregister.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core'; // Required for date picker
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatRadioButton, MatRadioModule } from '@angular/material/radio';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +37,9 @@ import { ManagerRegisterComponent } from './manager-register/manager-register.co
     CreateProjectComponent,
     ProjectTaskComponent,
     EmployeeRegisterComponent,
-    ManagerRegisterComponent
+    ManagerRegisterComponent,
+    TaskregisterComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +48,13 @@ import { ManagerRegisterComponent } from './manager-register/manager-register.co
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    BrowserAnimationsModule,
+    MatRadioButton,
+    MatRadioModule
   ],
   providers: [
     provideAnimationsAsync()
