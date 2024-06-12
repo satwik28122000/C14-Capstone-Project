@@ -13,6 +13,7 @@ import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
+import { CreateProjectComponent } from './create-project/create-project.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CommonModule } from '@angular/common';
     HomePageComponent,
     NavbarComponent,
     ManagerViewComponent,
-    ProjectCardComponent
+    ProjectCardComponent,
+    CreateProjectComponent
   ],
   imports: [
     BrowserModule,
