@@ -1,4 +1,31 @@
-
-<form action="">
-    
-</form>
+<section class="container">
+    <h1>Create Project</h1>
+    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="full-width">
+            <mat-label>Project Id</mat-label>
+            <input matInput type="text" name="projectId" formControlName="projectId" id="projectId">
+            <mat-error *ngIf="projectForm.get('projectId')?.hasError('required')">Project Id is required</mat-error>
+            <mat-error *ngIf="projectForm.get('projectId')?.hasError('minlength')">should have minimum 3
+                characters</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Project Name</mat-label>
+            <input matInput type="text" name="projectName" formControlName="projectName" id="projectName">
+            <mat-error *ngIf="projectForm.get('projectName')?.hasError('required')">Project Name is required</mat-error>
+            <mat-error *ngIf="projectForm.get('projectName')?.hasError('minlength')">should have minimum 4
+                characters</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Project Description</mat-label>
+            <textarea matInput type="text" name="projectDesc" formControlName="projectDesc" id="projectDesc"></textarea>
+            <mat-error *ngIf="projectForm.get('projectDesc')?.hasError('required')">Project Description is
+                required</mat-error>
+            <mat-error *ngIf="projectForm.get('projectDesc')?.hasError('minlength')">should have minimum 10
+                characters</mat-error>
+        </mat-form-field>
+        <div class="btn-group">
+            <button class="btn" type="submit" mat-raised-button [disabled]="projectForm.invalid">Add Project</button>
+            <button class="btn" type="reset" mat-raised-button>Reset</button>
+        </div>
+    </form>
+</section>

@@ -33,7 +33,8 @@ import { CreateProjectComponent } from './create-project/create-project.componen
     MatToolbarModule,
     MatInputModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideAnimationsAsync()

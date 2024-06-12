@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Project } from '../../models/project';
 
 @Component({
@@ -10,9 +10,18 @@ import { Project } from '../../models/project';
 export class CreateProjectComponent {
     constructor(private fb:FormBuilder){}
     project:Project={};
-    projectData = this.fb.group(
+    projectForm = this.fb.group(
       {
-
+        projectId: ['',[Validators.required,Validators.minLength(3)]],
+        projectName: ['',[Validators.required,Validators.minLength(4)]],
+        projectDesc: ['',Validators.required,Validators.minLength(10)],
+        projectTasks: [null] 
       }
     )
+    get projectId(){return this.projectForm.get('projectId')};
+    get projectName(){return this.projectForm.get('projectName')};
+    get projectDesc(){return this.projectForm.get('projectDesc')};
+
+
+    onSubmit(){}
 }
