@@ -1,0 +1,56 @@
+.user-view{
+    height: 95vh;
+    padding: 1%;
+    margin: 1%;
+}
+
+.user-kanban{
+    display: flex;
+    gap: 2%;
+    text-align: center;
+    margin: 2% 10%;
+}
+
+.user-kanban .assigned-task{
+    width: auto;
+    border: 1px solid #4084B6;
+    border-radius: 10px;
+    min-height: 85vh;
+}
+
+.user-kanban .assigned-task h2{
+    background-color: #4084B6;
+    border-radius: 10px;
+}
+
+.user-kanban .in-progress-task{
+    width: auto;
+    border: 1px solid rgb(201, 201, 88);
+    border-radius: 10px;
+}
+
+.user-kanban .in-progress-task h2{
+    background-color: rgb(204, 204, 83);
+    border-radius: 10px;
+}
+
+.user-kanban .completed-task{
+    width: auto;
+    border: 1px solid rgb(78, 199, 78);
+    border-radius: 10px;
+}
+
+.user-kanban .completed-task h2{
+    background-color: rgb(78, 199, 78);
+    border-radius: 10px;
+}
+
+
+@media screen and (max-width:426px){
+    .user-kanban{
+        display: flex;
+        gap: 1%;
+        text-align: center;
+        margin: 2% 3%;
+    }
+}

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Manager }  from '../../models/manager';
+import { Manager } from '../../models/manager';
+
 
 
 @Component({

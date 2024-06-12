@@ -19,8 +19,18 @@ import { CreateProjectComponent } from './create-project/create-project.componen
 import { ProjectTaskComponent } from './project-task/project-task.component';
 import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
 import { ManagerRegisterComponent } from './manager-register/manager-register.component';
+import { TaskregisterComponent } from './taskregister/taskregister.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core'; // Required for date picker
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatRadioButton, MatRadioModule } from '@angular/material/radio';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { UserViewComponent } from './user-view/user-view.component';
+import { TaskCardComponent } from './task-card/task-card.component';
 import { ManagerLoginComponent } from './manager-login/manager-login.component';
 import { EmployeeLoginComponent } from './employee-login/employee-login.component';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +44,10 @@ import { EmployeeLoginComponent } from './employee-login/employee-login.componen
     ProjectTaskComponent,
     EmployeeRegisterComponent,
     ManagerRegisterComponent,
-    ManagerLoginComponent,
+    TaskregisterComponent,
+    PageNotFoundComponent,
+    UserViewComponent,
+    TaskCardComponent,
     ManagerLoginComponent,
     EmployeeLoginComponent
   ],
@@ -46,6 +59,12 @@ import { EmployeeLoginComponent } from './employee-login/employee-login.componen
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    BrowserAnimationsModule,
+    MatRadioButton,
+    MatRadioModule,
     MatError
   ],
   providers: [

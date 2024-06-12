@@ -10,13 +10,12 @@ h3{
   color: white;
 }
 .project-form-container {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 30px;
-  border: 1px solid #447d64;
-  border-radius: 10px;
-  background-color: #0c091b74;
-  color: #faf6f6fc;
+  width: 100%;
+    max-width: 800px;
+    background-color: black;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 1px 7px rgba(0, 255, 255, 0.452);
 }
 
 .project-form-container label,
@@ -62,10 +61,10 @@ h3{
 
 .task-item .edit-btn {
   background: linear-gradient(to right, darkcyan, cyan, white);
+  margin: 30px 0 0;
   color: black;
   font-weight: 500;
   border: 1px solid darkcyan;
-  padding: 6px 12px;
 }
 
 .priority{
