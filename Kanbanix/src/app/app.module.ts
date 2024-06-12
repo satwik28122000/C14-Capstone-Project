@@ -11,10 +11,10 @@ import { FooterComponent } from './footer/footer.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ManagerViewComponent } from './manager-view/manager-view.component';
 import { ProjectCardComponent } from './project-card/project-card.component';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule} from '@angular/material/input';
+import { MatError } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { CommonModule } from '@angular/common';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { ProjectTaskComponent } from './project-task/project-task.component';
 import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
@@ -26,6 +26,9 @@ import { MatNativeDateModule } from '@angular/material/core'; // Required for da
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatRadioButton, MatRadioModule } from '@angular/material/radio';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { UserViewComponent } from './user-view/user-view.component';
+import { TaskCardComponent } from './task-card/task-card.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +42,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     EmployeeRegisterComponent,
     ManagerRegisterComponent,
     TaskregisterComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    UserViewComponent,
+    TaskCardComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +59,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatNativeDateModule,
     BrowserAnimationsModule,
     MatRadioButton,
-    MatRadioModule
+    MatRadioModule,
+    MatError
   ],
   providers: [
     provideAnimationsAsync()

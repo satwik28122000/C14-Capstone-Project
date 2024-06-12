@@ -1,3 +1,7 @@
+.project-task-component{
+  height: 95vh;
+}
+
 h2 {
   text-align: center;
   font-size: 30px;
@@ -33,7 +37,7 @@ h3{
   color: #8aa7b01c;
 }
 
-.tasks-header button {
+.tasks-header .add-task-btn {
   padding: 8px 12px;
   background: linear-gradient(to right, darkcyan, cyan, white);
   margin: 60px 0 0;
@@ -44,6 +48,7 @@ h3{
 
 .task-item {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
   background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
@@ -54,7 +59,7 @@ h3{
   padding: 10px 20px;
 }
 
-.task-item button {
+.task-item .edit-btn {
   background: linear-gradient(to right, darkcyan, cyan, white);
   margin: 30px 0 0;
   color: black;
@@ -62,6 +67,6 @@ h3{
   border: 1px solid darkcyan;
 }
 
-.task-item button:hover {
-  background-color: #61d071;
+.priority{
+  width: 100px;
 }

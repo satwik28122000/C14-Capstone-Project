@@ -9,7 +9,6 @@ import { Project } from '../../models/project';
   styleUrls: ['./project-task.component.css']
 })
 export class ProjectTaskComponent implements OnInit {
-
   projectForm: FormGroup;
   project:Project = {
     projectId:"1001",
@@ -22,7 +21,7 @@ export class ProjectTaskComponent implements OnInit {
         status:"Assigned",
         
         taskDesc: "Create auth service domains",
-        priority: "High",
+        priority: "Medium",
         dueDate: "12-06-2024",
         assignedTo: {
           userId:"Priyanka@123"
@@ -44,7 +43,7 @@ export class ProjectTaskComponent implements OnInit {
         taskName:"Auth Service",
         status:"Assigned",
         taskDesc: "Create auth service domains",
-        priority: "High",
+        priority: "Low",
         dueDate: "12-06-2024",
         assignedTo: {
           userId:"Priyanka@123"

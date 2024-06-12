@@ -67,5 +67,12 @@
   }
   
 
+  @media screen and (max-width:426px){
+    .navbar-menu {
+      font-size: small;
+      gap: 5px;
+      margin-left: auto;
+    }
+  }
 
    
