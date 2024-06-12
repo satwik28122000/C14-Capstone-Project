@@ -1,1 +1,81 @@
-<p>employee-register works!</p>
+<div class="container">
+    <h2>Employee's Registration</h2>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group half-width">
+          <mat-form-field appearance="fill">
+            <mat-label>Employee ID</mat-label>
+            <input matInput type="text" id="userId" formControlName="userId">
+            <mat-error *ngIf="registrationForm.controls['userId'].invalid && registrationForm.controls['userId'].touched">
+                <span *ngIf="registrationForm.controls['userId'].errors?.['required']">Employee Id is required.</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div class="form-group half-width">
+          <mat-form-field appearance="fill">
+            <mat-label>Employee Name</mat-label>
+            <input matInput type="text" id="userName" formControlName="userName">
+            <mat-error *ngIf="registrationForm.controls['userName'].invalid && registrationForm.controls['userName'].touched">
+              <span *ngIf="registrationForm.controls['userName'].errors?.['required']">Employee Name is required.</span>
+              <span *ngIf="registrationForm.controls['userName'].errors?.['minlength']">Employee Name must be at least 10 characters long.</span>
+              <span *ngIf="registrationForm.controls['userName'].errors?.['pattern']">Employee Name must contain only alphabetic characters.</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="form-group full-width">
+        <mat-form-field appearance="fill">
+          <mat-label>Email ID</mat-label>
+          <input matInput type="email" id="emailId" formControlName="emailId">
+          <mat-error *ngIf="registrationForm.controls['emailId'].invalid && registrationForm.controls['emailId'].touched">
+            <span *ngIf="registrationForm.controls['emailId'].errors?.['required']">Email ID is required.</span>
+            <span *ngIf="registrationForm.controls['emailId'].errors?.['email']">Invalid email format.</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="form-group full-width">
+        <mat-form-field appearance="fill">
+          <mat-label>Designation</mat-label>
+          <input matInput type="text" id="designation" formControlName="designation">
+          <mat-error *ngIf="registrationForm.controls['designation'].invalid && registrationForm.controls['designation'].touched">
+            <span *ngIf="registrationForm.controls['designation'].errors?.['required']">Designation is required.</span>
+            <span *ngIf="registrationForm.controls['designation'].errors?.['minlength']">Designation must be at least 10 characters long.</span>
+            <span *ngIf="registrationForm.controls['designation'].errors?.['pattern']">Designation must contain only alphabetic characters.</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="form-row">
+        <div class="form-group half-width">
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" id="password" formControlName="password">
+            <mat-error *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched">
+              <span *ngIf="registrationForm.controls['password'].errors?.['required']">Password is required.</span>
+              <span *ngIf="registrationForm.controls['password'].errors?.['minlength']">Password must be at least 6 characters long.</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div class="form-group half-width">
+          <mat-form-field appearance="fill">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type="password" id="confirmPassword" formControlName="confirmPassword">
+            <mat-error *ngIf="registrationForm.controls['confirmPassword'].invalid && registrationForm.controls['confirmPassword'].touched">
+              <span *ngIf="registrationForm.errors?.['passwordMatch']">Passwords do not match.</span>
+              <span *ngIf="registrationForm.controls['confirmPassword'].errors?.['required']">Confirm Password is required.</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="button-row">
+        <button mat-raised-button color="primary" type="submit" [disabled]="registrationForm.invalid">Submit</button>
+        <button mat-raised-button color="accent" type="reset">Reset</button>
+      </div>
+    </form>
+  </div>
+  

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Manager }  from '../../Models/Manager';
+import { Manager }  from '../../models/manager';
 
 
 @Component({
@@ -15,8 +15,8 @@ export class ManagerRegisterComponent {
  
   ngOnInit(): void {
     this.registrationForm = this.formBuilder.group({
-      managerId: [''],
-      managerName: ['', [Validators.required, Validators.minLength(20), Validators.pattern(/^[A-Za-z]+$/)]],
+      managerId: ['', [Validators.required]],
+      managerName: ['', [Validators.required, Validators.minLength(10), Validators.pattern(/^[A-Z a-z]+$/)]],
       managerEmail: ['', [Validators.required]],
       managerPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
@@ -43,8 +43,3 @@ export class ManagerRegisterComponent {
   }
 
  
-
-
-
-
-

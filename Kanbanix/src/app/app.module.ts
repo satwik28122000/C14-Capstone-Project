@@ -11,10 +11,12 @@ import { FooterComponent } from './footer/footer.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ManagerViewComponent } from './manager-view/manager-view.component';
 import { ProjectCardComponent } from './project-card/project-card.component';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule} from '@angular/material/input';
+import { MatError } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { CommonModule } from '@angular/common';
+import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
+import { ManagerRegisterComponent } from './manager-register/manager-register.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { CommonModule } from '@angular/common';
     HomePageComponent,
     NavbarComponent,
     ManagerViewComponent,
-    ProjectCardComponent
+    ProjectCardComponent,
+    EmployeeRegisterComponent,
+    ManagerRegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,9 @@ import { CommonModule } from '@angular/common';
     MatToolbarModule,
     MatInputModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatError
   ],
   providers: [
     provideAnimationsAsync()
