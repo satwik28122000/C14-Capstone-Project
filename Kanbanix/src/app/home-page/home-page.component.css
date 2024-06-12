@@ -41,6 +41,7 @@
     color: black;
     font-weight: 500;
     border: 1px solid darkcyan;
+    height: 35px;
 }
 
 .title-image img {
@@ -76,3 +77,4 @@
     flex-grow: 1;
     border: 2px solid darkcyan;
 }
+
