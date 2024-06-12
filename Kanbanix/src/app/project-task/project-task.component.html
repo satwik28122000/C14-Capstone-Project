@@ -1,0 +1,28 @@
+
+<section class="s">
+  <div class="project-form-container">
+    <h2>Project Tasks</h2>
+    <div>
+      <label for="projectName">Project Name:</label>
+      <span id="projectName">{{ project.projectName }}</span>
+    </div>
+    <div>
+      <label for="projectDesc">Project Description:</label>
+      <span id="projectDesc">{{ project.projectDesc }}</span>
+    </div>
+
+    <div class="tasks-header">
+      <h3 style="color: azure; font-size: 25px;">Tasks</h3>
+      <button type="button"  class="btn-md">Add Task</button>
+    </div>
+
+    <div class="task-item d-flex" *ngFor="let task of project.projectTasks">
+      <p>{{ task.taskName }}</p>
+      <p>{{ task.taskDesc }}</p>
+      <p>{{ task.status }}</p>
+      <p>{{ task.priority }}</p>
+      <p>{{ task.assignedTo?.userId }}</p>
+      <button type="button" class="btn-sm">Edit</button>
+    </div>
+  </div>
+</section>
