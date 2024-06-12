@@ -6,6 +6,8 @@ import { EmployeeRegisterComponent } from './employee-register/employee-register
 import { ManagerViewComponent } from './manager-view/manager-view.component';
 import { UserViewComponent } from './user-view/user-view.component';
 import { ProjectTaskComponent } from './project-task/project-task.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { TaskregisterComponent } from './taskregister/taskregister.component';
 
 const routes: Routes = [
   { path: "", component: HomePageComponent },
@@ -16,10 +18,16 @@ const routes: Routes = [
   {
     path: "manager/:id", children: [
       { path: "project", component: ManagerViewComponent },
-      { path: "project/:id", component: ProjectTaskComponent }
+      { path: "project/:id", children:[
+        { path: "project/:id",component:ProjectTaskComponent},
+        { path:"project/:id/add-task",component:TaskregisterComponent}
+      ]
+      }
     ]
   },
-  { path: "user/:id", component: UserViewComponent },
+  { path:"add-task",component:TaskregisterComponent},
+  { path: "user/:id", component: UserViewComponent},
+  { path: "**" ,component:PageNotFoundComponent}
 ];
 
 @NgModule({
