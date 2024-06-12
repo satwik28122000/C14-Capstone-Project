@@ -1,43 +1,68 @@
-   <div class="container">
-    <h2>Manager's Registration</h2>
-    <form>
-      <div class="form-row">
-        <div class="form-group half-width">
-          <label for="managerId">Manager ID</label>
-          <input type="text" id="managerId" class="form-control">
-        </div>
-  
-        <div class="form-group half-width">
-          <label for="managerName">Manager Name</label>
-          <input type="text" id="managerName" class="form-control">
-        </div>
+<div class="container">
+  <h2>Manager's Registration</h2>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group half-width">
+        <mat-form-field appearance="fill">
+          <mat-label>Manager ID</mat-label>
+          <input matInput type="text" id="managerId" formControlName="managerId">
+          <mat-error *ngIf="registrationForm.controls['managerId'].invalid && registrationForm.controls['managerId'].touched">
+         <span *ngIf="registrationForm.controls['managerId'].errors?.['required']">Manager Id is required.</span>
+          </mat-error>
+        </mat-form-field>
       </div>
-  
-      <div class="form-group">
-        <label for="managerEmail">Manager Email ID</label>
-        <input type="email" id="managerEmail" class="form-control">
-      </div>
-  
-      <div class="form-row">
-        <div class="form-group half-width">
-          <label for="managerPassword">Manager Password</label>
-          <input type="password" id="managerPassword" class="form-control">
-        </div>
-  
-        <div class="form-group half-width">
-          <label for="confirmPassword">Confirm Password</label>
-          <input type="password" id="confirmPassword" class="form-control">
-        </div>
-      </div>
-  
-      <div class="button-row">
-        
-        <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid">Submit</button>
-        <button type="reset" class="btn btn-secondary">Reset</button>
-      </div>
-    </form>
-  </div>
-  
 
-   
-  
+      <div class="form-group half-width">
+        <mat-form-field appearance="fill">
+          <mat-label>Manager Name</mat-label>
+          <input matInput type="text" id="managerName" formControlName="managerName">
+          <mat-error *ngIf="registrationForm.controls['managerName'].invalid && registrationForm.controls['managerName'].touched">
+            <span *ngIf="registrationForm.controls['managerName'].errors?.['required']">Manager Name is required.</span>
+            <span *ngIf="registrationForm.controls['managerName'].errors?.['minlength']">Manager Name must be at least 20 characters long.</span>
+            <span *ngIf="registrationForm.controls['managerName'].errors?.['pattern']">Manager Name must contain only alphabetic characters.</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Manager Email ID</mat-label>
+        <input matInput type="email" id="managerEmail" formControlName="managerEmail">
+        <mat-error *ngIf="registrationForm.controls['managerEmail'].invalid && registrationForm.controls['managerEmail'].touched">
+          <span *ngIf="registrationForm.controls['managerEmail'].errors?.['required']">Manager Email is required.</span>
+          <span *ngIf="registrationForm.controls['managerEmail'].errors?.['email']">Invalid email format.</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group half-width">
+        <mat-form-field appearance="fill">
+          <mat-label>Manager Password</mat-label>
+          <input matInput type="password" id="managerPassword" formControlName="managerPassword">
+          <mat-error *ngIf="registrationForm.controls['managerPassword'].invalid && registrationForm.controls['managerPassword'].touched">
+            <span *ngIf="registrationForm.controls['managerPassword'].errors?.['required']">Password is required.</span>
+            <span *ngIf="registrationForm.controls['managerPassword'].errors?.['minlength']">Password must be at least 6 characters long.</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group half-width">
+        <mat-form-field appearance="fill">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput type="password" id="confirmPassword" formControlName="confirmPassword">
+          <mat-error *ngIf="registrationForm.controls['confirmPassword'].invalid && registrationForm.controls['confirmPassword'].touched">
+            <span *ngIf="registrationForm.errors?.['passwordMatch']">Passwords do not match.</span>
+            <span *ngIf="registrationForm.controls['confirmPassword'].errors?.['required']">Confirm Password is required.</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="button-row">
+      <button type="submit" [disabled]="registrationForm.invalid">Submit</button>
+      <button  type="reset">Reset</button>
+    </div>
+  </form>
+</div>

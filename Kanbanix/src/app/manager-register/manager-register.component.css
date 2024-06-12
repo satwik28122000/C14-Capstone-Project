@@ -1,94 +1,67 @@
-   html, body {
-    height: 100%;
-    margin: 0;
-    background-color: black;
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: black;
+  border-radius: 8px;
+  box-shadow: 0 0 10px darkcyan;
+  margin-top: 50px;
 
-  }
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.half-width {
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+button {
+  width: 20%;
+  height: 40px;
+  background-color: darkcyan;
+  color: black;
+  border-radius: 10px;
   
-  .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
-    background-color: black;
-    text-align: center;
-  }
-  
-  h2 {
-    margin-bottom: 20px;
-    font-size: 25px;
-  }
-  
-  form {
-    width: 100%;
-    max-width: 800px;
-    background-color: black;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 1px 7px rgba(0, 255, 255, 0.452);
-  }
-  
-  .form-row {
-    display: flex;
-    justify-content: space-between;
-  }
-  
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
   .half-width {
-    width: 48%;
+    width: 100%;
   }
-  
-  .form-group {
-    margin-bottom: 15px;
-    text-align: left;
-    font-size: 14px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    
-  }
-  
+
   .button-row {
-    display: flex;
-    justify-content: space-between;
-    
-  }
-  
-  .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1em;
-    
-    text-align: center;
-    text-decoration: none;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .btn-secondary {
-    background-color: #6c757d;
-    height: 45px;
-    margin-top: 30px;
-  }
-
-  .btn-primary{
-    background: linear-gradient(to right, darkcyan, cyan, white);
-    margin: 30px 0 0;
-    color: black;
-    font-weight: 500;
-    border: 1px solid darkcyan;
-  }
-  
-  .btn-primary:disabled,
-  
-  .btn-secondary:disabled {
-    background-color: #aaa;
-    cursor: not-allowed;
+    flex-direction: column;
     
   }
 
- 
+  button {
+    width: 50%;
+    margin-bottom: 10px;
+    background-color:  cyan;
+   
+  }
+}
