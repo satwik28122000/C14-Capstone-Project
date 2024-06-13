@@ -352,8 +352,8 @@ public class KanbanController {
         }
     }
 
-    @Operation(summary = "Save Tak", description = "This will save new task")
-    @ApiResponse(responseCode = "200", description = "Task saved successfully")
+    @Operation(summary = "Save Task", description = "This will save new task")
+    @ApiResponse(responseCode = "201", description = "Task saved successfully")
     @PostMapping("/manager/project/{projectId}/saveTask")
     public ResponseEntity<?> createTaskInManagerAndEmployee(HttpServletRequest request,@PathVariable String projectId,@RequestBody Task task) throws
             ProjectNotFoundException, ManagerNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException {
