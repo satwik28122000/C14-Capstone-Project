@@ -1,4 +1,5 @@
-<div class="container">
+<div class="manager-login">
+  <div class="container">
     <h2>Manager's Login</h2>
     <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
       <div class="form-group">
@@ -25,8 +26,9 @@
         <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
       </div>
       <div class="register-link">
-        Don't have an account? <a routerLink="/register">Register</a>
+        Don't have an account? <a routerLink="/manager-register">Register</a>
       </div>
     </form>
   </div>
   
+</div>

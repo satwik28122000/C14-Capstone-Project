@@ -1,6 +1,10 @@
+.manager-login{
+  height: 90vh;
+}
+
 .container {
     max-width: 400px;
-    margin: 0 auto;
+    margin: 5% auto;
     padding: 20px;
     background-color: black;
     border-radius: 8px;
