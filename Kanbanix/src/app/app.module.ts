@@ -32,7 +32,6 @@ import { ManagerLoginComponent } from './manager-login/manager-login.component';
 import { EmployeeLoginComponent } from './employee-login/employee-login.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
-
 @NgModule({
   declarations: [
     AppComponent,

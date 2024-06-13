@@ -18,6 +18,7 @@
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="registrationForm.get('dueDate')?.errors?.['required']">Due Date is required</mat-error>
+        <mat-error *ngIf="registrationForm.get('dueDate')?.errors?.['dateError1']">Due Date cannot be in the past</mat-error>
       </mat-form-field>
       <mat-form-field class="matform">
         <mat-label>Assigned To</mat-label>
