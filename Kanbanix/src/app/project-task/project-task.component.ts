@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Project } from '../../models/project';
+import { RouterService } from '../services/router.service';
 
 @Component({
   selector: 'app-project-task',
@@ -51,7 +52,7 @@ export class ProjectTaskComponent implements OnInit {
       }
     ]
   }
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private routerService: RouterService) {
     this.projectForm = this.fb.group({
       tasks: this.fb.array([]) 
     });
@@ -82,7 +83,9 @@ export class ProjectTaskComponent implements OnInit {
   saveTask(index: number): void {
     this.tasks.at(index).get('isEditing')?.setValue(false);
   }
-
+  onAddTaskClick(){
+    this.routerService.redirectToAddTaskDirectly();
+  }
   onSubmit(): void {
     console.log(this.projectForm.value);
   }

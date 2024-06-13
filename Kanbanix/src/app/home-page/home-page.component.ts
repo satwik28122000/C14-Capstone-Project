@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterService } from '../services/router.service';
 
 @Component({
   selector: 'app-home-page',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './home-page.component.css'
 })
 export class HomePageComponent {
-
+  constructor(private routerService:RouterService){}
   features =[
     {
       fIcon:"",
@@ -30,4 +31,10 @@ export class HomePageComponent {
     }
   ]
 
+  onManagerLoginClick(){
+    this.routerService.redirectToManagerLogin();
+  }
+  onUserLoginClick(){
+    this.routerService.redirectToUserLogin();
+  }
 }
