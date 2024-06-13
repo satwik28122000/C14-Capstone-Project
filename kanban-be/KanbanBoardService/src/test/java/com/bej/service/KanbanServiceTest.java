@@ -440,7 +440,7 @@ public class KanbanServiceTest {
         Mockito.when(employeeRepository.findById(userId)).thenReturn(Optional.of(employee));
 
         // Act
-        List<Task> result = kanbanService.getAllEmployeeTaskFromTaskList(userId);
+        List<Task> result = kanbanService.getAllEmployeeTaskFromTaskList();
 
         // Assert
         assertNotNull(result);
@@ -455,7 +455,7 @@ public class KanbanServiceTest {
         Mockito.when(employeeRepository.findById(userId)).thenReturn(Optional.empty());
 
         // Act & Assert
-        assertThrows(EmployeeNotFoundException.class, () -> kanbanService.getAllEmployeeTaskFromTaskList(userId));
+        assertThrows(EmployeeNotFoundException.class, () -> kanbanService.getAllEmployeeTaskFromTaskList());
     }
 
 
