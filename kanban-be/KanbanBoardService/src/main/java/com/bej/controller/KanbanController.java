@@ -27,7 +27,7 @@ public class KanbanController {
     }
    //OpenAPI
     @Operation(summary = "Register employee", description = "This will register new employee")
-    @ApiResponse(responseCode = "200", description = "Employee registerd successfully")
+    @ApiResponse(responseCode = "201", description = "Employee registerd successfully")
     //Register the employee using endpoint "/api/kanban/register
     @PostMapping("/register")
     public ResponseEntity<?> registerEmployee(@RequestBody Employee employee) throws EmployeeAlreadyExistsException {
@@ -46,7 +46,7 @@ public class KanbanController {
     }
 
     @Operation(summary = "Save Manager", description = "This will save manager")
-    @ApiResponse(responseCode = "200", description = "manager saved successfully")
+    @ApiResponse(responseCode = "201", description = "manager saved successfully")
     @PostMapping("/managers/saveManager")
     public ResponseEntity createManager(@RequestBody Manager manager){
         try {
@@ -89,9 +89,10 @@ public class KanbanController {
     }
     @Operation(summary = "GetAllEmployeeTaskFromTaskList", description = "This will retrive employees task from task list")
     @ApiResponse(responseCode = "200", description = "Employee Task retrived successfully")
-    @GetMapping("/manager/employees/{userId}/tasks")
-    public ResponseEntity<?> getAllEmployeeTaskFromTaskList(@PathVariable String userId) throws EmployeeNotFoundException
+    @GetMapping("/user/tasks")
+    public ResponseEntity<?> getAllEmployeeTaskFromTaskList(HttpServletRequest request) throws EmployeeNotFoundException
             {
+                String userId = getUserIdClaims(request);
                 try {
                     List<Task> tasks = kanbanService.getAllEmployeeTaskFromTaskList(userId);
                     return new ResponseEntity<>(tasks, HttpStatus.OK);
@@ -103,7 +104,7 @@ public class KanbanController {
             }
 
     @Operation(summary = "Save Project in Manager", description = "This will save project in manager")
-    @ApiResponse(responseCode = "200", description = "Project saved successfully in manager")
+    @ApiResponse(responseCode = "201", description = "Project saved successfully in manager")
     @PostMapping("/manager/saveProjectInManager")
     public ResponseEntity<?> addManagerProjectToProjectList(@RequestBody Project project,HttpServletRequest request) throws ManagerNotFoundException , ProjectAlreadyExistException
     {
@@ -214,7 +215,7 @@ public class KanbanController {
     }
 
     @Operation(summary = "Save task to project", description = "This will save task to project")
-    @ApiResponse(responseCode = "200", description = " Task saved to project successfully")
+    @ApiResponse(responseCode = "201", description = " Task saved to project successfully")
     @PostMapping("/manager/saveTaskToProject/{projectId}")
     public ResponseEntity<?> addTaskToProject(@PathVariable String projectId, @RequestBody Task task) throws ProjectNotFoundException , TaskAlreadyExistsException
     {
@@ -296,7 +297,7 @@ public class KanbanController {
     }
 
     @Operation(summary = "Create task in project and Employee", description = "This will create task in project and employee")
-    @ApiResponse(responseCode = "200", description = "Task created successfully")
+    @ApiResponse(responseCode = "201", description = "Task created successfully")
     //Crucial methods for this application
     @PostMapping("/manager/project/{projectId}")
     public ResponseEntity<?> createTaskInProjectAndEmployee(@PathVariable String projectId,@RequestBody Task task){
@@ -352,7 +353,7 @@ public class KanbanController {
         }
     }
 
-    @Operation(summary = "Save Task", description = "This will save new task")
+    @Operation(summary = "Save Tak", description = "This will save new task")
     @ApiResponse(responseCode = "201", description = "Task saved successfully")
     @PostMapping("/manager/project/{projectId}/saveTask")
     public ResponseEntity<?> createTaskInManagerAndEmployee(HttpServletRequest request,@PathVariable String projectId,@RequestBody Task task) throws
