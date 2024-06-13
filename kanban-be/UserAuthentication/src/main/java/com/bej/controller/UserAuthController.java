@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/auth")
 public class UserAuthController {
@@ -43,7 +43,7 @@ public class UserAuthController {
     @Operation(summary = "login user", description = "This will provide login  for employees")
     @ApiResponse(responseCode = "200", description = "employee login successfully")
     //login employee mapping with endpoint "/auth/login"
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody Employee employee) throws UserNotFoundException, InvalidCredentialsException {
         try{
             String loggedUser = userAuthService.login(employee.getUserId(), employee.getPassword());
@@ -81,7 +81,7 @@ public class UserAuthController {
     @Operation(summary = "Login manager", description = "This provide login for manager")
     @ApiResponse(responseCode = "200", description = "User saved successfully")
     //login manager mapping with endpoint "/auth/loginManager"
-    @GetMapping("/loginManager")
+    @PostMapping("/loginManager")
     public ResponseEntity<?> loginManager(@RequestBody Manager manager) throws ManagerNotFoundException, InvalidCredentialsException {
         try{
             String loggedUser = userAuthService.loginManager(manager.getManagerId(),manager.getManagerPassword());
