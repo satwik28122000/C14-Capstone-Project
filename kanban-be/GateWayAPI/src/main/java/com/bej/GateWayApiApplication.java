@@ -14,6 +14,8 @@ public class GateWayApiApplication
 
 	public static void main(String[] args) {
 		SpringApplication.run(GateWayApiApplication.class, args);
+
+		System.out.println("API Gateway is running");
 	}
 
 
