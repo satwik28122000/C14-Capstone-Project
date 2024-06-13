@@ -1,5 +1,6 @@
 .project-task-component{
   height: 95vh;
+  width: 100%;
 }
 
 h2 {
@@ -10,8 +11,9 @@ h3{
   color: white;
 }
 .project-form-container {
-  width: 100%;
-    max-width: 800px;
+  margin: 2% 4%;
+    width: 90%;
+    min-width: 800px;
     background-color: black;
     padding: 20px;
     border-radius: 15px;
