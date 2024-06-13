@@ -15,8 +15,8 @@ export class ManagerService {
     authUrl:string ="http://localhost:9000/auth";
 
   //register manager
-   registerManager(manager:Manager):Observable<any>{
-      return this.httpClient.post<any>(`${this.kanbanUrl}/managers/saveManager`,manager);
+   registerManager(manager:Manager):Observable<Manager>{
+      return this.httpClient.post<Manager>(`${this.kanbanUrl}/managers/saveManager`,manager);
    }
 
    //login manager

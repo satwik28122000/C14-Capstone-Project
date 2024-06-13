@@ -9,7 +9,7 @@ import { Manager } from '../../models/manager';
 })
 export class ManagerLoginComponent {
   loginForm: FormGroup=new FormGroup ({});
-  manager: any;
+  manager: Manager ={};
   constructor
   (private formBuilder : FormBuilder){}
 
