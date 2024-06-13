@@ -1,0 +1,48 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Employee } from '../../models/employee';
+import { Task } from '../../models/task';
+
+@Injectable({
+  providedIn: 'root'
+})
+
+
+export class EmployeeService {
+
+  constructor(private http:HttpClient) { }
+  kanbanUrl:string = "http://localhost:9000/api/kanban";
+  authUrl:string = "http://localhost:9000/auth";
+
+  registerEmployee(employee: Employee): Observable<any> {
+    return this.http.post<any>(`${this.kanbanUrl}/register`, employee);
+  }
+
+  loginEmployee(employee: Employee): Observable<any> {
+    return this.http.post<any>(`${this.authUrl}/login`, employee);
+  }
+
+  getEmployeeByUserId(userId: string): Observable<any> {
+    return this.http.get<any>(`${this.kanbanUrl}/user/getEmployeesByUserId`+ userId);
+  }
+
+  getAllEmployeeTaskFromTaskList(userId: string): Observable<any>{
+    return this.http.get<any>(`${this}.kanbanUrl}/user/employees/tasks`+ userId);
+  }
+
+  getTaskByIdFromEmployee(taskId: string): Observable<any>{
+    return this.http.get<any>(`${this}.kanbanUrl}/user/findTaskByIdFromEmployee/task`+ taskId);
+  }
+
+  updateTaskFromEmployeeToManager(userId: string, task: Task): Observable<any> {
+    return this.http.put<any>(`${this.kanbanUrl}/user/updateEmployeeTask`+ userId, task);
+  }
+  
+}
+
+
+
+// public ResponseEntity<?> getAllEmployeeTaskFromTaskList(@PathVariable String userId) throws EmployeeNotFoundException   done
+// public ResponseEntity<?> fetchTaskByIdFromEmployee(@PathVariable String taskId,HttpServletRequest request) throws TaskNotFoundException , EmployeeNotFoundException
+// public ResponseEntity<?> modifyTaskInEmployeeToProject(HttpServletRequest request,@RequestBody Task task) throws ProjectNotFoundException,

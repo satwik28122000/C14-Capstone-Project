@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: "", component: HomePageComponent },
   { path: "manager", component: ManagerLoginComponent },
   { path: "user", component: EmployeeLoginComponent },
-  { path: "manager-register", component: ManagerRegisterComponent },
+  { path: "managerRegister", component: ManagerRegisterComponent },
   { path: "user-register", component: EmployeeRegisterComponent },
   {
     path: "manager/:id",
@@ -40,6 +40,9 @@ const routes: Routes = [
   { path: "user/:id", component: UserViewComponent, canActivate: [AuthGuard] },
   { path: "add-project", component: CreateProjectComponent, canActivate: [AuthGuard], canDeactivate: [DeactiveAuthGuard] },
   { path: "**", component: PageNotFoundComponent }
+  { path: "user/:id", component: UserViewComponent},
+  { path:"add-project",component:CreateProjectComponent},
+  { path: "**" ,component:PageNotFoundComponent}
 ];
 
 @NgModule({

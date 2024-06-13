@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Manager } from '../../models/manager';
-import { Project } from '../../models/project';
 import { RouterService } from '../services/router.service';
 
 @Component({

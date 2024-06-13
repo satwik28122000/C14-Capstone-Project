@@ -18,7 +18,7 @@
           <input matInput type="text" id="managerName" formControlName="managerName">
           <mat-error *ngIf="registrationForm.controls['managerName'].invalid && registrationForm.controls['managerName'].touched">
             <span *ngIf="registrationForm.controls['managerName'].errors?.['required']">Manager Name is required.</span>
-            <span *ngIf="registrationForm.controls['managerName'].errors?.['minlength']">Manager Name must be at least 20 characters long.</span>
+            <span *ngIf="registrationForm.controls['managerName'].errors?.['minlength']">Manager Name must be at least 10 characters long.</span>
             <span *ngIf="registrationForm.controls['managerName'].errors?.['pattern']">Manager Name must contain only alphabetic characters.</span>
           </mat-error>
         </mat-form-field>
@@ -51,11 +51,16 @@
       <div class="form-group half-width">
         <mat-form-field appearance="fill">
           <mat-label>Confirm Password</mat-label>
-          <input matInput type="password" id="confirmPassword" formControlName="confirmPassword">
-          <mat-error *ngIf="registrationForm.controls['confirmPassword'].invalid && registrationForm.controls['confirmPassword'].touched">
-            <span *ngIf="registrationForm.errors?.['passwordMatch']">Passwords do not match.</span>
-            <span *ngIf="registrationForm.controls['confirmPassword'].errors?.['required']">Confirm Password is required.</span>
-          </mat-error>
+          <input matInput  type="password" id="confirmPassword" formControlName="confirmPassword">
+           
+            <span>
+              <mat-error *ngIf="registrationForm?.get('congirmPassword')?.hasError('required')"><small>Confirm Password is
+                      required</small></mat-error>
+              <mat-error
+                  *ngIf="confirmPassword?.dirty && registrationForm?.errors?.['pError']"><small>Password and
+                      Confirm Password should match</small></mat-error>
+          </span>
+         
         </mat-form-field>
       </div>
     </div>

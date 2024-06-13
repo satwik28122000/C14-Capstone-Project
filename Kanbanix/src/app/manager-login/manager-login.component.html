@@ -14,7 +14,7 @@
       <div class="form-group">
         
         <mat-label>Password</mat-label>
-        <input type="password" id="password" name="password" class="form-control" [(ngModel)]="manager.password" required minlength="6">
+        <input type="password" id="password" name="managerPassword" class="form-control" [(ngModel)]="manager.managerPassword" required minlength="6">
         <div *ngIf="loginForm.submitted && !loginForm.controls['password']?.valid" class="error">
           <span *ngIf="loginForm.controls['password']?.errors?.['required']">Password is required.</span>
           <span *ngIf="loginForm.controls['password']?.errors?.['minlength']">Password must be at least 6 characters long.</span>
@@ -25,7 +25,7 @@
         <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
       </div>
       <div class="register-link">
-        Don't have an account? <a routerLink="/manager-register">Register</a>
+        Don't have an account? <a routerLink="/managerRegister">Register</a>
       </div>
     </form>
   </div>

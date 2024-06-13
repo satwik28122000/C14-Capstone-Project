@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import moment from 'moment'; // Import Moment.js
 import { Task } from '../../models/task';
 import { Observable } from 'rxjs';
 import { CanComponentDeactivate } from '../guard/deactive-auth.guard';
+import moment from 'moment';
+
 @Component({
   selector: 'app-taskregister',
   templateUrl: './taskregister.component.html',
