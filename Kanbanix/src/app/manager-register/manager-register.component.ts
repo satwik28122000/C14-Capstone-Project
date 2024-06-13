@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Manager } from '../../models/manager';
+import { ManagerService } from '../services/manager.service';
+import { RouterService } from '../services/router.service';
 
 
 
@@ -12,7 +14,7 @@ import { Manager } from '../../models/manager';
 export class ManagerRegisterComponent {
   registrationForm: FormGroup = new FormGroup({});
   constructor
-  (private formBuilder : FormBuilder){}
+  (private formBuilder : FormBuilder, private managerService:ManagerService,private routerService:RouterService){}
  
   ngOnInit(): void {
     this.registrationForm = this.formBuilder.group({
@@ -24,17 +26,15 @@ export class ManagerRegisterComponent {
     }, { validator: this.passwordMatchValidator });
   }
   onSubmit() {
-    console.log(this.registrationForm.valid);
-    console.log(this.registrationForm.value);
-    if (this.registrationForm.valid) {
-      const manager: Manager ={
-        managerId: this.registrationForm.value.managerId,
-        managerName: this.registrationForm.value.managerName,
-        managerEmail: this.registrationForm.value.managerEmail,
-        managerPassword: this.registrationForm.value.managerPassword
-      }
-    }
-    
+      this.managerService.registerManager(this.registrationForm.value).subscribe({
+        next: res => {
+          console.log(res);
+          this.routerService.redirectToManagerLogin();
+        },
+        error: err => {
+          alert(err);
+        }
+      })
   }
   passwordMatchValidator(formGroup: FormGroup){
     const password = formGroup.get('managerPassword')?.value;

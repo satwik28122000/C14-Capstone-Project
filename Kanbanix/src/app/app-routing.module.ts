@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: "", component: HomePageComponent },
   { path: "manager", component: ManagerLoginComponent },
   { path: "user", component: EmployeeLoginComponent },
-  { path: "manager-register", component: ManagerRegisterComponent },
+  { path: "managerRegister", component: ManagerRegisterComponent },
   { path: "user-register", component: EmployeeRegisterComponent },
   {
     path: "manager/:id", children: [
@@ -28,7 +28,6 @@ const routes: Routes = [
       }
     ]
   },
-  { path:"add-task",component:TaskregisterComponent},
   { path: "user/:id", component: UserViewComponent},
   { path:"add-project",component:CreateProjectComponent},
   { path: "**" ,component:PageNotFoundComponent}

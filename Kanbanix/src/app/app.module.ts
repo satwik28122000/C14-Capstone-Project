@@ -66,7 +66,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatRadioButton,
     MatRadioModule,
     MatError,
-    HttpClient
+    HttpClientModule
   ],
   providers: [
     provideAnimationsAsync()
