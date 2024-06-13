@@ -30,6 +30,7 @@ import { UserViewComponent } from './user-view/user-view.component';
 import { TaskCardComponent } from './task-card/task-card.component';
 import { ManagerLoginComponent } from './manager-login/manager-login.component';
 import { EmployeeLoginComponent } from './employee-login/employee-login.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { EmployeeLoginComponent } from './employee-login/employee-login.componen
     BrowserAnimationsModule,
     MatRadioButton,
     MatRadioModule,
-    MatError
+    MatError,
+    HttpClient
   ],
   providers: [
     provideAnimationsAsync()
