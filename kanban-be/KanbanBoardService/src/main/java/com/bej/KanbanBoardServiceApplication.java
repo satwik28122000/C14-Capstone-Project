@@ -18,6 +18,8 @@ public class KanbanBoardServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(KanbanBoardServiceApplication.class, args);
+
+		System.out.println("Kanban service is running");
 	}
 
 	@Bean

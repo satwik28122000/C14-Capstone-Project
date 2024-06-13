@@ -89,7 +89,7 @@ public class KanbanController {
     }
     @Operation(summary = "GetAllEmployeeTaskFromTaskList", description = "This will retrive employees task from task list")
     @ApiResponse(responseCode = "200", description = "Employee Task retrived successfully")
-    @GetMapping("/manager/employees/{userId}/tasks")
+    @GetMapping("/user/employees/tasks")
     public ResponseEntity<?> getAllEmployeeTaskFromTaskList(@PathVariable String userId) throws EmployeeNotFoundException
             {
                 try {
