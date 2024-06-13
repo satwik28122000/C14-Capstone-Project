@@ -54,7 +54,7 @@
           <input matInput  type="password" id="confirmPassword" formControlName="confirmPassword">
            
             <span>
-              <mat-error *ngIf="registrationForm?.confirmPassword?.errors?.['required']"><small>Confirm Password is
+              <mat-error *ngIf="registrationForm?.get('congirmPassword')?.hasError('required')"><small>Confirm Password is
                       required</small></mat-error>
               <mat-error
                   *ngIf="confirmPassword?.dirty && registrationForm?.errors?.['pError']"><small>Password and

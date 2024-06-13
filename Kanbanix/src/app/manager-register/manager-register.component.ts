@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Manager } from '../../models/manager';
+// import { Manager } from '../../models/manager';
 import { ManagerService } from '../services/manager.service';
 import { RouterService } from '../services/router.service';
+import { Manager } from '../../models/manager';
 
 @Component({
   selector: 'app-manager-register',
@@ -50,8 +51,10 @@ export class ManagerRegisterComponent implements OnInit {
     }
   }
 
-  get managerId(): AbstractControl {
-    return this.registrationForm.get('managerId')!;
+  
+
+  get managerId() : AbstractControl {
+    return this.registrationForm.get('managerId')!
   }
 
   get managerName(): AbstractControl {

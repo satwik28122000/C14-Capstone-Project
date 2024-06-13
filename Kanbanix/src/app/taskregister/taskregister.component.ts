@@ -1,14 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Task } from '../../models/task';
+<<<<<<< HEAD
 import {moment} from '/moment';
+=======
+import { Observable } from 'rxjs';
+import { CanComponentDeactivate } from '../guard/deactive-auth.guard';
+import moment from 'moment';
+>>>>>>> 6910daa8da21f730e84b395dd4a6b34e850fefe8
 
 @Component({
   selector: 'app-taskregister',
   templateUrl: './taskregister.component.html',
   styleUrls: ['./taskregister.component.css']
 })
-export class TaskregisterComponent implements OnInit {
+export class TaskregisterComponent implements OnInit,CanComponentDeactivate {
   registrationForm: FormGroup = new FormGroup({});
   
   constructor(private formBuilder: FormBuilder) {}
@@ -55,5 +61,8 @@ export class TaskregisterComponent implements OnInit {
       return { 'dateError1': true }; 
     }
     return null;
+  }
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    return confirm("Do you want to discard your changes?");
   }
 }
