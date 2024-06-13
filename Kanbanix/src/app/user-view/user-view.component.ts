@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { Employee } from '../../models/employee';
 import { Task } from '../../models/task';
+import { CanComponentDeactivate } from '../guard/deactive-auth.guard';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-view',
   templateUrl: './user-view.component.html',
   styleUrl: './user-view.component.css'
 })
-export class UserViewComponent {
+export class UserViewComponent  implements CanComponentDeactivate{
+ 
 
    employee:Employee = {
     userId: 'emp001',
@@ -145,5 +148,9 @@ export class UserViewComponent {
   }
   onDragOver(event:any){
     event.preventDefault();
-  }
 }
+canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+  return confirm("Do you want to discard your changes?");
+}
+}
+

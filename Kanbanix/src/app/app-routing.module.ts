@@ -11,6 +11,9 @@ import { TaskregisterComponent } from './taskregister/taskregister.component';
 import { ManagerLoginComponent } from './manager-login/manager-login.component';
 import { EmployeeLoginComponent } from './employee-login/employee-login.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
+import { DeactiveAuthGuard } from './guard/deactive-auth.guard';
+import { ChildAuthGuard } from './guard/child-auths.guard';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   { path: "", component: HomePageComponent },
@@ -19,19 +22,24 @@ const routes: Routes = [
   { path: "manager-register", component: ManagerRegisterComponent },
   { path: "user-register", component: EmployeeRegisterComponent },
   {
-    path: "manager/:id", children: [
+    path: "manager/:id",
+    canActivate: [AuthGuard],
+    canActivateChild: [ChildAuthGuard],
+    children: [
       { path: "project", component: ManagerViewComponent },
-      { path: "project/:id", children:[
-        { path: "",component:ProjectTaskComponent},
-        { path:"project/:id/add-task",component:TaskregisterComponent}
-      ]
+      {
+        path: "project/:id",
+        children: [
+          { path: "", component: ProjectTaskComponent, canDeactivate: [DeactiveAuthGuard] },
+          { path: "add-task", component: TaskregisterComponent, canDeactivate: [DeactiveAuthGuard] }
+        ]
       }
     ]
   },
-  { path:"add-task",component:TaskregisterComponent},
-  { path: "user/:id", component: UserViewComponent},
-  { path:"add-project",component:CreateProjectComponent},
-  { path: "**" ,component:PageNotFoundComponent}
+  { path: "add-task", component: TaskregisterComponent },
+  { path: "user/:id", component: UserViewComponent, canActivate: [AuthGuard] },
+  { path: "add-project", component: CreateProjectComponent, canActivate: [AuthGuard], canDeactivate: [DeactiveAuthGuard] },
+  { path: "**", component: PageNotFoundComponent }
 ];
 
 @NgModule({

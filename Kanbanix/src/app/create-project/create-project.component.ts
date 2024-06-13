@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Project } from '../../models/project';
+import { CanComponentDeactivate } from '../guard/deactive-auth.guard';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-project',
   templateUrl: './create-project.component.html',
   styleUrl: './create-project.component.css'
 })
-export class CreateProjectComponent {
+export class CreateProjectComponent implements CanComponentDeactivate{
     constructor(private fb:FormBuilder){}
+  
     project:Project={};
     projectForm = this.fb.group(
       {
@@ -24,4 +27,10 @@ export class CreateProjectComponent {
 
 
     onSubmit(){}
+    canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+      if (this.projectForm.dirty) {
+          return confirm('You have unsaved changes! Do you really want to leave?');
+      }
+      return true;
+  }
 }
