@@ -31,7 +31,6 @@ import { TaskCardComponent } from './task-card/task-card.component';
 import { ManagerLoginComponent } from './manager-login/manager-login.component';
 import { EmployeeLoginComponent } from './employee-login/employee-login.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

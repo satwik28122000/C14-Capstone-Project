@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import moment from 'moment'; // Import Moment.js
 import { Task } from '../../models/task';
 
 @Component({
@@ -19,7 +20,7 @@ export class TaskregisterComponent implements OnInit {
       taskDesc: ['', [Validators.required]],
       status: ['Assigned', [Validators.required]],
       priority: ['', [Validators.required]],
-      dueDate: ['', [Validators.required]],
+      dueDate: ['', [Validators.required, this.dateValidator]], 
       assignedTo: ['', [Validators.required]],
       projectId: ['', [Validators.required]]
     });
@@ -39,11 +40,20 @@ export class TaskregisterComponent implements OnInit {
         assignedTo: this.registrationForm.value.assignedTo,
         projectId: this.registrationForm.value.projectId,
       };
-      // Handle the task object, e.g., send it to a server
-      console.log(task);
+      
     }
   }
+  
   onClear() {
     this.registrationForm.reset();
+  }
+  dateValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const enterDate = moment(control.value);
+    const todaysDate = moment();
+
+    if (enterDate.isBefore(todaysDate, 'day')) {
+      return { 'dateError1': true }; 
+    }
+    return null;
   }
 }
