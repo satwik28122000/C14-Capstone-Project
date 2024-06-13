@@ -23,7 +23,7 @@
       </div>
   
       <div class="button-row">
-        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
       </div>
       <div class="register-link">
         Don't have an account? <a routerLink="/manager-register">Register</a>
