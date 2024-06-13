@@ -49,6 +49,18 @@ public class KanbanServiceImpl implements IKanbanService {
         return employeeList;
     }
 
+    @Override
+    public List<Manager> getAllManager() throws Exception
+    {
+        List<Manager> managerList= managerRepository.findAll();
+        if (managerList.isEmpty())
+        {
+            throw new Exception();
+        }
+        return managerList;
+
+    }
+
     //done
 
     @Override
@@ -65,22 +77,7 @@ public class KanbanServiceImpl implements IKanbanService {
         }
     }
 
-    //done
 
-    //register employee in employee db
-//    @Override
-//    public Employee registerEmployee (Employee employee) throws EmployeeAlreadyExistsException {
-//        if (employeeRepository.findById(employee.getUserId()).isPresent()) {
-//            throw new EmployeeAlreadyExistsException();
-//        }
-//        Employee saveEmp=employeeRepository.save(employee);
-//        if(!(saveEmp.getUserId().isEmpty()))
-//        {
-//            ResponseEntity<?> res=userProxy.saveUser(employee);
-//            System.out.println(res.getBody());
-//        }
-//        return saveEmp;
-//    }
 
     //done
 
@@ -216,8 +213,8 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
 
     //done
     @Override
-    public List<Task> getAllEmployeeTaskFromTaskList(String userId) throws EmployeeNotFoundException {
-        Employee employee = employeeRepository.findById(userId).orElseThrow(EmployeeNotFoundException::new);
+    public List<Task> getAllEmployeeTaskFromTaskList() throws EmployeeNotFoundException {
+        Employee employee = (Employee) employeeRepository.findAll();
         return employee.getUserTaskList();
     }
 

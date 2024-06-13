@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Task } from '../../models/task';
-import moment from 'moment';
+import {moment} from '/moment';
 
 @Component({
   selector: 'app-taskregister',

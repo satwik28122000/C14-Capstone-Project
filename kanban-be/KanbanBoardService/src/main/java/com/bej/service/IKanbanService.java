@@ -18,6 +18,8 @@ public interface IKanbanService {
 
     List<Employee> getAllEmployee() throws Exception;
 
+    List<Manager> getAllManager() throws Exception;
+
     Employee getEmployeeByUserId(String userId) throws EmployeeNotFoundException;
 
     Employee registerEmployee(Employee employee) throws EmployeeAlreadyExistsException;
@@ -28,7 +30,7 @@ public interface IKanbanService {
 
     List<Task> deleteTaskFromEmployee(String userId, String taskId) throws TaskNotFoundException, EmployeeNotFoundException;
 
-    List<Task> getAllEmployeeTaskFromTaskList(String userId) throws EmployeeNotFoundException;
+    List<Task> getAllEmployeeTaskFromTaskList() throws EmployeeNotFoundException;
 
     List<Project> getAllProjectFromManager(String managerId) throws ManagerNotFoundException;
 

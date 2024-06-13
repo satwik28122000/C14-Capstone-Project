@@ -24,19 +24,19 @@ export class EmployeeService {
   }
 
   getEmployeeByUserId(userId: string): Observable<any> {
-    return this.http.get<any>(`${this.kanbanUrl}/user/getEmployeesByUserId`+ userId);
+    return this.http.get<any>(`${this.kanbanUrl}/user/getEmployeesByUserId/${userId}`);
   }
 
-  getAllEmployeeTaskFromTaskList(userId: string): Observable<any>{
-    return this.http.get<any>(`${this}.kanbanUrl}/user/employees/tasks`+ userId);
+  getAllEmployeeTaskFromTaskList(): Observable<any>{
+    return this.http.get<any>(`${this.kanbanUrl}/user/employees/tasks`);
   }
 
   getTaskByIdFromEmployee(taskId: string): Observable<any>{
-    return this.http.get<any>(`${this}.kanbanUrl}/user/findTaskByIdFromEmployee/task`+ taskId);
+    return this.http.get<any>(`${this.kanbanUrl}/user/findTaskByIdFromEmployee/task/${taskId}`);
   }
 
-  updateTaskFromEmployeeToManager(userId: string, task: Task): Observable<any> {
-    return this.http.put<any>(`${this.kanbanUrl}/user/updateEmployeeTask`+ userId, task);
+  updateTaskFromEmployeeToManager(task: Task): Observable<any> {
+    return this.http.put<any>(`${this.kanbanUrl}/user/updateEmployeeTask`, task);
   }
   
 }
