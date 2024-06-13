@@ -9,42 +9,40 @@ import { Task } from '../../models/task';
 })
 
 
-export class ManagerService {
-
- 
-
-
+export class EmployeeService {
 
   constructor(private http:HttpClient) { }
+  kanbanUrl:string = "http://localhost:9000/api/kanban";
+  authUrl:string = "http://localhost:9000/auth";
 
-  registerEmployee(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>('http://localhost:8081/registerEmployee', employee);
+  registerEmployee(employee: Employee): Observable<any> {
+    return this.http.post<any>(`${this.kanbanUrl}/register`, employee);
   }
 
-  getAllEmployee(): Observable<Employee[]> {
-    return this.http.get<Employee[]>('http://localhost:8081/getAllEmployee');
+  loginEmployee(employee: Employee): Observable<any> {
+    return this.http.post<any>(`${this.authUrl}/login`, employee);
   }
 
-  getEmployeeByUserId(userId: string): Observable<Employee> {
-    return this.http.get<Employee>('http://localhost:8081/getEmployeeByUserId/' + userId);
+  getEmployeeByUserId(userId: string): Observable<any> {
+    return this.http.get<any>(`${this.kanbanUrl}/user/getEmployeesByUserId`+ userId);
   }
 
-  updateEmployeeTaskInTaskList(userId: string, employee: Task): Observable<Employee> {
-    return this.http.put<Employee>('http://localhost:8081/updateEmployeeTaskInTaskList/' + userId, employee);
+  getAllEmployeeTaskFromTaskList(userId: string): Observable<any>{
+    return this.http.get<any>(`${this}.kanbanUrl}/user/employees/tasks`+ userId);
   }
 
-  saveEmployeeTaskToTaskList(userId: string, task: Task): Observable<Employee>{
-    return this.http.post<Employee>('http://localhost:8081/saveEmployeeTaskToTaskList/' + userId, task);
+  getTaskByIdFromEmployee(taskId: string): Observable<any>{
+    return this.http.get<any>(`${this}.kanbanUrl}/user/findTaskByIdFromEmployee/task`+ taskId);
   }
 
-  deleteTaskFromEmployee(userId: string, taskId: string): Observable<Employee>{
-    return this.http.delete<Employee>('http://localhost:8081/deleteTaskFromEmployee/' + userId + '/' + taskId);
+  updateTaskFromEmployeeToManager(userId: string, task: Task): Observable<any> {
+    return this.http.put<any>(`${this.kanbanUrl}/user/updateEmployeeTask`+ userId, task);
   }
-
-  getAllEmployeeTaskFromTaskList(userId: string): Observable<Employee>{
-    return this.http.get<Employee>('http://localhost:8081/getAllEmployeeTaskFromTaskList/' + userId);
-  }
-
   
-
 }
+
+
+
+// public ResponseEntity<?> getAllEmployeeTaskFromTaskList(@PathVariable String userId) throws EmployeeNotFoundException   done
+// public ResponseEntity<?> fetchTaskByIdFromEmployee(@PathVariable String taskId,HttpServletRequest request) throws TaskNotFoundException , EmployeeNotFoundException
+// public ResponseEntity<?> modifyTaskInEmployeeToProject(HttpServletRequest request,@RequestBody Task task) throws ProjectNotFoundException,

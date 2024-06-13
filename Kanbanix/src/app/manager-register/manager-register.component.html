@@ -18,7 +18,7 @@
           <input matInput type="text" id="managerName" formControlName="managerName">
           <mat-error *ngIf="registrationForm.controls['managerName'].invalid && registrationForm.controls['managerName'].touched">
             <span *ngIf="registrationForm.controls['managerName'].errors?.['required']">Manager Name is required.</span>
-            <span *ngIf="registrationForm.controls['managerName'].errors?.['minlength']">Manager Name must be at least 20 characters long.</span>
+            <span *ngIf="registrationForm.controls['managerName'].errors?.['minlength']">Manager Name must be at least 10 characters long.</span>
             <span *ngIf="registrationForm.controls['managerName'].errors?.['pattern']">Manager Name must contain only alphabetic characters.</span>
           </mat-error>
         </mat-form-field>

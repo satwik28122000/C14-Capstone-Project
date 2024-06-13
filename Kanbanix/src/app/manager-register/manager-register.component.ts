@@ -1,5 +1,3 @@
-
-
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 // import { Manager } from '../../models/manager';
@@ -39,21 +37,7 @@ export class ManagerRegisterComponent implements OnInit {
         }
       })
   }
-  // passwordMatchValidator(formGroup: FormGroup){
-  //   const password = formGroup.get('managerPassword')?.value;
-  //   const confirmPassword = formGroup.get('confirmPassword')?.value;
-  //   return password === confirmPassword ? null : {passwordMatch: true};
-  // }
   
-    // if (this.registrationForm.valid) {
-    //   const manager: Manager = {
-    //     managerId: this.registrationForm.value.managerId,
-    //     managerName: this.registrationForm.value.managerName,
-    //     managerEmail: this.registrationForm.value.managerEmail,
-    //     managerPassword: this.registrationForm.value.managerPassword
-    //   };
-    //   // Process the manager object as needed
-    // }
   
 
   passwordMatchValidator(ac: AbstractControl) {
@@ -72,7 +56,7 @@ export class ManagerRegisterComponent implements OnInit {
   get managerId() : AbstractControl {
     return this.registrationForm.get('managerId')!
   }
-  
+
   get managerName(): AbstractControl {
     return this.registrationForm.get('managerName')!;
   }
