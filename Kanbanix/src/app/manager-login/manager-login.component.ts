@@ -15,7 +15,7 @@ export class ManagerLoginComponent {
 
   ngOnInit(): void {
       this.loginForm = this.formBuilder.group({
-        managerId: ['', Validators.required],
+        managerId: ['', [Validators.required]],
         managerPassword: ['', [Validators.required, Validators.minLength(6)]]
       });
   }

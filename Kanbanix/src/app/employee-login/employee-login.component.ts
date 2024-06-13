@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Employee } from '../../models/employee';
 
 @Component({
   selector: 'app-employee-login',
@@ -7,42 +8,31 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./employee-login.component.css']
 })
 export class EmployeeLoginComponent {
-  employee = {
-    employeeId: '',
-    password: ''
-  };
+  loginForm: FormGroup=new FormGroup ({});
+    employee: any;
+    constructor(private formBuilder: FormBuilder){}
+
+    ngOnInit(): void {
+      this.loginForm=this.formBuilder.group({
+        userId: ['', [Validators.required]],
+        password: ['', [Validators.required, Validators.minLength(6)]]
+      });
+    }
 
   onSubmit(form: NgForm) {
-    if (form.valid) {
-      console.log('Employee ID:', this.employee.employeeId);
-      console.log('Password:', this.employee.password);
-      // Add your login logic here
+    console.log(this.loginForm.valid);
+    console.log(this.loginForm.value);
+    if (this.loginForm.valid) 
+      {
+        const employee: Employee={
+          userId: this.loginForm.value.employeeId,
+          password: this.loginForm.value.password
+        }
+      }
     }
-  }
-}
-
-
-
-// registrationForm: FormGroup = new FormGroup({});
-// constructor
-// (private formBuilder : FormBuilder){}
-
-// ngOnInit(): void {
-//   this.registrationForm = this.formBuilder.group({
-//     userId: ['', Validators.required],
-//password: ['', [Validators.required, Validators.minLength(6)]]
-
-
-// onSubmit() {
-//   console.log(this.registrationForm.valid);
-//   console.log(this.registrationForm.value);
-//   if (this.registrationForm.valid) {
-//     const employee: Employee ={
-//       userId: this.registrationForm.value.userId,
-//       password: this.registrationForm.value.userPassword,
-
-// passwordMatchValidator(formGroup: FormGroup){
-//   const password = formGroup.get('managerPassword')?.value;
-//   const confirmPassword = formGroup.get('confirmPassword')?.value;
-//   return password === confirmPassword ? null : {passwordMatch: true};
-// }
+      passwordMatchValidator(formGroup: FormGroup){
+        const password = formGroup.get('password')?.value;
+        const confirmPassword = formGroup.get('confirmPassword')?.value;
+        return password === confirmPassword? null : {passwordMatch: true};
+      }
+    }
