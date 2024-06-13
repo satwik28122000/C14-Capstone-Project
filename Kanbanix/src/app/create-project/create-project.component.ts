@@ -14,7 +14,7 @@ export class CreateProjectComponent {
       {
         projectId: ['',[Validators.required,Validators.minLength(3)]],
         projectName: ['',[Validators.required,Validators.minLength(4)]],
-        projectDesc: ['',Validators.required,Validators.minLength(10)],
+        projectDesc: ['',[Validators.required,Validators.minLength(10)]],
         projectTasks: [null] 
       }
     )

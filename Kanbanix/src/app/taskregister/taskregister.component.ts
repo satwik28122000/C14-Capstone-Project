@@ -17,7 +17,7 @@ export class TaskregisterComponent implements OnInit {
       taskId: [''],
       taskName: ['', [Validators.required, Validators.minLength(3), Validators.pattern(/^[A-Za-z\s]+$/)]],
       taskDesc: ['', [Validators.required]],
-      status: ['', [Validators.required]],
+      status: ['Assigned', [Validators.required]],
       priority: ['', [Validators.required]],
       dueDate: ['', [Validators.required]],
       assignedTo: ['', [Validators.required]],

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Manager } from '../../models/manager';
 import { Project } from '../../models/project';
+import { RouterService } from '../services/router.service';
 
 @Component({
   selector: 'app-manager-view',
@@ -9,6 +10,7 @@ import { Project } from '../../models/project';
 })
 export class ManagerViewComponent {
 
+  constructor(private routerService:RouterService){}
   
  manager:Manager = {
   managerId:"Sangeetha@123",
@@ -39,16 +41,7 @@ projectList:[
 ]
 
  }
-//  searchText:string="";
-//   filteredProjects:any;
-//  searchProjectByName():any{
-//   if(!this.searchText || this.searchText == ""){
-//     return this.manager.projectList;
-//   }
-//   else{
-//     console.log(this.searchText);
-    
-//     return this.manager.projectList?.filter(p => p.projectName?.includes(this.searchText));
-//   }
-//  }
+ onCreateProjectClick(){
+  this.routerService.redirectToCreateProjectForm();
+ }
 }

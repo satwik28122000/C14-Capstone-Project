@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { TaskregisterComponent } from './taskregister/taskregister.component';
 import { ManagerLoginComponent } from './manager-login/manager-login.component';
 import { EmployeeLoginComponent } from './employee-login/employee-login.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
 
 const routes: Routes = [
   { path: "", component: HomePageComponent },
@@ -21,7 +22,7 @@ const routes: Routes = [
     path: "manager/:id", children: [
       { path: "project", component: ManagerViewComponent },
       { path: "project/:id", children:[
-        { path: "project/:id",component:ProjectTaskComponent},
+        { path: "",component:ProjectTaskComponent},
         { path:"project/:id/add-task",component:TaskregisterComponent}
       ]
       }
@@ -29,6 +30,7 @@ const routes: Routes = [
   },
   { path:"add-task",component:TaskregisterComponent},
   { path: "user/:id", component: UserViewComponent},
+  { path:"add-project",component:CreateProjectComponent},
   { path: "**" ,component:PageNotFoundComponent}
 ];
 

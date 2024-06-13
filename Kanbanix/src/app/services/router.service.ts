@@ -51,6 +51,12 @@ export class RouterService {
   redirectToPageNotFound() {
     this.r.navigate(['**']);
   }
+
+  redirectToCreateProjectForm(){
+    this.r.navigate(["add-project"])
+  }
+
+  
 }
 
 
