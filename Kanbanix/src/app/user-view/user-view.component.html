@@ -1,0 +1,25 @@
+<section class="user-view">
+    <section>
+        <h1>{{employee?.userName}}'s Kanban</h1>
+    </section>
+    <section class="user-kanban">
+        <section class="assigned-task" (dragover)="onDragOver($event)" (drop)="onDrop($event,'Assigned')">
+            <h2>Assigned Tasks</h2>
+            <div class="task-list">
+                <app-task-card [task]="task" *ngFor="let task of assignedList" (dragstart)="onDrag(task)" draggable="true"></app-task-card>
+            </div>
+        </section>
+        <section class="in-progress-task" (dragover)="onDragOver($event)"  (drop)="onDrop($event,'In-Progress')">
+            <h2>In-Progress Tasks</h2>
+            <div class="task-list">
+                <app-task-card [task]="task" *ngFor="let task of inProgressList" (dragstart)="onDrag(task)" draggable="true"></app-task-card>
+            </div>
+        </section>
+        <section class="completed-task" (dragover)="onDragOver($event)"  (drop)="onDrop($event,'Completed')">
+            <h2>Completed Tasks</h2>
+            <div class="task-list">
+                <app-task-card [task]="task" *ngFor="let task of completedList" (dragstart)="onDrag(task)" draggable="true"></app-task-card>
+            </div>
+        </section>
+    </section>
+</section>

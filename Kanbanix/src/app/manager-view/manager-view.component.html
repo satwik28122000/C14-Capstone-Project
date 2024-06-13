@@ -1,0 +1,12 @@
+<!-- <section class="search-bar">
+    <mat-form-field class="">
+        <input matInput placeholder="Search project" [(ngModel)]="searchText">
+    </mat-form-field>
+</section> -->
+<section class="manager-name">
+    <h2>{{manager.managerName}}'s Workspace</h2>
+    <button class="btn btn-md" (click)="onCreateProjectClick()">Create Project</button>
+</section>
+<section class="project-card-section">
+    <app-project-card [project]="project" *ngFor="let project of manager.projectList"></app-project-card>
+</section>

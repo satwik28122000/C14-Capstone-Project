@@ -1,0 +1,66 @@
+.container {
+  max-width: 800px;
+  margin: 5% auto;
+  padding: 20px;
+  background-color: black;
+  border-radius: 8px;
+  box-shadow: 0 0 10px darkcyan;
+
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.half-width {
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+button {
+  width: 20%;
+  height: 40px;
+  background-color: darkcyan;
+  color: black;
+  border-radius: 10px;
+  
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .half-width {
+    width: 100%;
+  }
+
+  .button-row {
+    flex-direction: column;
+    
+  }
+
+  button {
+    width: 50%;
+    margin-bottom: 10px;
+    background-color:  cyan;
+   
+  }
+}

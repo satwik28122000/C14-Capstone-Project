@@ -1,0 +1,27 @@
+<!-- <p>home-page works!</p> -->
+<section class="title-section row">
+    <section class="titles col-lg-6 col-md-12 col-sm-12">
+        <h1>Welcome to <span>Kanbanix</span></h1>
+        <h2>A Project Management Software On The Rise</h2>
+        <article>Link efforts to success & move closer to a better world of work by fostering employee productivity and engagement with accuracy.</article>
+        <button class="btn btn-lg" (click)="onManagerLoginClick()">Manager Login</button>
+        <button class="btn btn-lg" (click)="onUserLoginClick()">User Login</button>
+    </section>
+    <section class="col-lg-6 col-md-12 col-sm-12">
+        <figure class="title-image">
+            <img src="../../assets/kanban-image.png" alt="kanban-intro-image">
+        </figure>
+    </section>
+</section>
+<section class="features-section">
+    <div class="features-headings">
+        <h2>Versatile Features To Accommodate Your Diverse Needs</h2>
+        <article>Start Managing Your Tasks Today</article>
+    </div>
+    <div class="features-card-section d-flex">
+        <div class="card" *ngFor="let feature of features">
+            <h2>{{feature.fTitle}}</h2>
+            <article>{{feature.fDesc}}</article>
+        </div>
+    </div>
+</section>

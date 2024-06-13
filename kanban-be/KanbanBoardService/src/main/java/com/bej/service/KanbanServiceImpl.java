@@ -104,6 +104,19 @@ public class KanbanServiceImpl implements IKanbanService {
     //done
 
     @Override
+    public Manager saveManager(Manager manager){
+        // return managerRepository.save(manager);
+        Manager savedManager = managerRepository.save(manager);
+        if (userProxy != null && !savedManager.getManagerId().isEmpty()) {
+            ResponseEntity<?> responseEntity = userProxy.createManager(manager);
+            System.out.println(responseEntity.getBody());
+        }
+        return savedManager;
+    }
+
+    //done
+
+    @Override
     public Employee saveEmployeeTaskToTaskList(Task task, String userId) throws EmployeeNotFoundException, TaskAlreadyExistsException {
 
 
@@ -394,17 +407,7 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
         throw new TaskNotFoundException();
     }
 
-    //done
-    @Override
-    public Manager saveManager(Manager manager){
-       // return managerRepository.save(manager);
-        Manager savedManager = managerRepository.save(manager);
-        if (userProxy != null && !savedManager.getManagerId().isEmpty()) {
-            ResponseEntity<?> responseEntity = userProxy.createManager(manager);
-            System.out.println(responseEntity.getBody());
-        }
-        return savedManager;
-    }
+
     //save task in manager's  project task list
     @Override
     public Manager saveTaskInManagerProjectList(String managerId, String projectId, Task task) throws ManagerNotFoundException, ProjectNotFoundException, TaskAlreadyExistsException {

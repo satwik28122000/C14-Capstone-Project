@@ -1,0 +1,86 @@
+.title-section {
+    padding: 3% 4.5% 1%;
+    border-bottom: 1px solid cyan;
+    border-bottom-left-radius: 4%;
+    border-bottom-right-radius: 4%;
+    box-shadow: 0 1px 7px rgba(0, 255, 255, 0.452);
+}
+
+.title-section .titles {
+    width: 45%;
+    text-align: left;
+    padding-top: 9%;
+}
+
+.title-section .titles h1 {
+    margin-top: 30px;
+}
+
+.title-section .titles h1 span {
+    font-size: 3.5rem;
+    margin-left: 15px;
+    background: linear-gradient(to right, darkcyan, cyan, white);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 900;
+}
+
+.title-section .titles h2 {
+    margin: 30px 0;
+    font-size: 2.5rem;
+}
+
+.title-section .titles article{
+    font-weight: lighter;
+}
+
+.title-section .titles button {
+    background: linear-gradient(to right, darkcyan, cyan, white);
+    margin: 30px 30px 0 0;
+    color: black;
+    font-weight: 500;
+    border: 1px solid darkcyan;
+}
+
+.title-image img {
+    max-width: 90%;
+    margin-left: 3%;
+}
+
+.features-card-section{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.features-section{
+    width: 100%;
+    text-align:center;
+    padding: 5%;
+    gap: 20px;
+}
+
+.features-section .features-headings{
+    margin: 0px 0 30px;
+    line-height: 2;
+}
+
+ .card{
+    width: 100px;
+    height: 150px;
+    margin: 20px;
+    border-radius: 20px;
+    flex-wrap: wrap;
+    background:linear-gradient(to right,rgba(255,255,255,0.2),rgba(255,255,255,0.1));
+    padding: 20px;
+    flex-grow: 1;
+    border: 2px solid darkcyan;
+}
+
+@media screen and (max-width: 426px) {
+    .card{
+        width: 90%;
+        height: auto;
+    }
+}

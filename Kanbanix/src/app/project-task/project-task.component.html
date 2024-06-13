@@ -1,0 +1,30 @@
+
+<section class="project-task-component">
+  <div class="project-form-container">
+    <h2>Project Tasks</h2>
+    <div>
+      <label for="projectName">Project Name:</label>
+      <span id="projectName">{{ project.projectName }}</span>
+    </div>
+    <div>
+      <label for="projectDesc">Project Description:</label>
+      <span id="projectDesc">{{ project.projectDesc }}</span>
+    </div>
+
+    <div class="tasks-header">
+      <h3 style="color: azure; font-size: 25px;">Tasks</h3>
+      <button type="button"  class="btn-lg add-task-btn" (click)="onAddTaskClick()">Add Task</button>
+    </div>
+
+    <div class="task-item d-flex" *ngFor="let task of project.projectTasks">
+      <p>{{ task.taskName }}</p>
+      <p>{{ task.taskDesc }}</p>
+      <p>{{ task.status }}</p>
+      <button class="priority btn btn-md btn-danger" *ngIf="task?.priority == 'High'|| task?.priority == 'high'" disabled>{{ task.priority }}</button>
+      <button class="priority btn btn-md btn-success" *ngIf="task?.priority == 'Low'|| task?.priority == 'low'" disabled>{{ task.priority }}</button>
+      <button class="priority btn btn-md btn-warning" *ngIf="task?.priority == 'Medium'|| task?.priority == 'medium'" disabled>{{ task.priority }}</button>
+      <p>{{ task.assignedTo?.userId }}</p>
+      <button class="edit-btn btn-sm" type="button">Edit</button>
+    </div>
+  </div>
+</section>

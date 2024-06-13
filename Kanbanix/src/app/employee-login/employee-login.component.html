@@ -1,0 +1,35 @@
+<div class="employee-login">
+  <div class="container">
+    <h2>Employee's Login</h2>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+      <div class="form-group">
+        <mat-label>Employee ID</mat-label>
+        <input type="text" id="employeeId" name="employeeId" class="form-control" [(ngModel)]="employee.employeeId" required>
+        <div *ngIf="loginForm.submitted && !loginForm.controls['employeeId']?.valid" class="error">
+          Employee ID is required.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <mat-label>Password</mat-label>
+        <input type="password" id="password" name="password" class="form-control" [(ngModel)]="employee.password" required minlength="6">
+        <div *ngIf="loginForm.submitted && !loginForm.controls['password']?.valid" class="error">
+          <span *ngIf="loginForm.controls['password']?.errors?.['required']">Password is required.</span>
+          <span *ngIf="loginForm.controls['password']?.errors?.['minlength']">Password must be at least 6 characters long.</span>
+        </div>
+      </div>
+  
+      <div class="button-row">
+        <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
+      </div>
+      <div class="register-link">
+        Don't have an account? <a routerLink="/user-register">Register</a>
+
+        
+      </div>
+    </form>
+  </div>
+</div>
+
+  
+  

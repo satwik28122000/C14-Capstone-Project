@@ -1,0 +1,28 @@
+.search-bar{
+    width: 100%;
+    padding: 2px 10px;
+    color: white;
+    display: flex;justify-content: flex-end;
+    padding: 10px;
+}
+.manager-name{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    text-align: center;
+    margin-top: 3%;
+    padding: 3px 20px;
+}
+.manager-name button {
+    background: linear-gradient(to right, darkcyan, cyan, white);
+    color: black;
+    border: 1px solid darkcyan;
+    height: 35px;
+}
+
+.project-card-section{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin:5% 3%;
+}
