@@ -23,23 +23,23 @@ const routes: Routes = [
   { path: "user-register", component: EmployeeRegisterComponent },
   {
     path: "manager/:id",
-    canActivate: [AuthGuard],
-    canActivateChild: [ChildAuthGuard],
+    // canActivate: [AuthGuard],
+    // canActivateChild: [ChildAuthGuard],
     children: [
       { path: "project", component: ManagerViewComponent },
       {
         path: "project/:id",
         children: [
-          { path: "", component: ProjectTaskComponent, canDeactivate: [DeactiveAuthGuard] },
-          { path: "add-task", component: TaskregisterComponent, canDeactivate: [DeactiveAuthGuard] }
+          { path: "", component: ProjectTaskComponent},
+          { path: "add-task", component: TaskregisterComponent}
         ]
       }
     ]
   },
   { path: "add-task", component: TaskregisterComponent },
-  { path: "user/:id", component: UserViewComponent, canActivate: [AuthGuard] },
-  { path: "add-project", component: CreateProjectComponent, canActivate: [AuthGuard], canDeactivate: [DeactiveAuthGuard] },
-  { path: "**", component: PageNotFoundComponent }
+  { path: "user/:id", component: UserViewComponent},
+  { path: "add-project", component: CreateProjectComponent},
+  { path: "**", component: PageNotFoundComponent },
   { path: "user/:id", component: UserViewComponent},
   { path:"add-project",component:CreateProjectComponent},
   { path: "**" ,component:PageNotFoundComponent}
