@@ -32,7 +32,9 @@ import { ManagerLoginComponent } from './manager-login/manager-login.component';
 import { EmployeeLoginComponent } from './employee-login/employee-login.component';
 import { HttpClient, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { customInterceptor } from './services/custom.interceptor';
-
+import { AuthGuard } from './guard/auth.guard';
+import { ChildAuthGuard } from './guard/child-auths.guard';
+import { DeactiveAuthGuard } from './guard/deactive-auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
