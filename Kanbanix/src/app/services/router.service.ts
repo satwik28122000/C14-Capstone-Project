@@ -55,7 +55,9 @@ export class RouterService {
   redirectToCreateProjectForm(){
     this.r.navigate(["add-project"])
   }
-
+  redirectToPreviousPage(){
+    this.r.navigate(["/"])
+  }
   
 }
 
