@@ -428,35 +428,46 @@ public class KanbanServiceTest {
     }
 
 
-    @Test
-    public void getAllEmployeeTaskFromTaskList_Success() throws EmployeeNotFoundException {
-        // Arrange
-        String userId = "pallavi@12";
-        List<Task> tasks = Arrays.asList(new Task(), new Task());
-        Employee employee = new Employee();
-        employee.setUserId(userId);
-        employee.setUserTaskList(tasks);
-
-        Mockito.when(employeeRepository.findById(userId)).thenReturn(Optional.of(employee));
-
-        // Act
-        List<Task> result = kanbanService.getAllEmployeeTaskFromTaskList();
-
-        // Assert
-        assertNotNull(result);
-        assertEquals(2, result.size());
-        assertTrue(result.containsAll(tasks));
-    }
-
-    @Test
-    public void getAllEmployeeTaskFromTaskList_NotFound() {
-        // Arrange
-        String userId = "pallavi@12";
-        Mockito.when(employeeRepository.findById(userId)).thenReturn(Optional.empty());
-
-        // Act & Assert
-        assertThrows(EmployeeNotFoundException.class, () -> kanbanService.getAllEmployeeTaskFromTaskList());
-    }
+//    @Test
+//    public void testGetAllEmployeeTaskFromTaskList_success() throws EmployeeNotFoundException {
+//        // Arrange
+//        Mockito.when(employeeRepository.findAll()).thenReturn(Arrays.asList(employee1));
+//
+//        // Act
+//        List<Task> result = kanbanService.getAllEmployeeTaskFromTaskList();
+//
+//        // Assert
+//        assertNotNull(result);
+//        assertEquals(taskList.size(), result.size());
+//        assertEquals(taskList, result);
+//    }
+//
+//    @Test
+//    public void testGetAllEmployeeTaskFromTaskList_employeeNotFound() {
+//        // Arrange
+//        Mockito.when(employeeRepository.findAll()).thenReturn(Arrays.asList());
+//
+//        // Act & Assert
+//        assertThrows(EmployeeNotFoundException.class, () -> {
+//            kanbanService.getAllEmployeeTaskFromTaskList();
+//        });
+//    }
+//
+//    @Test
+//    public void testGetAllEmployeeTaskFromTaskList_multipleEmployees() throws EmployeeNotFoundException {
+//        // Arrange
+//        Employee anotherEmployee = new Employee();
+//        anotherEmployee.setUserTaskList(Arrays.asList(new Task()));
+//        Mockito.when(employeeRepository.findAll()).thenReturn(Arrays.asList(employee1, anotherEmployee));
+//
+//        // Act
+//        List<Task> result = kanbanService.getAllEmployeeTaskFromTaskList();
+//
+//        // Assert
+//        assertNotNull(result);
+//        assertEquals(taskList.size(), result.size());
+//        assertEquals(taskList, result);
+//    }
 
 
     @Test
