@@ -27,8 +27,10 @@ export class ManagerLoginComponent {
      
     this.managerService.loginManager(form.value).subscribe({
         
-        next: res => {
+        next: (res:any) => {
           console.log(res);
+          localStorage.setItem("token",res.Token);
+          
           this.routerService.redirectToManagerView(form.value?.managerId);
         },
         error: err =>{

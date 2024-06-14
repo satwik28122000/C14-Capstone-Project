@@ -38,6 +38,11 @@ export class ManagerService {
       return this.httpClient.get<any[]>(`${this.kanbanUrl}/manager/projects`);
    }
 
+   //fetch all manager
+   fetchAllManager():Observable<any[]>{
+      return this.httpClient.get<any[]>(`${this.kanbanUrl}/getAllManager`)
+   }
+
    //will fetch all employee from employee document
    fetchAllEmployee():Observable<any[]>{
     return this.httpClient.get<any[]>(`${this.kanbanUrl}/manager/getAllEmployee`);
