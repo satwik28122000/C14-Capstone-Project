@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Employee }  from '../../models/employee';
+import { EmployeeService } from '../services/employee.service';
+import { RouterService } from '../services/router.service';
 
 
 @Component({
@@ -8,10 +10,10 @@ import { Employee }  from '../../models/employee';
   templateUrl: './employee-register.component.html',
   styleUrl: './employee-register.component.css'
 })
-export class EmployeeRegisterComponent {
+export class EmployeeRegisterComponent implements OnInit {
   registrationForm: FormGroup = new FormGroup({});
   constructor
-  (private formBuilder : FormBuilder){}
+  (private formBuilder : FormBuilder, private employeeService: EmployeeService, private routerService: RouterService){}
  
   ngOnInit(): void {
     this.registrationForm = this.formBuilder.group({
@@ -24,25 +26,52 @@ export class EmployeeRegisterComponent {
     }, { validator: this.passwordMatchValidator });
   }
   onSubmit() {
-    console.log(this.registrationForm.valid);
-    console.log(this.registrationForm.value);
-    if (this.registrationForm.valid) {
-      const employee: Employee ={
-        userId: this.registrationForm.value.userId,
-        userName: this.registrationForm.value.userName,
-        emailId: this.registrationForm.value.userEmail,
-        password: this.registrationForm.value.userPassword,
-        designation: this.registrationForm.value.designation
+    this.employeeService.registerEmployee(this.registrationForm.value).subscribe({
+      next : res =>{
+        console.log(res);
+        this.routerService.redirectToUserLogin();
+      },
+      error : err => {
+        console.log(err);
+      }
+    })
         
       }
-    }
     
-  }
-  passwordMatchValidator(formGroup: FormGroup){
-    const password = formGroup.get('managerPassword')?.value;
-    const confirmPassword = formGroup.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : {passwordMatch: true};
-  }
+      passwordMatchValidator(ac: AbstractControl) {
+        let password = ac.get('employeePassword')?.value;
+        let confirmPassword = ac.get('confirmPassword')?.value;
+        console.log(password + " " + confirmPassword);
+        if (password !== confirmPassword) {
+          return { pError: true };
+        } else {
+          return null;
+        }
+      }
+    
+      get userId(): AbstractControl {
+        return this.registrationForm.get('userId')!;
+      }
+    
+      get userName(): AbstractControl {
+        return this.registrationForm.get('userName')!;
+      }
+    
+      get emailId(): AbstractControl {
+        return this.registrationForm.get('emailId')!;
+      }
+
+      get designation(): AbstractControl {
+        return this.registrationForm.get('designation')!;
+      }
+    
+      get password(): AbstractControl {
+        return this.registrationForm.get('password')!;
+      }
+    
+      get confirmPassword(): AbstractControl {
+        return this.registrationForm.get('confirmPassword')!;
+      }
   }
 
  

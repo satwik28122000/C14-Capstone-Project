@@ -50,11 +50,25 @@ public class KanbanController {
     @PostMapping("/managers/saveManager")
     public ResponseEntity createManager(@RequestBody Manager manager){
         try {
-            return new ResponseEntity(kanbanService.saveManager(manager), HttpStatus.CREATED);
+            return new ResponseEntity<>(kanbanService.saveManager(manager), HttpStatus.CREATED);
         }catch(Exception e){
-            return new ResponseEntity(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+//    @CrossOrigin(origins = "http://localhost:4200")
+//    @PostMapping("/managers/saveManager")
+//    public ResponseEntity createManager(@RequestBody Manager manager)
+//    {
+//        try {
+//            return new ResponseEntity<>(kanbanService.saveManager(manager), HttpStatus.CREATED);
+//        }catch(Exception e){
+//            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+
+
 
     @Operation(summary = "Get employee by user id", description = "This will get employee by user id")
     @ApiResponse(responseCode = "200", description = "Retrive employee successfully")
@@ -74,7 +88,7 @@ public class KanbanController {
         }
     }
 
-    @Operation(summary = "Fetch Employee", description = "This will  fetch all employee")
+    @Operation(summary = "Fetch Employee", description = "This will fetch all employee")
     @ApiResponse(responseCode = "200", description = "Employees fetched successfully")
     @GetMapping("/manager/getAllEmployee")
     public ResponseEntity<?> fetchAllEmployee() throws Exception
@@ -87,6 +101,23 @@ public class KanbanController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    @Operation(summary = "Fetch Manager", description = "This will fetch all manager")
+    @ApiResponse(responseCode = "200", description = "Manager fetched successfully")
+    @GetMapping("/manager/getAllManager")
+    public ResponseEntity<?> fetchAllManager() throws Exception
+    {
+        try {
+            return new ResponseEntity<>(kanbanService.getAllManager(), HttpStatus.OK);
+        }
+        catch (Exception e)
+        {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     @Operation(summary = "GetAllEmployeeTaskFromTaskList", description = "This will retrive employees task from task list")
     @ApiResponse(responseCode = "200", description = "Employee Task retrived successfully")
     @GetMapping("/user/tasks")
@@ -94,7 +125,7 @@ public class KanbanController {
             {
                 String userId = getUserIdClaims(request);
                 try {
-                    List<Task> tasks = kanbanService.getAllEmployeeTaskFromTaskList(userId);
+                    List<Task> tasks = kanbanService.getAllEmployeeTaskFromTaskList();
                     return new ResponseEntity<>(tasks, HttpStatus.OK);
                 } catch (EmployeeNotFoundException e) {
                     return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
