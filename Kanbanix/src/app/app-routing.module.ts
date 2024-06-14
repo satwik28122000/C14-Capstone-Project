@@ -39,7 +39,7 @@ const routes: Routes = [
   { path: "add-task", component: TaskregisterComponent },
   { path: "user/:id", component: UserViewComponent, canActivate: [AuthGuard] },
   { path: "add-project", component: CreateProjectComponent, canActivate: [AuthGuard], canDeactivate: [DeactiveAuthGuard] },
-  { path: "**", component: PageNotFoundComponent }
+  { path: "**", component: PageNotFoundComponent },
   { path: "user/:id", component: UserViewComponent},
   { path:"add-project",component:CreateProjectComponent},
   { path: "**" ,component:PageNotFoundComponent}

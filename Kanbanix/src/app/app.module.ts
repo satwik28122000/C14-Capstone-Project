@@ -31,7 +31,9 @@ import { TaskCardComponent } from './task-card/task-card.component';
 import { ManagerLoginComponent } from './manager-login/manager-login.component';
 import { EmployeeLoginComponent } from './employee-login/employee-login.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-
+import { AuthGuard } from './guard/auth.guard';
+import { ChildAuthGuard } from './guard/child-auths.guard';
+import { DeactiveAuthGuard } from './guard/deactive-auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,8 +70,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatError,
     HttpClientModule
   ],
-  providers: [
-    provideAnimationsAsync()
+  providers: [AuthGuard,ChildAuthGuard,DeactiveAuthGuard,
+   provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
