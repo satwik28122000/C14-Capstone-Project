@@ -1,9 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Manager } from '../../models/manager';
+
 import { Observable } from 'rxjs';
+
 import { Project } from '../../models/project';
 import { Task } from '../../models/task';
+import { Manager } from '../../models/manager';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -25,13 +29,18 @@ export class ManagerService {
    }
 
   //save project in manager project list
-   saveManagerProject(project:Project):Observable<any>{
+   saveManagerProject(project:any):Observable<any>{
       return this.httpClient.post<any>(`${this.kanbanUrl}/manager/saveProjectInManager`,project);
    }
 
   //will fetch all projects from manager   
    fetchAllProjects():Observable<any[]>{
       return this.httpClient.get<any[]>(`${this.kanbanUrl}/manager/projects`);
+   }
+
+   //fetch all manager
+   fetchAllManager():Observable<any[]>{
+      return this.httpClient.get<any[]>(`${this.kanbanUrl}/getAllManager`)
    }
 
    //will fetch all employee from employee document

@@ -23,18 +23,14 @@ export class ManagerLoginComponent {
   }
 
   onSubmit(form: NgForm) {
-      // console.log(this.loginForm.valid);
-      // console.log(this.loginForm.value);
-      // if (this.loginForm.valid) {
-      //       const manager: Manager ={
-      //         managerId: this.loginForm.value.managerId,
-      //         managerPassword: this.loginForm.value.Password
-      //       }
-      //     }
-      this.managerService.loginManager(form.value).subscribe({
+  
+     
+    this.managerService.loginManager(form.value).subscribe({
         
-        next: res => {
+        next: (res:any) => {
           console.log(res);
+          localStorage.setItem("token",res.Token);
+          
           this.routerService.redirectToManagerView(form.value?.managerId);
         },
         error: err =>{
