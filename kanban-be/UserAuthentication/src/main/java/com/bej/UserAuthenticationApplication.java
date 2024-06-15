@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@OpenAPIDefinition(info=@Info(title = "User-Auth-API", version = "2.0", description = "This is a User Authentication Application"))
+@OpenAPIDefinition(info=@Info(title = "User-Auth-API", version = "1.0", description = "This is a User Authentication Application"))
 public class UserAuthenticationApplication {
 
 	public static void main(String[] args)
