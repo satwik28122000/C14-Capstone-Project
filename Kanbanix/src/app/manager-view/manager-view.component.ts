@@ -22,9 +22,10 @@ export class ManagerViewComponent implements OnInit {
       next: data => {
         const managerId = data.get('id') ?? "";
         this.managerService.fetchAllManager().subscribe({
-          next: res =>{
+          next: (res:any) =>{
             console.log(res);
-            this.manager = res.find(m => m.managerId === managerId);
+            this.manager = res.find((m: { managerId: string; }) => m.managerId === managerId);
+            localStorage.setItem("Token",res.Token)
             console.log(this.manager);
             
           },
