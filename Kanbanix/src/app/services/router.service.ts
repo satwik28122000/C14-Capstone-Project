@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { AbstractControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -44,8 +45,8 @@ export class RouterService {
     this.r.navigate([`user/${userId}`]);
   }
 
-  redirectToAddTaskDirectly() {
-    this.r.navigate(['add-task']);
+  redirectToAddTaskDirectly(route:any) {
+    this.r.navigate(['saveTask'],{ relativeTo: route });
   }
 
   redirectToPageNotFound() {

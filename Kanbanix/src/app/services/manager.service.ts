@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -30,7 +30,21 @@ export class ManagerService {
 
   //save project in manager project list
    saveManagerProject(project:any):Observable<any>{
-      return this.httpClient.post<any>(`${this.kanbanUrl}/manager/saveProjectInManager`,project);
+    const token = localStorage.getItem('token');
+
+    // Check if token exists
+    if (token) {
+      // Create HTTP headers with the token
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+
+      return this.httpClient.post<any>(`${this.kanbanUrl}/manager/saveProjectInManager`,project,{headers});
+      }
+      else{
+         throw new Error("Authentication token not found")
+      }
+      
    }
 
   //will fetch all projects from manager   
@@ -45,17 +59,51 @@ export class ManagerService {
 
    //will fetch all employee from employee document
    fetchAllEmployee():Observable<any[]>{
-    return this.httpClient.get<any[]>(`${this.kanbanUrl}/manager/getAllEmployee`);
-   }
+    const token = localStorage.getItem('token');
+     // Check if token exists
+     if (token) {
+      // Create HTTP headers with the token
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+      return this.httpClient.get<any[]>(`${this.kanbanUrl}/manager/getAllEmployee`);
+      }
+      else{
+         throw new Error("Authentication token not found")
+      }
+    }
 
    //this will fetch project by id from project list of manager's project list
    fetchManagerProjectById(projectId:string):Observable<any>{
-      return this.httpClient.get<any>(`${this.kanbanUrl}/manager/${projectId}`)
+      const token = localStorage.getItem('token');
+
+    // Check if token exists
+    if (token) {
+      // Create HTTP headers with the token
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+
+      return this.httpClient.get<any>(`${this.kanbanUrl}/manager/${projectId}`,{headers})
+      }
+      else{
+         throw new Error("Authentication token not found")
+      }
    }
 
    //this will save task in manager project and employee task list
    saveTaskInManagerProjectAndEmployee(projectId:string,task:Task):Observable<any>{
-    return this.httpClient.post(`${this.kanbanUrl}/manager/project/${projectId}/saveTask`,task);
+    const token = localStorage.getItem('token');
+
+    if(token){
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+      return this.httpClient.post(`${this.kanbanUrl}/manager/project/${projectId}/saveTask`,task,{headers});
+    }
+    else{
+      throw new Error("Not Authorized")
+    }
    }
 
    //this will update task in manager project and employee task list
@@ -65,6 +113,20 @@ export class ManagerService {
 
    //fetch all projetcs from manager project list
    fetchAllProjectsFromManager():Observable<any[]>{
-    return this.httpClient.get<any>(`${this.kanbanUrl}/manager/projects`);
+      const token = localStorage.getItem('token');
+
+    // Check if token exists
+    if (token) {
+      // Create HTTP headers with the token
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+
+      // Make the GET request with the headers
+      return this.httpClient.get<any>(`${this.kanbanUrl}/manager/projects`,{headers});
+    }else {
+      // Handle the case where the token is missing
+      throw new Error('Authentication token not found');
+    } 
    }
 }

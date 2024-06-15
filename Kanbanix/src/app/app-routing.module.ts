@@ -31,18 +31,16 @@ const routes: Routes = [
         path: "project/:id",
         children: [
           { path: "", component: ProjectTaskComponent},
-          { path: "add-task", component: TaskregisterComponent}
+          { path: "saveTask", component: TaskregisterComponent}
         ]
       }
     ]
   },
-  { path: "add-task", component: TaskregisterComponent },
+  // { path:"project/:id", component: ProjectTaskComponent},
+  // { path: "add-task", component: TaskregisterComponent },
   { path: "user/:id", component: UserViewComponent},
   { path: "add-project", component: CreateProjectComponent},
-  { path: "**", component: PageNotFoundComponent },
-  { path: "user/:id", component: UserViewComponent},
-  { path:"add-project",component:CreateProjectComponent},
-  { path: "**" ,component:PageNotFoundComponent}
+  { path: "**", component: PageNotFoundComponent }
 ];
 
 @NgModule({

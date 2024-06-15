@@ -1,8 +1,10 @@
 // src/app/project-task/project-task.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Project } from '../../models/project';
 import { RouterService } from '../services/router.service';
+import { ActivatedRoute } from '@angular/router';
+import { ManagerService } from '../services/manager.service';
 
 @Component({
   selector: 'app-project-task',
@@ -10,83 +12,76 @@ import { RouterService } from '../services/router.service';
   styleUrls: ['./project-task.component.css']
 })
 export class ProjectTaskComponent implements OnInit {
-  projectForm: FormGroup;
-  project:Project = {
-    projectId:"1001",
-    projectName:"Travel App",
-    projectDesc:"Your travel guide",
-    projectTasks:[
+  project: Project = {
+    projectId: "1001",
+    projectName: "Travel App",
+    projectDesc: "Your travel guide",
+    projectTasks: [
       {
-        taskId:"1",
-        taskName:"Auth Service",
-        status:"Assigned",
-        
+        taskId: "1",
+        taskName: "Auth Service",
+        status: "Assigned",
+
         taskDesc: "Create auth service domains",
         priority: "Medium",
         dueDate: "12-06-2024",
         assignedTo: {
-          userId:"Priyanka@123"
+          userId: "Priyanka@123"
         }
       },
       {
-        taskId:"1",
-        taskName:"Auth Service",
-        status:"Assigned",
+        taskId: "1",
+        taskName: "Auth Service",
+        status: "Assigned",
         taskDesc: "Create auth service domains",
         priority: "High",
         dueDate: "12-06-2024",
         assignedTo: {
-          userId:"Priyanka@123"
+          userId: "Priyanka@123"
         }
       },
       {
-        taskId:"1",
-        taskName:"Auth Service",
-        status:"Assigned",
+        taskId: "1",
+        taskName: "Auth Service",
+        status: "Assigned",
         taskDesc: "Create auth service domains",
         priority: "Low",
         dueDate: "12-06-2024",
         assignedTo: {
-          userId:"Priyanka@123"
+          userId: "Priyanka@123"
         }
       }
     ]
   }
-  constructor(private fb: FormBuilder,private routerService: RouterService) {
-    this.projectForm = this.fb.group({
-      tasks: this.fb.array([]) 
-    });
+
+  constructor(
+    private fb: FormBuilder, 
+    private routerService: RouterService, 
+    private activatedRoute: ActivatedRoute,
+    private managerService:ManagerService) { }
+
+  ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe((data: any) => {
+      console.log(data);
+      const projectId = data.get('id');
+      console.log(projectId);
+      const managerToken = localStorage.getItem("token") ?? "";
+      console.log(managerToken)
+      this.managerService.fetchManagerProjectById(projectId).subscribe({
+        next: (res:any) => {
+          console.log(res);
+          this.project=res;
+        },
+        error: err => {
+          console.log(err);
+        }
+      })
+    })
   }
 
-  ngOnInit(): void {}
 
-  get tasks(): FormArray {
-    return this.projectForm.get('tasks') as FormArray;
-  }
-
-  addTask(): void {
-    this.tasks.push(this.fb.group({
-      taskName: '',
-      taskDesc: '',
-      status: '',
-      priority: '',
-      dueDate: '',
-      assignedTo: '',
-      isEditing: false
-    }));
+  onAddTaskClick() {
+    this.routerService.redirectToAddTaskDirectly(this.activatedRoute);
   }
 
-  editTask(index: number): void {
-    this.tasks.at(index).get('isEditing')?.setValue(true);
-  }
-
-  saveTask(index: number): void {
-    this.tasks.at(index).get('isEditing')?.setValue(false);
-  }
-  onAddTaskClick(){
-    this.routerService.redirectToAddTaskDirectly();
-  }
-  onSubmit(): void {
-    console.log(this.projectForm.value);
-  }
 }

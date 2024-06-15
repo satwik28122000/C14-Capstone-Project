@@ -5,6 +5,7 @@ import { CanComponentDeactivate } from '../guard/deactive-auth.guard';
 import { Observable } from 'rxjs';
 import { ManagerService } from '../services/manager.service';
 import { RouterService } from '../services/router.service';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-create-project',
   templateUrl: './create-project.component.html',
@@ -12,7 +13,10 @@ import { RouterService } from '../services/router.service';
 })
 export class CreateProjectComponent implements CanComponentDeactivate{
   [x: string]: any;
-    constructor(private fb:FormBuilder, private managerService: ManagerService, private routerService: RouterService){}
+    constructor(private fb:FormBuilder, 
+      private managerService: ManagerService, 
+      private routerService: RouterService,
+      private location:Location){}
   
     project:Project={};
     projectForm = this.fb.group(
@@ -31,10 +35,10 @@ export class CreateProjectComponent implements CanComponentDeactivate{
       this.managerService.saveManagerProject(this.projectForm.value).subscribe({
       next:res=>{
         console.log(res);
-        this.routerService.redirectToPreviousPage();
+        this.location.back();
       },
        error :err => {
-        console.log(err);
+        alert(err);
        }
       })
     }
