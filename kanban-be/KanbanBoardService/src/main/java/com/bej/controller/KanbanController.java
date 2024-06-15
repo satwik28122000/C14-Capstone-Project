@@ -13,11 +13,10 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-@CrossOrigin
+@CrossOrigin()
 @RestController
 @RequestMapping("/api/kanban")
 public class KanbanController {
-
 
     private IKanbanService kanbanService;
 
@@ -105,7 +104,7 @@ public class KanbanController {
 
     @Operation(summary = "Fetch Manager", description = "This will fetch all manager")
     @ApiResponse(responseCode = "200", description = "Manager fetched successfully")
-    @GetMapping("/manager/getAllManager")
+    @GetMapping("/getAllManager")
     public ResponseEntity<?> fetchAllManager() throws Exception
     {
         try {
