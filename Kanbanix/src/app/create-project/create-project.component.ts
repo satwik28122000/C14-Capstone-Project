@@ -3,14 +3,16 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Project } from '../../models/project';
 import { CanComponentDeactivate } from '../guard/deactive-auth.guard';
 import { Observable } from 'rxjs';
-
+import { ManagerService } from '../services/manager.service';
+import { RouterService } from '../services/router.service';
 @Component({
   selector: 'app-create-project',
   templateUrl: './create-project.component.html',
   styleUrl: './create-project.component.css'
 })
 export class CreateProjectComponent implements CanComponentDeactivate{
-    constructor(private fb:FormBuilder){}
+  [x: string]: any;
+    constructor(private fb:FormBuilder, private managerService: ManagerService, private routerService: RouterService){}
   
     project:Project={};
     projectForm = this.fb.group(
@@ -25,8 +27,17 @@ export class CreateProjectComponent implements CanComponentDeactivate{
     get projectName(){return this.projectForm.get('projectName')};
     get projectDesc(){return this.projectForm.get('projectDesc')};
 
-
-    onSubmit(){}
+    onSubmit(){
+      this.managerService.saveManagerProject(this.projectForm.value).subscribe({
+      next:res=>{
+        console.log(res);
+        this.routerService.redirectToPreviousPage();
+      },
+       error :err => {
+        console.log(err);
+       }
+      })
+    }
     canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
       if (this.projectForm.dirty) {
           return confirm('You have unsaved changes! Do you really want to leave?');

@@ -13,7 +13,9 @@ import { Manager } from '../../models/manager';
 export class ManagerRegisterComponent implements OnInit {
   registrationForm: FormGroup = new FormGroup({});
   constructor
-  (private formBuilder : FormBuilder, private managerService:ManagerService,private routerService:RouterService){}
+  (private formBuilder : FormBuilder,
+     private managerService:ManagerService,
+     private routerService:RouterService){}
  
 
   ngOnInit(): void {

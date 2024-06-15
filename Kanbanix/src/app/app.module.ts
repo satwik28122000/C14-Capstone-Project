@@ -30,7 +30,8 @@ import { UserViewComponent } from './user-view/user-view.component';
 import { TaskCardComponent } from './task-card/task-card.component';
 import { ManagerLoginComponent } from './manager-login/manager-login.component';
 import { EmployeeLoginComponent } from './employee-login/employee-login.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { customInterceptor } from './services/custom.interceptor';
 import { AuthGuard } from './guard/auth.guard';
 import { ChildAuthGuard } from './guard/child-auths.guard';
 import { DeactiveAuthGuard } from './guard/deactive-auth.guard';
@@ -70,8 +71,9 @@ import { DeactiveAuthGuard } from './guard/deactive-auth.guard';
     MatError,
     HttpClientModule
   ],
-  providers: [AuthGuard,ChildAuthGuard,DeactiveAuthGuard,
-   provideAnimationsAsync()
+  providers: [
+    provideHttpClient(withInterceptors([customInterceptor])),
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
