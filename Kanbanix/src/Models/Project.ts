@@ -1,8 +1,8 @@
-import { Task } from "./task";
+import { Task } from "./Task";
 
-export class Project {
-    projectId?: string;
-    projectName?: string;
-    projectDesc?: string;
-    projectTasks?: Task[]; 
+export type Project = {
+    projectId?: string,
+    projectName?: string,
+    projectDesc?: string,
+    projectTasks?: Task[] 
 }

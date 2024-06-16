@@ -8,3 +8,8 @@
     padding: 30px 20px;
     border: 2px solid darkcyan;
 }
+
+a{
+    color: white;
+    text-decoration: none;
+}

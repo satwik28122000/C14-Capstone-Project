@@ -67,7 +67,8 @@
 }
 
  .card{
-    width: 100px;
+    min-width: 200px;
+    max-width: 300px;
     height: 150px;
     margin: 20px;
     border-radius: 20px;
@@ -79,8 +80,18 @@
 }
 
 @media screen and (max-width: 426px) {
+    .title-section .titles {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
     .card{
         width: 90%;
+        max-width: 90%;
         height: auto;
+    }
+
+    .title-image img {
+        display:none
     }
 }

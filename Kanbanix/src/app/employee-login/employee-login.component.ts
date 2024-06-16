@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Employee } from '../../models/employee';
+import { Employee } from '../../Models/Employee';
+import { RouterService } from '../services/router.service';
+import { EmployeeService } from '../services/employee.service';
 
 @Component({
   selector: 'app-employee-login',
@@ -10,7 +12,7 @@ import { Employee } from '../../models/employee';
 export class EmployeeLoginComponent {
   loginForm: FormGroup=new FormGroup ({});
     employee: any;
-    constructor(private formBuilder: FormBuilder){}
+    constructor(private formBuilder: FormBuilder ,private routerService:RouterService,private employeeService:EmployeeService){}
 
     ngOnInit(): void {
       this.loginForm=this.formBuilder.group({
@@ -29,6 +31,23 @@ export class EmployeeLoginComponent {
           password: this.loginForm.value.password
         }
       }
+    
+  
+     
+      this.employeeService.loginEmployee(form.value).subscribe({
+          
+          next: (res:any) => {
+            console.log(res);
+            localStorage.setItem("token",res.Token);
+            
+            this.routerService.redirectToUserView(form.value?.employeeId);
+          },
+          error: err =>{
+            console.log(form.value);
+            console.log(err);
+          }
+        })
+  
     }
       passwordMatchValidator(formGroup: FormGroup){
         const password = formGroup.get('password')?.value;

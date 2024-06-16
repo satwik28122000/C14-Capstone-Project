@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Employee } from '../../models/employee';
-import { Task } from '../../models/task';
+import { Employee } from '../../Models/Employee';
+import { Task } from '../../Models/Task';
 import { CanComponentDeactivate } from '../guard/deactive-auth.guard';
 import { Observable } from 'rxjs';
 
