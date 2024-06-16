@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Employee }  from '../../Models/Employee';
+import { Employee }  from '../../models/employee';
 import { EmployeeService } from '../services/employee.service';
 import { RouterService } from '../services/router.service';
 
@@ -20,7 +20,7 @@ export class EmployeeRegisterComponent implements OnInit {
       userId: ['', Validators.required],
       userName: ['', [Validators.required, Validators.minLength(10), Validators.pattern(/^[A-Z a-z]+$/)]],
       emailId: ['', [Validators.required]],
-      designation: ['', [Validators.required], Validators.minLength(10), Validators.pattern(/^[A-Z a-z]+$/)],
+      designation: ['', [Validators.required, Validators.minLength(10), Validators.pattern(/^[A-Z a-z]+$/)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
     }, { validator: this.passwordMatchValidator });

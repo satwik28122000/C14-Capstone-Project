@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Employee } from '../../Models/Employee';
+import { Employee } from '../../models/employee';
 import { RouterService } from '../services/router.service';
 import { EmployeeService } from '../services/employee.service';
 

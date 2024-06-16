@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Project } from '../../Models/Project';
-import { Manager } from '../../Models/Manager';
+import { Project } from '../../models/project';
+import { Manager } from '../../models/manager';
 
 @Component({
   selector: 'app-project-card',

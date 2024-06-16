@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 // import { Manager } from '../../models/manager';
 import { ManagerService } from '../services/manager.service';
 import { RouterService } from '../services/router.service';
-import { Manager } from '../../Models/Manager';
+import { Manager } from '../../models/manager';
 
 @Component({
   selector: 'app-manager-register',

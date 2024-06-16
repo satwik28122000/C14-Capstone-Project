@@ -1,4 +1,6 @@
-import { Task } from "./Task";
+import { Task } from "./task"
+
+
 
 export type Project = {
     projectId?: string,

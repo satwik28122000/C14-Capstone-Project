@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
-import { Employee } from '../../Models/Employee';
-import { Task } from '../../Models/Task';
+
 import { CanComponentDeactivate } from '../guard/deactive-auth.guard';
 import { Observable } from 'rxjs';
+import { EmployeeService } from '../services/employee.service';
+import { RouterService } from '../services/router.service';
+import { ActivatedRoute } from '@angular/router';
+import { Employee } from '../../models/employee';
 
 @Component({
   selector: 'app-user-view',
   templateUrl: './user-view.component.html',
-  styleUrl: './user-view.component.css'
+  styleUrls: ['./user-view.component.css']
 })
-export class UserViewComponent  implements CanComponentDeactivate{
- 
-
-   employee:Employee = {
+export class UserViewComponent implements CanComponentDeactivate {
+  employee: Employee = {
     userId: 'emp001',
     userName: 'John Doe',
     password: 'password123',
@@ -20,137 +21,67 @@ export class UserViewComponent  implements CanComponentDeactivate{
     emailId: 'johndoe@example.com',
     managerId: 'mgr001',
     userTaskList: [
-        {
-            taskId: 'task001',
-            taskName: 'Design Homepage',
-            taskDesc: 'Create the initial design for the homepage',
-            status: 'In-Progress',
-            priority: 'High',
-            dueDate: '2024-06-20',
-            assignedTo: {
-                userId: 'emp001',
-                userName: 'John Doe',
-                password: 'password123',
-                designation: 'Project Manager',
-                emailId: 'johndoe@example.com',
-                managerId: 'mgr001'
-            },
-            projectId: 'proj001'
-        },
-        {
-            taskId: 'task002',
-            taskName: 'Develop Login Module',
-            taskDesc: 'Implement login functionality',
-            status: 'Assigned',
-            priority: 'Medium',
-            dueDate: '2024-06-25',
-            assignedTo: {
-              userId: 'emp001',
-              userName: 'John Doe',
-              password: 'password123',
-                designation: 'Developer',
-                emailId: 'johndoe@example.com',
-                managerId: 'emp001'
-            },
-            projectId: 'proj001'
-        },
-        {
-            taskId: 'task003',
-            taskName: 'Setup CI/CD Pipeline',
-            taskDesc: 'Setup continuous integration and continuous deployment pipeline',
-            status: 'Completed',
-            priority: 'Low',
-            dueDate: '2024-06-15',
-            assignedTo: {
-                userId: 'emp001',
-                userName: 'John Doe',
-                password: 'password123',
-                designation: 'Project Manager',
-                emailId: 'johndoe@example.com',
-                managerId: 'mgr001'
-            },
-            projectId: 'proj001'
-        },
-        {
-          taskId: 'task004',
-          taskName: 'Design Homepage',
-          taskDesc: 'Create the initial design for the homepage',
-          status: 'In-Progress',
-          priority: 'High',
-          dueDate: '2024-06-20',
-          assignedTo: {
-              userId: 'emp001',
-              userName: 'John Doe',
-              password: 'password123',
-              designation: 'Project Manager',
-              emailId: 'johndoe@example.com',
-              managerId: 'mgr001'
-          },
-          projectId: 'proj001'
-      },
-      {
-          taskId: 'task005',
-          taskName: 'Develop Login Module',
-          taskDesc: 'Implement login functionality',
-          status: 'Assigned',
-          priority: 'Medium',
-          dueDate: '2024-06-25',
-          assignedTo: {
-            userId: 'emp001',
-            userName: 'John Doe',
-            password: 'password123',
-              designation: 'Developer',
-              emailId: 'johndoe@example.com',
-              managerId: 'emp001'
-          },
-          projectId: 'proj001'
-      },
-      {
-          taskId: 'task006',
-          taskName: 'Setup CI/CD Pipeline',
-          taskDesc: 'Setup continuous integration and continuous deployment pipeline',
-          status: 'Completed',
-          priority: 'Low',
-          dueDate: '2024-06-15',
-          assignedTo: {
-              userId: 'emp001',
-              userName: 'John Doe',
-              password: 'password123',
-              designation: 'Project Manager',
-              emailId: 'johndoe@example.com',
-              managerId: 'mgr001'
-          },
-          projectId: 'proj001'
-      }
+      // Your task list data here
     ]
-};
-    currentItem:any={};
-  assignedList = this.employee.userTaskList?.filter(t => (t.status == 'Assigned' || t.status == 'assigned'));
-  inProgressList = this.employee.userTaskList?.filter(t => (t.status == 'In-Progress' || t.status == 'In-progress'));
-  completedList = this.employee.userTaskList?.filter(t => (t.status == 'Completed' || t.status == 'completed'));
-
-  onDrag(task:any){
-    console.log(task);
-    return this.currentItem = task;
-  }
-  onDrop(event:any,status:string){
-    event.preventDefault();
-    const record = this.employee.userTaskList?.find( t => t.taskId == this.currentItem?.taskId);
-    console.log(record);
-    if(record != undefined){
-        record.status=status;
-    }
-    this.assignedList = this.employee.userTaskList?.filter(t => (t.status == 'Assigned' || t.status == 'assigned'));
-    this.inProgressList = this.employee.userTaskList?.filter(t => (t.status == 'In-Progress' || t.status == 'In-progress'));
-    this.completedList = this.employee.userTaskList?.filter(t => (t.status == 'Completed' || t.status == 'completed'));
+  };
   
-    this.currentItem=null;
-  }
-  onDragOver(event:any){
-    event.preventDefault();
-}
-canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-  return confirm("Do you want to discard your changes?");
-}
-}
+  currentItem: any = {};
+  assignedList = this.employee.userTaskList?.filter(t => (t.status === 'Assigned' || t.status === 'assigned'));
+  inProgressList = this.employee.userTaskList?.filter(t => (t.status === 'In-Progress' || t.status === 'In-progress'));
+  completedList = this.employee.userTaskList?.filter(t => (t.status === 'Completed' || t.status === 'completed'));
 
+  constructor(
+    private routerService: RouterService,
+    private employeeService: EmployeeService,
+    private activatedRoute: ActivatedRoute
+  ) { }
+
+  onDrag(task: any) {
+    console.log(task);
+    this.currentItem = task;
+  }
+
+  onDrop(event: any, status: string) {
+    event.preventDefault();
+    const record = this.employee.userTaskList?.find(t => t.taskId === this.currentItem?.taskId);
+    console.log(record);
+    if (record !== undefined) {
+      record.status = status;
+    }
+    this.updateTaskLists();
+    this.currentItem = null;
+  }
+
+  onDragOver(event: any) {
+    event.preventDefault();
+  }
+
+  ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe({
+      next: data => {
+        const employeeId = data.get('id') ?? "";
+        this.employeeService.getEmployeeByUserId(employeeId).subscribe({
+          next: (res: any) => {
+            console.log(res);
+            this.employee = res;  
+            localStorage.setItem("Token", res.Token);  
+            console.log(this.employee);
+          },
+          error: (err: any) => {
+            console.log(err);
+          }
+        });
+      }
+    });
+  }
+
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    return confirm("Do you want to discard your changes?");
+  }
+
+  private updateTaskLists() {
+    this.assignedList = this.employee.userTaskList?.filter(t => (t.status === 'Assigned' || t.status === 'assigned'));
+    this.inProgressList = this.employee.userTaskList?.filter(t => (t.status === 'In-Progress' || t.status === 'In-progress'));
+    this.completedList = this.employee.userTaskList?.filter(t => (t.status === 'Completed' || t.status === 'completed'));
+  }
+}

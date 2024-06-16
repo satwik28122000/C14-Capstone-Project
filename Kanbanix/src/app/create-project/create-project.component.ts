@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Project } from '../../Models/Project';
+import { Project } from '../../models/project';
 import { CanComponentDeactivate } from '../guard/deactive-auth.guard';
 import { Observable } from 'rxjs';
 import { ManagerService } from '../services/manager.service';

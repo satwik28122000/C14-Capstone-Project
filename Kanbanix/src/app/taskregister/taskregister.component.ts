@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { Task } from '../../Models/Task';
+import { Task } from '../../models/task';
 import { Observable } from 'rxjs';
 import { CanComponentDeactivate } from '../guard/deactive-auth.guard';
 import moment from 'moment';
 import { ManagerService } from '../services/manager.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Employee } from '../../Models/Employee';
+import { Employee } from '../../models/employee';
 
 @Component({
   selector: 'app-taskregister',
