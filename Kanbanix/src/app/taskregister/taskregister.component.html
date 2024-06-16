@@ -31,7 +31,7 @@
       <mat-form-field class="matform">
         <mat-label>Assigned To</mat-label>
         <mat-select placeholder="Select" formControlName="assignedTo">
-          <mat-option [value]="emp" *ngFor="let emp of empList">User Id:{{emp?.userId}} Name: {{emp?.userName}}</mat-option>
+          <mat-option [value]="emp" *ngFor="let emp of filteredList">User Id:{{emp?.userId}} Name: {{emp?.userName}}</mat-option>
         </mat-select>
         <mat-error *ngIf="registrationForm.get('assignedTo')?.errors?.['required']">Assigned To is required</mat-error>
       </mat-form-field>

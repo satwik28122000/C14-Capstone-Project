@@ -7,6 +7,7 @@ import moment from 'moment';
 import { ManagerService } from '../services/manager.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Employee } from '../../Models/Employee';
 
 @Component({
   selector: 'app-taskregister',
@@ -21,11 +22,21 @@ export class TaskregisterComponent implements OnInit,CanComponentDeactivate {
     private activatedRoute:ActivatedRoute,
     private location:Location) {}
     empList:any[] = [];
+    
+    filteredList:any[]=[];
+    
   ngOnInit(): void {
     this.managerService.fetchAllEmployee().subscribe(
       res =>{
         this.empList=res;
+        this.filteredList = this.empList?.filter((emp:any) =>{
+          let inProgressList:[] = emp.userTaskList?.filter( (task:any) => task.status == "In-Progress");
+          let assignedList:[] = emp.userTaskList?.filter( (task:any) => task.status == "Assigned");
+          return (inProgressList?.length <3 && assignedList?.length<3 || emp.userTaskList==null); 
+        });
         console.log(res);
+        console.log(this.filteredList);
+        
       }
     )
     this.activatedRoute.paramMap.subscribe(data => {
@@ -45,6 +56,12 @@ export class TaskregisterComponent implements OnInit,CanComponentDeactivate {
     })
     
   }
+  
+     
+   // console.log(this.filteredList);
+    
+
+
 
   onSubmit() {
     console.log(this.registrationForm.value)
