@@ -12,47 +12,7 @@ import { ManagerService } from '../services/manager.service';
   styleUrls: ['./project-task.component.css']
 })
 export class ProjectTaskComponent implements OnInit {
-  project: Project = {
-    projectId: "1001",
-    projectName: "Travel App",
-    projectDesc: "Your travel guide",
-    projectTasks: [
-      {
-        taskId: "1",
-        taskName: "Auth Service",
-        status: "Assigned",
-
-        taskDesc: "Create auth service domains",
-        priority: "Medium",
-        dueDate: "12-06-2024",
-        assignedTo: {
-          userId: "Priyanka@123"
-        }
-      },
-      {
-        taskId: "1",
-        taskName: "Auth Service",
-        status: "Assigned",
-        taskDesc: "Create auth service domains",
-        priority: "High",
-        dueDate: "12-06-2024",
-        assignedTo: {
-          userId: "Priyanka@123"
-        }
-      },
-      {
-        taskId: "1",
-        taskName: "Auth Service",
-        status: "Assigned",
-        taskDesc: "Create auth service domains",
-        priority: "Low",
-        dueDate: "12-06-2024",
-        assignedTo: {
-          userId: "Priyanka@123"
-        }
-      }
-    ]
-  }
+  project: Project = {}
 
   constructor(
     private fb: FormBuilder, 

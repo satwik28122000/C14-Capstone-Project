@@ -32,7 +32,8 @@ export class TaskregisterComponent implements OnInit,CanComponentDeactivate {
         this.filteredList = this.empList?.filter((emp:any) =>{
           let inProgressList:[] = emp.userTaskList?.filter( (task:any) => task.status == "In-Progress");
           let assignedList:[] = emp.userTaskList?.filter( (task:any) => task.status == "Assigned");
-          return (inProgressList?.length <3 && assignedList?.length<3 || emp.userTaskList==null); 
+          return (inProgressList?.length <3 && assignedList?.length<3 || emp.userTaskList==null || inProgressList==null 
+            || assignedList==null); 
         });
         console.log(res);
         console.log(this.filteredList);
