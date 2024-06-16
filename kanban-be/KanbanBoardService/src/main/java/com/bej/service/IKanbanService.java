@@ -30,7 +30,9 @@ public interface IKanbanService {
 
     List<Task> deleteTaskFromEmployee(String userId, String taskId) throws TaskNotFoundException, EmployeeNotFoundException;
 
-    List<Task> getAllEmployeeTaskFromTaskList() throws EmployeeNotFoundException;
+
+
+    List<Task> getAllEmployeeTaskFromTaskList(String userId) throws EmployeeNotFoundException;
 
     List<Project> getAllProjectFromManager(String managerId) throws ManagerNotFoundException;
 

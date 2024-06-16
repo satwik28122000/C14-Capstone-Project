@@ -208,15 +208,12 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
     }
 
 
-
-
-
-    //done
     @Override
-    public List<Task> getAllEmployeeTaskFromTaskList() throws EmployeeNotFoundException {
-        Employee employee = (Employee) employeeRepository.findAll();
+    public List<Task> getAllEmployeeTaskFromTaskList(String userId) throws EmployeeNotFoundException {
+        Employee employee = employeeRepository.findById(userId).orElseThrow(EmployeeNotFoundException::new);
         return employee.getUserTaskList();
     }
+
 
     @Override
     public Manager saveProjectInManagerProjectList(Project project, String managerId) throws ManagerNotFoundException, ProjectAlreadyExistException

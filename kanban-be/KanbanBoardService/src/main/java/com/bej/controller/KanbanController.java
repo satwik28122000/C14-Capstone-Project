@@ -117,22 +117,22 @@ public class KanbanController {
         }
     }
 
-
     @Operation(summary = "GetAllEmployeeTaskFromTaskList", description = "This will retrive employees task from task list")
     @ApiResponse(responseCode = "200", description = "Employee Task retrived successfully")
     @GetMapping("/user/tasks")
     public ResponseEntity<?> getAllEmployeeTaskFromTaskList(HttpServletRequest request) throws EmployeeNotFoundException
-            {
-                String userId = getUserIdClaims(request);
-                try {
-                    List<Task> tasks = kanbanService.getAllEmployeeTaskFromTaskList();
-                    return new ResponseEntity<>(tasks, HttpStatus.OK);
-                } catch (EmployeeNotFoundException e) {
-                    return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-                } catch (Exception e) {
-                    return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-                }
-            }
+    {
+        String userId = getUserIdClaims(request);
+        try {
+            List<Task> tasks = kanbanService.getAllEmployeeTaskFromTaskList(userId);
+            return new ResponseEntity<>(tasks, HttpStatus.OK);
+        } catch (EmployeeNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     @Operation(summary = "Save Project in Manager", description = "This will save project in manager")
     @ApiResponse(responseCode = "201", description = "Project saved successfully in manager")
