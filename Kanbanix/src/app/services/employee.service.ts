@@ -23,8 +23,8 @@ export class EmployeeService {
     return this.http.post<any>(`${this.authUrl}/login`, employee);
   }
 
-  getEmployeeByUserId(userId: string): Observable<any> {
-    return this.http.get<any>(`${this.kanbanUrl}/user/getEmployeesByUserId/${userId}`);
+  getEmployeeByUserId(): Observable<any> {
+    return this.http.get<any>(`${this.kanbanUrl}/user/getEmployeesByUserId`);
   }
 
   getAllEmployeeTaskFromTaskList(): Observable<any>{

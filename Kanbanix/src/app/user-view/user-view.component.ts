@@ -60,11 +60,11 @@ export class UserViewComponent implements CanComponentDeactivate {
     this.activatedRoute.paramMap.subscribe({
       next: data => {
         const employeeId = data.get('id') ?? "";
-        this.employeeService.getEmployeeByUserId(employeeId).subscribe({
+        this.employeeService.getEmployeeByUserId().subscribe({
           next: (res: any) => {
             console.log(res);
             this.employee = res;  
-            localStorage.setItem("Token", res.Token);  
+            localStorage.setItem("token", res.Token);  
             console.log(this.employee);
           },
           error: (err: any) => {

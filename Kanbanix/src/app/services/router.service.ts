@@ -29,19 +29,19 @@ export class RouterService {
     this.r.navigate(['user-register']);
   }
 
-  redirectToManagerView(managerId: number) {
+  redirectToManagerView(managerId: any) {
     this.r.navigate([`manager/${managerId}/project`]);
   }
 
-  redirectToManagerProject(managerId: number, projectId: number) {
+  redirectToManagerProject(managerId: any, projectId: any) {
     this.r.navigate([`manager/${managerId}/project/${projectId}`]);
   }
 
-  redirectToAddTask(managerId: number, projectId: number) {
+  redirectToAddTask(managerId: any, projectId: any) {
     this.r.navigate([`manager/${managerId}/project/${projectId}/add-task`]);
   }
 
-  redirectToUserView(userId: number) {
+  redirectToUserView(userId: any) {
     this.r.navigate([`user/${userId}`]);
   }
 

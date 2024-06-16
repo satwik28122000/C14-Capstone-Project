@@ -1,10 +1,11 @@
 // src/app/project-task/project-task.component.ts
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { Project } from '../../Models/project';
+
 import { RouterService } from '../services/router.service';
 import { ActivatedRoute } from '@angular/router';
 import { ManagerService } from '../services/manager.service';
+import { Project } from '../../Models/Project';
 
 @Component({
   selector: 'app-project-task',

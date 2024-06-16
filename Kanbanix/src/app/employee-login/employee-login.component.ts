@@ -22,17 +22,7 @@ export class EmployeeLoginComponent {
     }
 
   onSubmit(form: NgForm) {
-    console.log(this.loginForm.valid);
-    console.log(this.loginForm.value);
-    if (this.loginForm.valid) 
-      {
-        const employee: Employee={
-          userId: this.loginForm.value.employeeId,
-          password: this.loginForm.value.password
-        }
-      }
-    
-  
+      
      
       this.employeeService.loginEmployee(form.value).subscribe({
           
@@ -40,7 +30,7 @@ export class EmployeeLoginComponent {
             console.log(res);
             localStorage.setItem("token",res.Token);
             
-            this.routerService.redirectToUserView(form.value?.employeeId);
+            this.routerService.redirectToUserView(form.value?.userId);
           },
           error: err =>{
             console.log(form.value);
@@ -49,9 +39,5 @@ export class EmployeeLoginComponent {
         })
   
     }
-      passwordMatchValidator(formGroup: FormGroup){
-        const password = formGroup.get('password')?.value;
-        // const confirmPassword = formGroup.get('confirmPassword')?.value;
-        // return password === confirmPassword? null : {passwordMatch: true};
-      }
+      
     }
