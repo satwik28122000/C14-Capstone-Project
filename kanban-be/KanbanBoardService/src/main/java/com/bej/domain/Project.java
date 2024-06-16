@@ -11,15 +11,17 @@ public class Project {
     private String projectId;
     private String projectName;
     private String projectDesc;
+    private String managerId;
     private List<Task> projectTasks;
 
     public Project(){}
 
-    public Project(String projectId,String projectName, String projectDesc, List<Task> projectTasks) {
+    public Project(String projectId,String projectName, String projectDesc, String managerId,List<Task> projectTasks) {
         this.projectName = projectName;
         this.projectDesc = projectDesc;
         this.projectTasks = projectTasks;
         this.projectId=projectId;
+        this.managerId=managerId;
     }
 
     public String getProjectId() {
@@ -54,13 +56,23 @@ public class Project {
         this.projectTasks = projectTasks;
     }
 
+    public String getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(String managerId) {
+        this.managerId = managerId;
+    }
+
     @Override
     public String toString() {
         return "Project{" +
                 "projectId='" + projectId + '\'' +
                 ", projectName='" + projectName + '\'' +
                 ", projectDesc='" + projectDesc + '\'' +
+                ", managerId='" + managerId + '\'' +
                 ", projectTasks=" + projectTasks +
                 '}';
     }
+
 }
