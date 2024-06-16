@@ -11,7 +11,7 @@ import { EmployeeService } from '../services/employee.service';
 })
 export class EmployeeLoginComponent {
   loginForm: FormGroup=new FormGroup ({});
-    employee: any;
+    employee: Employee={};
     constructor(private formBuilder: FormBuilder ,private routerService:RouterService,private employeeService:EmployeeService){}
 
     ngOnInit(): void {

@@ -17,10 +17,10 @@ export class EmployeeRegisterComponent implements OnInit {
  
   ngOnInit(): void {
     this.registrationForm = this.formBuilder.group({
-      userId: ['', Validators.required],
+      userId: ['', [Validators.required]],
       userName: ['', [Validators.required, Validators.minLength(10), Validators.pattern(/^[A-Z a-z]+$/)]],
       emailId: ['', [Validators.required]],
-      designation: ['', [Validators.required], Validators.minLength(10), Validators.pattern(/^[A-Z a-z]+$/)],
+      designation: ['', [Validators.required, Validators.minLength(10), Validators.pattern(/^[A-Z a-z]+$/)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
     }, { validator: this.passwordMatchValidator });
@@ -39,7 +39,7 @@ export class EmployeeRegisterComponent implements OnInit {
       }
     
       passwordMatchValidator(ac: AbstractControl) {
-        let password = ac.get('employeePassword')?.value;
+        let password = ac.get('password')?.value;
         let confirmPassword = ac.get('confirmPassword')?.value;
         console.log(password + " " + confirmPassword);
         if (password !== confirmPassword) {

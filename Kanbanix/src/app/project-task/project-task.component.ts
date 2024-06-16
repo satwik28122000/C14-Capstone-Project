@@ -23,7 +23,7 @@ export class ProjectTaskComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((data: any) => {
       console.log(data);
-      const projectId = data.get('id');
+      const projectId = data.get('id') ?? '';
       console.log(projectId);
       const managerToken = localStorage.getItem("token") ?? "";
       console.log(managerToken)
