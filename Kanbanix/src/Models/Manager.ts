@@ -1,4 +1,4 @@
-import { Project } from "./project";
+import { Project } from "./Project";
 
 export type Manager = {
     managerId?: string,

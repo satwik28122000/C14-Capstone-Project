@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Employee }  from '../../models/employee';
+import { Employee }  from '../../Models/Employee';
 import { EmployeeService } from '../services/employee.service';
 import { RouterService } from '../services/router.service';
 

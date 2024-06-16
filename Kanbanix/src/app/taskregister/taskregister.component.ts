@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { Task } from '../../models/task';
+import { Task } from '../../Models/Task';
 import { Observable } from 'rxjs';
 import { CanComponentDeactivate } from '../guard/deactive-auth.guard';
 import moment from 'moment';
@@ -20,8 +20,7 @@ export class TaskregisterComponent implements OnInit,CanComponentDeactivate {
     private  managerService:ManagerService,
     private activatedRoute:ActivatedRoute,
     private location:Location) {}
-  empList:any[] = [];
-
+    empList:any[] = [];
   ngOnInit(): void {
     this.managerService.fetchAllEmployee().subscribe(
       res =>{
