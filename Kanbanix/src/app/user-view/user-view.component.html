@@ -18,7 +18,7 @@
         <section class="completed-task" (dragover)="onDragOver($event)"  (drop)="onDrop($event,'Completed')">
             <h2>Completed Tasks</h2>
             <div class="task-list">
-                <app-task-card [task]="task" *ngFor="let task of completedList" (dragstart)="onDrag(task)" draggable="true"></app-task-card>
+                <app-task-card [task]="task" *ngFor="let task of completedList"></app-task-card>
             </div>
         </section>
     </section>

@@ -6,6 +6,7 @@ import { EmployeeService } from '../services/employee.service';
 import { RouterService } from '../services/router.service';
 import { ActivatedRoute } from '@angular/router';
 import { Employee } from '../../Models/Employee';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-user-view',
@@ -13,23 +14,13 @@ import { Employee } from '../../Models/Employee';
   styleUrls: ['./user-view.component.css']
 })
 export class UserViewComponent implements CanComponentDeactivate {
-  employee: Employee = {
-    userId: 'emp001',
-    userName: 'John Doe',
-    password: 'password123',
-    designation: 'Project Manager',
-    emailId: 'johndoe@example.com',
-    managerId: 'mgr001',
-    userTaskList: [
-      // Your task list data here
-    ]
-  };
+  employee: Employee = {};
+  assignedList:any=[];
+  inProgressList:any=[];
+  completedList:any=[];
   
   currentItem: any = {};
-  assignedList = this.employee.userTaskList?.filter(t => (t.status === 'Assigned' || t.status === 'assigned'));
-  inProgressList = this.employee.userTaskList?.filter(t => (t.status === 'In-Progress' || t.status === 'In-progress'));
-  completedList = this.employee.userTaskList?.filter(t => (t.status === 'Completed' || t.status === 'completed'));
-
+  
   constructor(
     private routerService: RouterService,
     private employeeService: EmployeeService,
@@ -43,13 +34,23 @@ export class UserViewComponent implements CanComponentDeactivate {
 
   onDrop(event: any, status: string) {
     event.preventDefault();
-    const record = this.employee.userTaskList?.find(t => t.taskId === this.currentItem?.taskId);
+    const record:any = this.employee.userTaskList?.find(t => t.taskId === this.currentItem?.taskId);
     console.log(record);
     if (record !== undefined) {
       record.status = status;
     }
-    this.updateTaskLists();
-    this.currentItem = null;
+    this.employeeService.updateTaskFromEmployeeToManager(record).subscribe({
+      next : (res:any) =>{
+        console.log(res);
+        this.updateTaskLists();
+       this.currentItem = null;
+       alert("data updated");
+      },
+      error : (err:any)=>{
+          console.log(err);
+      }
+    })
+    
   }
 
   onDragOver(event: any) {
@@ -66,6 +67,10 @@ export class UserViewComponent implements CanComponentDeactivate {
             this.employee = res;  
             localStorage.setItem("token", res.Token);  
             console.log(this.employee);
+            this.assignedList= this.employee.userTaskList?.filter(t => (t.status === 'Assigned' || t.status === 'assigned'));
+            this.inProgressList = this.employee.userTaskList?.filter(t => (t.status === 'In-Progress' || t.status === 'In-progress'));
+            this.completedList = this.employee.userTaskList?.filter(t => (t.status === 'Completed' || t.status === 'completed'));
+
           },
           error: (err: any) => {
             console.log(err);
@@ -79,7 +84,7 @@ export class UserViewComponent implements CanComponentDeactivate {
     return confirm("Do you want to discard your changes?");
   }
 
-  private updateTaskLists() {
+  updateTaskLists() {
     this.assignedList = this.employee.userTaskList?.filter(t => (t.status === 'Assigned' || t.status === 'assigned'));
     this.inProgressList = this.employee.userTaskList?.filter(t => (t.status === 'In-Progress' || t.status === 'In-progress'));
     this.completedList = this.employee.userTaskList?.filter(t => (t.status === 'Completed' || t.status === 'completed'));
