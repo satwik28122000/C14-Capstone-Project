@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Manager } from '../../models/manager';
-import { Task } from '../../models/task';
+import { Manager } from '../../Models/Manager';
+import { Task } from '../../Models/Task';
 
 
 

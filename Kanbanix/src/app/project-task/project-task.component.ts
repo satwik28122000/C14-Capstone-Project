@@ -1,7 +1,7 @@
 // src/app/project-task/project-task.component.ts
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { Project } from '../../models/project';
+import { Project } from '../../Models/project';
 import { RouterService } from '../services/router.service';
 import { ActivatedRoute } from '@angular/router';
 import { ManagerService } from '../services/manager.service';
@@ -12,47 +12,7 @@ import { ManagerService } from '../services/manager.service';
   styleUrls: ['./project-task.component.css']
 })
 export class ProjectTaskComponent implements OnInit {
-  project: Project = {
-    projectId: "1001",
-    projectName: "Travel App",
-    projectDesc: "Your travel guide",
-    projectTasks: [
-      {
-        taskId: "1",
-        taskName: "Auth Service",
-        status: "Assigned",
-
-        taskDesc: "Create auth service domains",
-        priority: "Medium",
-        dueDate: "12-06-2024",
-        assignedTo: {
-          userId: "Priyanka@123"
-        }
-      },
-      {
-        taskId: "1",
-        taskName: "Auth Service",
-        status: "Assigned",
-        taskDesc: "Create auth service domains",
-        priority: "High",
-        dueDate: "12-06-2024",
-        assignedTo: {
-          userId: "Priyanka@123"
-        }
-      },
-      {
-        taskId: "1",
-        taskName: "Auth Service",
-        status: "Assigned",
-        taskDesc: "Create auth service domains",
-        priority: "Low",
-        dueDate: "12-06-2024",
-        assignedTo: {
-          userId: "Priyanka@123"
-        }
-      }
-    ]
-  }
+  project: Project = {}
 
   constructor(
     private fb: FormBuilder, 
@@ -63,7 +23,7 @@ export class ProjectTaskComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((data: any) => {
       console.log(data);
-      const projectId = data.get('id');
+      const projectId = data.get('id') ?? '';
       console.log(projectId);
       const managerToken = localStorage.getItem("token") ?? "";
       console.log(managerToken)

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { Task } from '../../models/task';
+import { Task } from '../../Models/Task';
 import { Observable } from 'rxjs';
 import { CanComponentDeactivate } from '../guard/deactive-auth.guard';
 import moment from 'moment';
 import { ManagerService } from '../services/manager.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Employee } from '../../models/employee';
+import { Employee } from '../../Models/Employee';
 
 @Component({
   selector: 'app-taskregister',
@@ -32,7 +32,8 @@ export class TaskregisterComponent implements OnInit,CanComponentDeactivate {
         this.filteredList = this.empList?.filter((emp:any) =>{
           let inProgressList:[] = emp.userTaskList?.filter( (task:any) => task.status == "In-Progress");
           let assignedList:[] = emp.userTaskList?.filter( (task:any) => task.status == "Assigned");
-          return (inProgressList?.length <3 && assignedList?.length<3 || emp.userTaskList==null); 
+          return (inProgressList?.length <3 && assignedList?.length<3 || emp.userTaskList==null || inProgressList==null 
+            || assignedList==null); 
         });
         console.log(res);
         console.log(this.filteredList);

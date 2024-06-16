@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Employee }  from '../../models/employee';
+import { Employee }  from '../../Models/Employee';
 import { EmployeeService } from '../services/employee.service';
 import { RouterService } from '../services/router.service';
 
@@ -17,7 +17,7 @@ export class EmployeeRegisterComponent implements OnInit {
  
   ngOnInit(): void {
     this.registrationForm = this.formBuilder.group({
-      userId: ['', Validators.required],
+      userId: ['', [Validators.required]],
       userName: ['', [Validators.required, Validators.minLength(10), Validators.pattern(/^[A-Z a-z]+$/)]],
       emailId: ['', [Validators.required]],
       designation: ['', [Validators.required, Validators.minLength(10), Validators.pattern(/^[A-Z a-z]+$/)]],
@@ -39,7 +39,7 @@ export class EmployeeRegisterComponent implements OnInit {
       }
     
       passwordMatchValidator(ac: AbstractControl) {
-        let password = ac.get('employeePassword')?.value;
+        let password = ac.get('password')?.value;
         let confirmPassword = ac.get('confirmPassword')?.value;
         console.log(password + " " + confirmPassword);
         if (password !== confirmPassword) {

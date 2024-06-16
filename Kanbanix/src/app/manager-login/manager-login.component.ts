@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Manager } from '../../models/manager';
+import { Manager } from '../../Models/Manager';
 import { RouterService } from '../services/router.service';
 import { ManagerService } from '../services/manager.service';
 

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { EmployeeService } from '../services/employee.service';
 import { RouterService } from '../services/router.service';
 import { ActivatedRoute } from '@angular/router';
-import { Employee } from '../../models/employee';
+import { Employee } from '../../Models/Employee';
 
 @Component({
   selector: 'app-user-view',

@@ -4,8 +4,8 @@
     <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
       <div class="form-group">
         <mat-label>Employee ID</mat-label>
-        <input type="text" id="employeeId" name="employeeId" class="form-control" [(ngModel)]="employee.employeeId" required>
-        <div *ngIf="loginForm.submitted && !loginForm.controls['employeeId']?.valid" class="error">
+        <input type="text" id="employeeId" name="userId" class="form-control" [(ngModel)]="employee.userId" required>
+        <div *ngIf="loginForm.submitted && !loginForm.controls['userId']?.valid" class="error">
           Employee ID is required.
         </div>
       </div>

@@ -1,4 +1,5 @@
-import { Task } from "./task"
+import { Task } from "./Task"
+
 
 
 export type Employee = {

@@ -17,14 +17,15 @@
     </div>
 
     <div class="task-item d-flex" *ngFor="let task of project.projectTasks">
-      <p>{{ task.taskName }}</p>
-      <p>{{ task.taskDesc }}</p>
-      <p>{{ task.status }}</p>
-      <button class="priority btn btn-md btn-danger" *ngIf="task?.priority == 'High'|| task?.priority == 'high'" disabled>{{ task.priority }}</button>
-      <button class="priority btn btn-md btn-success" *ngIf="task?.priority == 'Low'|| task?.priority == 'low'" disabled>{{ task.priority }}</button>
-      <button class="priority btn btn-md btn-warning" *ngIf="task?.priority == 'Medium'|| task?.priority == 'medium'" disabled>{{ task.priority }}</button>
-      <p>{{ task.assignedTo?.userId }}</p>
-      <button class="edit-btn btn-sm" type="button">Edit</button>
+      <p>{{ task?.taskName }}</p>
+      <p>{{ task?.taskDesc }}</p>
+      <p>{{ task?.status }}</p>
+      <button class="priority btn btn-md btn-danger" *ngIf="task?.priority == 'High'|| task?.priority == 'high'" disabled>{{ task?.priority }}</button>
+      <button class="priority btn btn-md btn-success" *ngIf="task?.priority == 'Low'|| task?.priority == 'low'" disabled>{{ task?.priority }}</button>
+      <button class="priority btn btn-md btn-warning" *ngIf="task?.priority == 'Medium'|| task?.priority == 'medium'" disabled>{{ task?.priority }}</button>
+      <p>{{ task?.dueDate}}</p>
+      <p>{{ task?.assignedTo?.userId }}</p>
+      <!-- <button class="edit-btn btn-sm" type="button">Edit</button> -->
     </div>
   </div>
 </section>
