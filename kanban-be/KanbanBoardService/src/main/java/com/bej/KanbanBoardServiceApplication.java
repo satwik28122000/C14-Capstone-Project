@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 @EnableFeignClients
 @SpringBootApplication
-@OpenAPIDefinition(info=@Info(title = "Kanban-Service-API", version = "2.0", description = "This is a Kanban Service Application"))
+@OpenAPIDefinition(info=@Info(title = "Kanban-Service-API", version = "1.0", description = "This is a Kanban Service Application"))
 public class KanbanBoardServiceApplication {
 
 	public static void main(String[] args) {

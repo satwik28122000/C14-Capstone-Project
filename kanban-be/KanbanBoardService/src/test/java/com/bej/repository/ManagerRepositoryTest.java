@@ -33,8 +33,8 @@ public class ManagerRepositoryTest {
     @BeforeEach
     void setUp() {
         projectList = new ArrayList<>();
-        project1 = new Project("201", "Project A", "Description A",null);
-        project2 = new Project("202", "Project B", "Description B",null);
+        project1 = new Project("201", "Project A", "Description A","Sangeetha@123",null);
+        project2 = new Project("202", "Project B", "Description B","Sangeetha@123",null);
         projectList.add(project1);
         projectList.add(project2);
         manager1 = new Manager("manager1", "Manager One", "manager1@example.com", "password1", projectList);

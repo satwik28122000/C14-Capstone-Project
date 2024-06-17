@@ -552,7 +552,7 @@ public class KanbanServiceTest {
     public void testUpdateProjectInManagerProjectList_ProjectNotFound() {
         when(managerRepository.findById("manager1")).thenReturn(Optional.of(manager));
 
-        Project nonExistingProject = new Project("202", "Non-Existing Project", "Non-Existing Description", null);
+        Project nonExistingProject = new Project("202", "Non-Existing Project", "Non-Existing Description", "Sangeetha@123",null);
 
         assertThrows(ProjectNotFoundException.class, () -> {
             kanbanService.updateProjectInManagerProjectList("manager1", nonExistingProject);

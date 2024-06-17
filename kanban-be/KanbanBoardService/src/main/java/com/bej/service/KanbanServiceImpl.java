@@ -480,6 +480,7 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
     public Task saveTaskInProjectAndEmployee(String projectId, Task task) throws ProjectNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException {
         saveTaskInProjectTaskList(task,projectId);
         saveEmployeeTaskToTaskList(task, task.getAssignedTo().getUserId());
+
         return task;
     }
 
@@ -499,8 +500,9 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
     @Override
     public Task updateTaskFromEmployeeToManager(String userId, Task task) throws TaskNotFoundException, EmployeeNotFoundException, ProjectNotFoundException, ManagerNotFoundException {
         Employee employee= employeeRepository.findById(userId).orElseThrow(EmployeeNotFoundException::new);
+        Project project = projectRepository.findById(task.getProjectId()).orElseThrow(ProjectNotFoundException::new);
         updateEmployeeTaskInTaskList(userId,task);
-        updateTaskInManagerProjectList(employee.getManagerId(),task.getProjectId(), task);
+        updateTaskInManagerProjectList(project.getManagerId(),task.getProjectId(), task);
         updateTaskInProjectTaskList(task.getProjectId(),task);
         return task;
     }
@@ -510,6 +512,7 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
             ProjectNotFoundException, ManagerNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException {
         Manager manager = saveTaskInManagerProjectList(managerId,projectId,task);
         saveEmployeeTaskToTaskList(task,task.getAssignedTo().getUserId());
+        saveTaskInProjectTaskList(task,projectId);
         return manager;
     }
 
