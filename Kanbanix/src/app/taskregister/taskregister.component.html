@@ -1,52 +1,49 @@
 <form [formGroup]="registrationForm" class="form-container" (ngSubmit)="onSubmit()">
-    <h2>Task Registration</h2>
-    <div class="form-row">
-        <mat-form-field class="matform">
-        <input matInput placeholder="Task ID" formControlName="taskId">
-        <mat-error *ngIf="registrationForm.get('taskId')?.errors?.['required']">Task ID is required</mat-error>
-        <mat-error *ngIf="registrationForm.get('taskId')?.errors?.['minlength']">Task Id must be at least 3 characters long</mat-error>
-      </mat-form-field>
-      <mat-form-field class="matform">
-        <input matInput placeholder="Task Name" formControlName="taskName">
-        <mat-error *ngIf="registrationForm.get('taskName')?.errors?.['required']">Task Name is required</mat-error>
-        <mat-error *ngIf="registrationForm.get('taskName')?.errors?.['minlength']">Task Name must be at least 3 characters long</mat-error>
-        <mat-error *ngIf="registrationForm.get('taskName')?.errors?.['pattern']">Task Name can only contain letters and spaces</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="form-row">
-      <mat-form-field class="matform">
-        <input matInput placeholder="Task Description" formControlName="taskDesc">
-        <mat-error *ngIf="registrationForm.get('taskDesc')?.errors?.['required']">Task Description is required</mat-error>
-      </mat-form-field>
-      <mat-form-field class="matform">
-        <input matInput type='text' placeholder="Due Date" [matDatepicker]="picker" formControlName="dueDate">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="registrationForm.get('dueDate')?.errors?.['required']">Due Date is required</mat-error>
-        <mat-error *ngIf="registrationForm.get('dueDate')?.errors?.['dateError1']">Due Date cannot be in the past</mat-error>
-      </mat-form-field>
-      
-    </div>
-    <div class="form-row">
-      <mat-form-field class="matform">
-        <mat-label>Assigned To</mat-label>
-        <mat-select placeholder="Select" formControlName="assignedTo">
-          <mat-option [value]="emp" *ngFor="let emp of filteredList">User Id:{{emp?.userId}} Name: {{emp?.userName}}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="registrationForm.get('assignedTo')?.errors?.['required']">Assigned To is required</mat-error>
-      </mat-form-field>
-      <mat-radio-group class="matform" placeholder="Priority" formControlName="priority">
-        <mat-label>Priority</mat-label>
+  <h2>Task Registration</h2>
+  <div class="form-row">
+    <mat-form-field class="matform">
+      <input matInput placeholder="Task ID" formControlName="taskId">
+      <mat-error *ngIf="registrationForm.get('taskId')?.errors?.['required']">Task ID is required</mat-error>
+      <mat-error *ngIf="registrationForm.get('taskId')?.errors?.['minlength']">Task Id must be at least 3 characters long</mat-error>
+    </mat-form-field>
+    <mat-form-field class="matform">
+      <input matInput placeholder="Task Name" formControlName="taskName">
+      <mat-error *ngIf="registrationForm.get('taskName')?.errors?.['required']">Task Name is required</mat-error>
+      <mat-error *ngIf="registrationForm.get('taskName')?.errors?.['minlength']">Task Name must be at least 3 characters long</mat-error>
+      <mat-error *ngIf="registrationForm.get('taskName')?.errors?.['pattern']">Task Name can only contain letters and spaces</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="form-row">
+    <mat-form-field class="matform">
+      <input matInput placeholder="Task Description" formControlName="taskDesc">
+      <mat-error *ngIf="registrationForm.get('taskDesc')?.errors?.['required']">Task Description is required</mat-error>
+    </mat-form-field>
+    <mat-form-field class="matform">
+      <input matInput type='text' placeholder="Due Date" [matDatepicker]="picker" formControlName="dueDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="registrationForm.get('dueDate')?.errors?.['required']">Due Date is required</mat-error>
+      <mat-error *ngIf="registrationForm.get('dueDate')?.errors?.['dateError1']">Due Date cannot be in the past</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="form-row">
+    <mat-form-field class="matform">
+      <mat-label>Assigned To</mat-label>
+      <mat-select placeholder="Select" formControlName="assignedTo">
+        <mat-option [value]="emp" *ngFor="let emp of filteredList">User Id: {{emp?.userId}} Name: {{emp?.userName}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="registrationForm.get('assignedTo')?.errors?.['required']">Assigned To is required</mat-error>
+    </mat-form-field>
+    <div class="matform" style="display: flex; align-items: center;">
+      <mat-radio-group formControlName="priority" style="display: flex; justify-content: space-between;">
         <mat-radio-button value="Low">Low</mat-radio-button>
         <mat-radio-button value="Medium">Medium</mat-radio-button>
         <mat-radio-button value="High">High</mat-radio-button>
-        
       </mat-radio-group>
-     
     </div>
-    <div class="button-row">
-      <button mat-raised-button color="primary" type="submit" [disabled]="registrationForm.invalid" class="button1">Submit</button>
-      <button mat-raised-button color="primary" type="button" (click)="onClear()" class="button1">Clear</button>
-    </div>
-  </form>
-  
+  </div>
+  <div class="button-row">
+    <button mat-raised-button color="primary" type="submit" [disabled]="registrationForm.invalid" class="button1">Submit</button>
+    <button mat-raised-button color="primary" type="button" (click)="onClear()" class="button1">Clear</button>
+  </div>
+</form>

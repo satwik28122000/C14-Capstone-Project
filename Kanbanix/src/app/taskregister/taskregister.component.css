@@ -1,67 +1,97 @@
 .form-container {
-    width: 100%;
-    max-width: 800px;
-    background-color: black;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 1px 7px rgba(0, 255, 255, 0.452);
-    align-items:center ;
-    margin-left:400px ;
-    margin-top: 100px;
-    margin-bottom: 100px;
+  width: 100%;
+  max-width: 800px;
+  background-color: black;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 1px 7px rgba(0, 255, 255, 0.452);
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 10px; /* Reduced margin-bottom for less space between rows */
+}
+
+.matform {
+  width: calc(50% - 10px);
+  margin-bottom: 10px; /* Reduced margin-bottom for less space between fields */
+}
+
+.mat-input-element {
+  border-color: #c9c9c9 !important;
+}
+
+.mat-form-field:not(.mat-form-field-disabled) .mat-form-field-underline {
+  background-color: #c9c9c9;
+}
+
+.mat-form-field:not(.mat-form-field-disabled) .mat-form-field-ripple {
+  background-color: #c9c9c9;
+}
+
+.mat-radio-button {
+  margin-right: 10px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.button1 {
+  background: linear-gradient(to right, darkcyan, cyan, white);
+  margin: 30px 50px 0;
+  color: black;
+  font-weight: 500;
+  border: 1px solid darkcyan;
+  border-radius: 3px;
+  height: 40px;
+  width: 100px;
+}
+
+.button1:hover {
+  background-color: green;
+}
+
+.button1:disabled {
+  background-color: #bfbfbf;
+  color: #666666;
+}
+
+/* Media Query for screens smaller than 768px (e.g., tablets, mobile devices) */
+@media (max-width: 768px) {
+  .form-container {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 15px;
   }
-  h2{
-    text-align: center;
-  }
+
   .matform {
-    width: calc(50% - 10px);
-    margin-right: 10px; 
-    height: fit-content;
-    height: 70px;
-    width: 300px;
-    margin-left: 50px;
-    box-shadow: rgba(0, 255, 255, 0.452);
+    width: 100%;
+    margin-bottom: 10px; /* Reduced margin-bottom for less space between fields */
   }
-  
-  .mat-input-element {
-    border-color: #c9c9c9 !important;
-  }
-  
-  .mat-form-field:not(.mat-form-field-disabled) .mat-form-field-underline {
-    background-color: #c9c9c9;
-  }
-  
-  .mat-form-field:not(.mat-form-field-disabled) .mat-form-field-ripple {
-    background-color: #c9c9c9;
-  }
-  
-  .mat-radio-button {
-    margin-right: 10px;
-  }
-  
+
   .button-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+    flex-direction: column;
+    align-items: center;
   }
-  
+
   .button1 {
-    background: linear-gradient(to right, darkcyan, cyan, white);
-    margin: 30px 50px 0;
-    color: black;
-    font-weight: 500;
-    border: 1px solid darkcyan;
-    border-radius: 3px;
-    height: 40px;
-    width: 100px;
+    width: 80%;
+    margin: 10px 0;
   }
-  
-  .button1:hover {
-    background-color: green;
-  }
-  
-  .button1:disabled {
-    background-color: #bfbfbf;
-    color: #666666;
-  }
-  
+}
