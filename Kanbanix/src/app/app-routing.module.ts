@@ -27,6 +27,7 @@ const routes: Routes = [
     // canActivateChild: [ChildAuthGuard],
     children: [
       { path: "project", component: ManagerViewComponent },
+      { path: "add-project", component: CreateProjectComponent },
       {
         path: "project/:id",
         children: [
@@ -39,7 +40,7 @@ const routes: Routes = [
   // { path:"project/:id", component: ProjectTaskComponent},
   // { path: "add-task", component: TaskregisterComponent },
   { path: "user/:id", component: UserViewComponent},
-  { path: "add-project", component: CreateProjectComponent},
+  // { path: "add-project", component: CreateProjectComponent},
   { path: "**", component: PageNotFoundComponent }
 ];
 
