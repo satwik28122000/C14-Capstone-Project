@@ -224,6 +224,7 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
             if (projectList == null)
             {
                 manager.setProjectList(Arrays.asList(project));
+                projectRepository.save(project);
             }
             else
             {
@@ -512,7 +513,6 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
             ProjectNotFoundException, ManagerNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException {
         Manager manager = saveTaskInManagerProjectList(managerId,projectId,task);
         saveEmployeeTaskToTaskList(task,task.getAssignedTo().getUserId());
-        saveTaskInProjectTaskList(task,projectId);
         return manager;
     }
 
