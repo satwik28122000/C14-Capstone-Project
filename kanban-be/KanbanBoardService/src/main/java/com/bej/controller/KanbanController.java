@@ -76,6 +76,7 @@ public class KanbanController {
 
         try {
             String userId = getUserIdClaims(request);
+            System.out.println("Fetch employee by USERID Claims: "+userId);
             return new ResponseEntity<>(kanbanService.getEmployeeByUserId(userId), HttpStatus.OK);
         }
         catch (EmployeeNotFoundException enf)
@@ -368,7 +369,7 @@ public class KanbanController {
     public ResponseEntity<?> modifyTaskInEmployeeToProject(HttpServletRequest request,@RequestBody Task task) throws ProjectNotFoundException,
             TaskNotFoundException, EmployeeNotFoundException, ManagerNotFoundException {
         try{
-            String userId = getManagerIdClaims(request);
+            String userId = getUserIdClaims(request);
             return new ResponseEntity<>(kanbanService.updateTaskFromEmployeeToManager(userId, task),HttpStatus.OK);
         } catch (ProjectNotFoundException e) {
             throw new ProjectNotFoundException();
