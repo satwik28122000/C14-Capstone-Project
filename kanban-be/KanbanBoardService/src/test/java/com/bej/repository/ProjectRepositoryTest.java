@@ -38,8 +38,8 @@ public class ProjectRepositoryTest {
         task2 = new Task("302", "Task 2", "Description 2", "In Progress", "High", "2024-06-10", null,"123");
         taskList.add(task1);
         taskList.add(task2);
-        project1 = new Project("401", "Project X", "ProjectDescription", taskList);
-        project2 = new Project("402", "Project Y", "ProjectDescription", taskList);
+        project1 = new Project("401", "Project X", "ProjectDescription", "Sangeetha@123",taskList);
+        project2 = new Project("402", "Project Y", "ProjectDescription", "Sangeetha@123",taskList);
     }
 
     @AfterEach
