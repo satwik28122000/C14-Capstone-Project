@@ -13,14 +13,9 @@ export class ManagerLoginComponent {
   loginForm: FormGroup=new FormGroup ({});
   manager: Manager ={};
   constructor
-  (private formBuilder : FormBuilder,private routerService:RouterService,private managerService:ManagerService){}
+  (private routerService:RouterService,private managerService:ManagerService){}
 
-  ngOnInit(): void {
-      this.loginForm = this.formBuilder.group({
-        managerId: ['', [Validators.required]],
-        managerPassword: ['', [Validators.required, Validators.minLength(6)]]
-      });
-  }
+  ngOnInit(): void {}
 
   onSubmit(form: NgForm) {
   

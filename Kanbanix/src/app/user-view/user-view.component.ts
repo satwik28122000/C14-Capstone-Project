@@ -27,36 +27,6 @@ export class UserViewComponent implements CanComponentDeactivate {
     private activatedRoute: ActivatedRoute
   ) { }
 
-  onDrag(task: any) {
-    console.log(task);
-    this.currentItem = task;
-  }
-
-  onDrop(event: any, status: string) {
-    event.preventDefault();
-    const record:any = this.employee.userTaskList?.find(t => t.taskId === this.currentItem?.taskId);
-    console.log(record);
-    if (record !== undefined) {
-      record.status = status;
-    }
-    this.employeeService.updateTaskFromEmployeeToManager(record).subscribe({
-      next : (res:any) =>{
-        console.log(res);
-        this.updateTaskLists();
-       this.currentItem = null;
-       alert("data updated");
-      },
-      error : (err:any)=>{
-          console.log(err);
-      }
-    })
-    
-  }
-
-  onDragOver(event: any) {
-    event.preventDefault();
-  }
-
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe({
       next: data => {
@@ -65,7 +35,6 @@ export class UserViewComponent implements CanComponentDeactivate {
           next: (res: any) => {
             console.log(res);
             this.employee = res;  
-            localStorage.setItem("token", res.Token);  
             console.log(this.employee);
             this.assignedList= this.employee.userTaskList?.filter(t => (t.status === 'Assigned' || t.status === 'assigned'));
             this.inProgressList = this.employee.userTaskList?.filter(t => (t.status === 'In-Progress' || t.status === 'In-progress'));
@@ -79,6 +48,40 @@ export class UserViewComponent implements CanComponentDeactivate {
       }
     });
   }
+
+  onDrag(task: any) {
+    const token:string= localStorage.getItem('token') ?? '';
+    localStorage.setItem('token',token)
+    console.log(task);
+    this.currentItem = task;
+  }
+
+  onDrop(event: any, status: string) {
+    event.preventDefault();
+    const record:any = this.employee.userTaskList?.find(t => t.taskId === this.currentItem?.taskId);
+    console.log("record"+record);
+    if (record !== undefined) {
+      record.status = status;
+    }
+    this.employeeService.updateTaskFromEmployeeToManager(record).subscribe({
+      next : (res:any) =>{
+        console.log(res);
+       alert("data updated");
+      },
+      error : (err:any)=>{
+          console.log(err);
+      }
+    })
+    
+    this.updateTaskLists();
+    this.currentItem = null;
+  }
+
+  onDragOver(event: any) {
+    event.preventDefault();
+  }
+
+  
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     return confirm("Do you want to discard your changes?");
