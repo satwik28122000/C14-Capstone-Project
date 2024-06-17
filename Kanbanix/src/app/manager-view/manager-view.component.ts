@@ -3,6 +3,7 @@ import { Manager } from '../../Models/Manager';
 import { RouterService } from '../services/router.service';
 import { ManagerService } from '../services/manager.service';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-manager-view',
@@ -12,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ManagerViewComponent implements OnInit {
 
   constructor(private routerService:RouterService,private managerService:ManagerService,
-    private activatedRoute:ActivatedRoute
+    private activatedRoute:ActivatedRoute, private location:Location
   ){}
 
   manager:Manager = {}
@@ -39,6 +40,6 @@ export class ManagerViewComponent implements OnInit {
   
 
  onCreateProjectClick(){
-  this.routerService.redirectToCreateProjectForm();
+  this.routerService.redirectToCreateProjectForm(this.manager?.managerId,this.activatedRoute);
  }
 }

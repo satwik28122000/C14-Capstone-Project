@@ -53,8 +53,8 @@ export class RouterService {
     this.r.navigate(['**']);
   }
 
-  redirectToCreateProjectForm(){
-    this.r.navigate(["add-project"])
+  redirectToCreateProjectForm(managerId:any,route:any){
+    this.r.navigate([`manager/${managerId}/add-project`])
   }
   redirectToPreviousPage(){
     this.r.navigate(["/"])
