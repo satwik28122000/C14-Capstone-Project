@@ -17,12 +17,6 @@ export class EmployeeLoginComponent
     ngOnInit(): void { }
 
 
-  onSubmit(form: NgForm) 
-  {
-
-      this.employeeService.loginEmployee(form.value).subscribe({
-
-
       onSubmit(form: NgForm) {
         this.employeeService.loginEmployee(form.value).subscribe({
         
@@ -41,6 +35,4 @@ export class EmployeeLoginComponent
     
       }
     }
-  }
   
-}
