@@ -10,22 +10,15 @@ import { EmployeeService } from '../services/employee.service';
   styleUrls: ['./employee-login.component.css']
 })
 export class EmployeeLoginComponent {
-  loginForm: FormGroup=new FormGroup ({});
-    employee: Employee={};
-    constructor(private formBuilder: FormBuilder ,private routerService:RouterService,private employeeService:EmployeeService){}
+    employee: Employee={ userId: '', password: '' };
+    constructor(private routerService:RouterService,private employeeService:EmployeeService){}
 
-    ngOnInit(): void {
-      this.loginForm=this.formBuilder.group({
-        userId: ['', [Validators.required]],
-        password: ['', [Validators.required, Validators.minLength(6)]]
-      });
-    }
+    ngOnInit(): void { }
 
-  onSubmit(form: NgForm) {
-      
-     
-      this.employeeService.loginEmployee(form.value).subscribe({
-          
+
+      onSubmit(form: NgForm) {
+        this.employeeService.loginEmployee(form.value).subscribe({
+        
           next: (res:any) => {
             console.log(res);
             localStorage.setItem("token",res.Token);
@@ -38,6 +31,17 @@ export class EmployeeLoginComponent {
           }
         })
   
-    }
+    
+      }
+    
+
+
+
+
+
+
+
+
+
       
-    }
+}

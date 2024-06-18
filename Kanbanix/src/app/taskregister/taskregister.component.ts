@@ -58,9 +58,6 @@ export class TaskregisterComponent implements OnInit,CanComponentDeactivate {
     })
     
   }
-  
-     
-   // console.log(this.filteredList);
     
 
 
