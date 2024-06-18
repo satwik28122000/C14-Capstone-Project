@@ -448,30 +448,47 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
 
     //update task in manager's project task list
     @Override
-    public Manager updateTaskInManagerProjectList(String managerId, String projectId, Task task) throws ProjectNotFoundException, ManagerNotFoundException, TaskNotFoundException {
+    public Manager updateTaskInManagerProjectList(String managerId, String projectId, Task task)
+            throws ProjectNotFoundException, ManagerNotFoundException, TaskNotFoundException {
+
+        // Retrieve manager or throw exception if not found
         Manager manager = managerRepository.findById(managerId).orElseThrow(ManagerNotFoundException::new);
-        Project project = getProjectByIdFromManager(managerId,projectId);
+
+        // Retrieve project from manager's project list or throw exception if not found
+        Project project = getProjectByIdFromManager(managerId, projectId);
+
+        // Retrieve task list from the project
         List<Task> taskList = project.getProjectTasks();
-        if(taskList==null || taskList.isEmpty() ||
-                taskList.stream().noneMatch(t -> t.getTaskId().equals(task.getTaskId()))){
+        if (taskList == null) {
+            taskList = new ArrayList<>();
+        }
+
+        // Find the task to update
+        Task taskToUpdate = null;
+        for (Task t : taskList) {
+            if (t.getTaskId().equals(task.getTaskId())) {
+                taskToUpdate = t;
+                break;
+            }
+        }
+
+        // If task is not found, throw exception
+        if (taskToUpdate == null) {
             throw new TaskNotFoundException();
         }
-        else{
-            for(Task t : taskList){
-                if (t.getTaskId().equals(task.getTaskId())){
-                    t.setTaskName(task.getTaskName());
-                    t.setStatus(task.getStatus());
-                    t.setDueDate(task.getDueDate());
-                    t.setPriority(task.getPriority());
-                    t.setTaskDesc(task.getTaskDesc());
-                    t.setAssignedTo(task.getAssignedTo());
-                    t.setProjectId(projectId);
-                    break;
-                }
-            }
-            project.setProjectTasks(taskList);
-            managerRepository.save(manager);
-        }
+
+        // Update the task details
+        taskToUpdate.setTaskName(task.getTaskName());
+        taskToUpdate.setStatus(task.getStatus());
+        taskToUpdate.setDueDate(task.getDueDate());
+        taskToUpdate.setPriority(task.getPriority());
+        taskToUpdate.setTaskDesc(task.getTaskDesc());
+        taskToUpdate.setAssignedTo(task.getAssignedTo());
+        taskToUpdate.setProjectId(projectId);
+
+        // Save the updated project back to the manager and persist
+        managerRepository.save(manager);
+
         return manager;
     }
 
@@ -501,10 +518,11 @@ public List<Task> deleteTaskFromEmployee(String userId, String taskId) throws Ta
     @Override
     public Task updateTaskFromEmployeeToManager(String userId, Task task) throws TaskNotFoundException, EmployeeNotFoundException, ProjectNotFoundException, ManagerNotFoundException {
         Employee employee= employeeRepository.findById(userId).orElseThrow(EmployeeNotFoundException::new);
+        updateTaskInProjectTaskList(task.getProjectId(),task);
         Project project = projectRepository.findById(task.getProjectId()).orElseThrow(ProjectNotFoundException::new);
         updateEmployeeTaskInTaskList(userId,task);
-        updateTaskInManagerProjectList(project.getManagerId(),task.getProjectId(), task);
-        updateTaskInProjectTaskList(task.getProjectId(),task);
+       // updateTaskInManagerProjectList(project.getManagerId(),task.getProjectId(), task);
+        updateProjectInManagerProjectList(project.getManagerId(), project);
         return task;
     }
 
