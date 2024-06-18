@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Employee } from '../../Models/Employee';
 import { Task } from '../../Models/Task';
@@ -24,6 +24,7 @@ export class EmployeeService {
   }
 
   getEmployeeByUserId(): Observable<any> {
+       
     return this.http.get<any>(`${this.kanbanUrl}/user/getEmployeesByUserId`);
   }
 
@@ -36,7 +37,8 @@ export class EmployeeService {
   }
 
   updateTaskFromEmployeeToManager(task: Task): Observable<any> {
-    return this.http.put<any>(`${this.kanbanUrl}/user/updateEmployeeTask`, task);
+    
+       return this.http.put<any>(`${this.kanbanUrl}/user/updateEmployeeTask`, task );
   }
   
 }
