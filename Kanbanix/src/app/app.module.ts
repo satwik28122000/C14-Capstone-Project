@@ -72,7 +72,10 @@ import { DeactiveAuthGuard } from './guard/deactive-auth.guard';
   ],
   providers: [
     provideHttpClient(withInterceptors([customInterceptor])),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    AuthGuard,
+    ChildAuthGuard,
+    DeactiveAuthGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -101,13 +101,7 @@ export class TaskregisterComponent implements OnInit,CanComponentDeactivate {
 
 
   }
-
-
-  
-
-
-
-  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     return confirm("Do you want to discard your changes?");
   }
 }

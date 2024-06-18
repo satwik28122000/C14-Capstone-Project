@@ -1,3 +1,4 @@
+// src/app/app-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -12,8 +13,10 @@ import { ManagerLoginComponent } from './manager-login/manager-login.component';
 import { EmployeeLoginComponent } from './employee-login/employee-login.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { DeactiveAuthGuard } from './guard/deactive-auth.guard';
-import { ChildAuthGuard } from './guard/child-auths.guard';
+
 import { AuthGuard } from './guard/auth.guard';
+import { AuthService } from './services/auth.service'; // Import AuthService
+import { ChildAuthGuard } from './guard/child-auths.guard';
 
 const routes: Routes = [
   { path: "", component: HomePageComponent },
@@ -21,26 +24,31 @@ const routes: Routes = [
   { path: "user", component: EmployeeLoginComponent },
   { path: "managerRegister", component: ManagerRegisterComponent },
   { path: "user-register", component: EmployeeRegisterComponent },
+  { 
+    path: "logout", 
+    canActivate: [AuthGuard], // Optional: Secure logout route if needed
+    component: HomePageComponent, // Example: Navigate to home after logout
+    resolve: { 
+      logout: AuthService // Use resolver to trigger logout
+    } 
+  },
   {
     path: "manager/:id",
-    // canActivate: [AuthGuard],
-    // canActivateChild: [ChildAuthGuard],
+    canActivate: [AuthGuard],
+    canActivateChild: [ChildAuthGuard],
     children: [
       { path: "project", component: ManagerViewComponent },
-      { path: "add-project", component: CreateProjectComponent },
+      { path: "add-project", component: CreateProjectComponent, canDeactivate: [DeactiveAuthGuard] },
       {
         path: "project/:id",
         children: [
-          { path: "", component: ProjectTaskComponent},
-          { path: "saveTask", component: TaskregisterComponent}
+          { path: "", component: ProjectTaskComponent },
+          { path: "saveTask", component: TaskregisterComponent, canDeactivate: [DeactiveAuthGuard] }
         ]
       }
     ]
   },
-  // { path:"project/:id", component: ProjectTaskComponent},
-  // { path: "add-task", component: TaskregisterComponent },
-  { path: "user/:id", component: UserViewComponent},
-  // { path: "add-project", component: CreateProjectComponent},
+  { path: "user/:id", component: UserViewComponent },
   { path: "**", component: PageNotFoundComponent }
 ];
 
