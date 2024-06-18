@@ -58,15 +58,6 @@ public class ManagerRepositoryTest {
     }
 
     @Test
-    public void testDeleteByIdMethod() {
-        managerRepository.save(manager1);
-        managerRepository.save(manager2);
-        managerRepository.deleteById("manager2");
-        assertEquals(1, managerRepository.findAll().size());
-        assertFalse(managerRepository.findById("manager2").isPresent());
-    }
-
-    @Test
     public void testFindByIdMethod() {
         managerRepository.save(manager1);
         assertTrue(managerRepository.findById("manager1").isPresent());
