@@ -22,15 +22,11 @@ export class EmployeeLoginComponent {
     }
 
   onSubmit(form: NgForm) {
-      
-     
       this.employeeService.loginEmployee(form.value).subscribe({
-          
           next: (res:any) => {
             console.log(res);
             localStorage.setItem("token",res.Token);
-            
-            this.routerService.redirectToUserView(form.value?.userId);
+             this.routerService.redirectToUserView(form.value?.userId);
           },
           error: err =>{
             console.log(form.value);
