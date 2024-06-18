@@ -14,10 +14,8 @@ export class AuthService {
   logout(): void {
     // Clear user session data
     localStorage.removeItem('token');
-    // Optionally, clear other session data
-     localStorage.removeItem('user');
-    // Navigate to the login page or home page
-     //window.alert("Do you Sure! want to logout?")
+    localStorage.removeItem('Token');
+    alert("Logging out..");
     this.router.navigate(['/']);
   }
 }

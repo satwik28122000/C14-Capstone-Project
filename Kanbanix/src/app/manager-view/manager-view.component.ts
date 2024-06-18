@@ -26,12 +26,18 @@ export class ManagerViewComponent implements OnInit {
           next: (res:any) =>{
             console.log(res);
             this.manager = res.find((m: { managerId: string; }) => m.managerId === managerId);
-            localStorage.setItem("Token",res.Token)
+            if(this.manager){
+              alert("Welcome to "+this.manager.managerName+"'s Workspace")
+            }
+            else{
+              alert("Manager not found");
+              this.routerService.redirectToPreviousPage();
+            }
             console.log(this.manager);
             
           },
           error: err => {
-            console.log(err); 
+            alert(err); 
           }
         })
       }

@@ -28,7 +28,7 @@ export class EmployeeLoginComponent
           },
           error: err =>{
             console.log(form.value);
-            console.log(err);
+            alert("Invalid credentials or New User? Register Now!!");
           }
         })
 
