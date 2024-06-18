@@ -9,7 +9,8 @@ import { EmployeeService } from '../services/employee.service';
   templateUrl: './employee-login.component.html',
   styleUrls: ['./employee-login.component.css']
 })
-export class EmployeeLoginComponent {
+export class EmployeeLoginComponent
+{
     employee: Employee={ userId: '', password: '' };
     constructor(private routerService:RouterService,private employeeService:EmployeeService){}
 
@@ -18,7 +19,9 @@ export class EmployeeLoginComponent {
 
       onSubmit(form: NgForm) {
         this.employeeService.loginEmployee(form.value).subscribe({
-         next: (res:any) => {
+
+
+          next: (res:any) => {
             console.log(res);
             localStorage.setItem("token",res.Token);
              this.routerService.redirectToUserView(form.value?.userId);
@@ -28,18 +31,8 @@ export class EmployeeLoginComponent {
             console.log(err);
           }
         })
-  
-    
+
+
       }
-    
+    }
 
-
-
-
-
-
-
-
-
-      
-}
