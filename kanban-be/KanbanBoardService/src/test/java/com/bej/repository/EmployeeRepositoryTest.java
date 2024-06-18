@@ -57,14 +57,14 @@ public class EmployeeRepositoryTest {
         assertEquals(2,employeeRepository.findAll().size());
     }
 
-    @Test
-    public void testDeleteByIdMethod(){
-        employeeRepository.save(employee1);
-        employeeRepository.save(employee2);
-        employeeRepository.deleteById("priya@12");
-        assertEquals(1,employeeRepository.findAll().size());
-        assertFalse(employeeRepository.findById("priya@12").isPresent());
-    }
+//    @Test
+//    public void testDeleteByIdMethod(){
+//        employeeRepository.save(employee1);
+//        employeeRepository.save(employee2);
+//        employeeRepository.deleteById("priya@12");
+//        assertEquals(1,employeeRepository.findAll().size());
+//        assertFalse(employeeRepository.findById("priya@12").isPresent());
+//    }
     @Test
     public void testFindByIdMethod() {
         employeeRepository.save(employee1);

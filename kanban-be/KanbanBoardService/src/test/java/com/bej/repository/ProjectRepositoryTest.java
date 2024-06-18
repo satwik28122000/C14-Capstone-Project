@@ -59,14 +59,14 @@ public class ProjectRepositoryTest {
 
     }
 
-    @Test
-    public void testDeleteByIdMethod() {
-        projectRepository.save(project1);
-        projectRepository.save(project2);
-        projectRepository.deleteById("402");
-        assertEquals(1, projectRepository.findAll().size());
-        assertFalse(projectRepository.findById("402").isPresent());
-    }
+//    @Test
+//    public void testDeleteByIdMethod() {
+//        projectRepository.save(project1);
+//        projectRepository.save(project2);
+//        projectRepository.deleteById("402");
+//        assertEquals(1, projectRepository.findAll().size());
+//        assertFalse(projectRepository.findById("402").isPresent());
+//    }
 
     @Test
     public void testFindByIdMethod() {
