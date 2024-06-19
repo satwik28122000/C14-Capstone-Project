@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -8,10 +8,17 @@ import { AuthService } from '../services/auth.service';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
- constructor(private as: AuthService) { }
+ constructor(private as: AuthService,private r: Router) { }
 
   logout() {
     this.as.logout();
   }
-
+  
+  
+  navigateToHome() {
+    const confirmHomeNavigation = confirm("Do you want to discard your changes and go to the home page?");
+    if (confirmHomeNavigation) {
+      this.r.navigate(['/']);
+    }
+  }
 }

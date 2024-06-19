@@ -1,20 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Employee }  from '../../Models/Employee';
 import { EmployeeService } from '../services/employee.service';
 import { RouterService } from '../services/router.service';
-
+import { CanComponentDeactivate } from '../guard/deactive-auth.guard';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-employee-register',
   templateUrl: './employee-register.component.html',
-  styleUrl: './employee-register.component.css'
+  styleUrls: ['./employee-register.component.css']
 })
-export class EmployeeRegisterComponent implements OnInit {
+export class EmployeeRegisterComponent implements OnInit, CanComponentDeactivate {
   registrationForm: FormGroup = new FormGroup({});
-  constructor
-  (private formBuilder : FormBuilder, private employeeService: EmployeeService, private routerService: RouterService){}
- 
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private employeeService: EmployeeService,
+    private routerService: RouterService
+  ) {}
+
   ngOnInit(): void {
     this.registrationForm = this.formBuilder.group({
       userId: ['', [Validators.required]],
@@ -25,53 +29,60 @@ export class EmployeeRegisterComponent implements OnInit {
       confirmPassword: ['', [Validators.required]]
     }, { validator: this.passwordMatchValidator });
   }
+
   onSubmit() {
     this.employeeService.registerEmployee(this.registrationForm.value).subscribe({
-      next : res =>{
+      next: res => {
         console.log(res);
+        // Mark the form as pristine after successful submission
+        this.registrationForm.markAsPristine();
         this.routerService.redirectToUserLogin();
       },
-      error : err => {
+      error: err => {
         console.log(err);
       }
-    })
-        
-      }
-    
-      passwordMatchValidator(ac: AbstractControl) {
-        let password = ac.get('password')?.value;
-        let confirmPassword = ac.get('confirmPassword')?.value;
-        console.log(password + " " + confirmPassword);
-        if (password !== confirmPassword) {
-          return { pError: true };
-        } else {
-          return null;
-        }
-      }
-    
-      get userId(): AbstractControl {
-        return this.registrationForm.get('userId')!;
-      }
-    
-      get userName(): AbstractControl {
-        return this.registrationForm.get('userName')!;
-      }
-    
-      get emailId(): AbstractControl {
-        return this.registrationForm.get('emailId')!;
-      }
-
-      get designation(): AbstractControl {
-        return this.registrationForm.get('designation')!;
-      }
-    
-      get password(): AbstractControl {
-        return this.registrationForm.get('password')!;
-      }
-    
-      get confirmPassword(): AbstractControl {
-        return this.registrationForm.get('confirmPassword')!;
-      }
+    });
   }
 
- 
+  passwordMatchValidator(ac: AbstractControl) {
+    let password = ac.get('password')?.value;
+    let confirmPassword = ac.get('confirmPassword')?.value;
+    console.log(password + " " + confirmPassword);
+    if (password !== confirmPassword) {
+      return { pError: true };
+    } else {
+      return null;
+    }
+  }
+
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (this.registrationForm.dirty) {
+      return confirm("You have unsaved changes. Do you really want to leave?");
+    }
+    return true;
+  }
+
+  get userId(): AbstractControl {
+    return this.registrationForm.get('userId')!;
+  }
+
+  get userName(): AbstractControl {
+    return this.registrationForm.get('userName')!;
+  }
+
+  get emailId(): AbstractControl {
+    return this.registrationForm.get('emailId')!;
+  }
+
+  get designation(): AbstractControl {
+    return this.registrationForm.get('designation')!;
+  }
+
+  get password(): AbstractControl {
+    return this.registrationForm.get('password')!;
+  }
+
+  get confirmPassword(): AbstractControl {
+    return this.registrationForm.get('confirmPassword')!;
+  }
+}
