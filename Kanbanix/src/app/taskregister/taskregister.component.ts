@@ -8,6 +8,7 @@ import { ManagerService } from '../services/manager.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Employee } from '../../Models/Employee';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 //import * as moment from 'moment-timezone';
 
 @Component({
@@ -62,6 +63,22 @@ export class TaskregisterComponent implements OnInit,CanComponentDeactivate {
   }
     
 
+  selectedDate: string="";
+
+  onDateChange(event: MatDatepickerInputEvent<Date>) {
+    const date = event.value;
+
+    if (date) {
+      // Convert the date to a string in the format YYYY-MM-DD
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      this.selectedDate = `${year}-${month}-${day}`;
+      console.log(this.selectedDate);
+      this.registrationForm.value.dueDate = this.selectedDate;
+    }
+    return this.selectedDate;
+  }
 
 
   onSubmit() {
@@ -103,6 +120,8 @@ export class TaskregisterComponent implements OnInit,CanComponentDeactivate {
 
 
   }
+
+
 canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     return confirm("Do you want to discard your changes?");
   }
