@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { ManagerService } from '../services/manager.service';
 import { RouterService } from '../services/router.service';
 import { Manager } from '../../Models/Manager';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-manager-register',
@@ -15,7 +16,8 @@ export class ManagerRegisterComponent implements OnInit {
   constructor
   (private formBuilder : FormBuilder,
      private managerService:ManagerService,
-     private routerService:RouterService){}
+     private routerService:RouterService,
+    private snackBar:MatSnackBar){}
  
 
   ngOnInit(): void {
@@ -32,6 +34,7 @@ export class ManagerRegisterComponent implements OnInit {
       this.managerService.registerManager(this.registrationForm.value).subscribe({
         next: res => {
           console.log(res);
+          this.snackBar.open("Manager registered successfully!!")
           this.routerService.redirectToManagerLogin();
         },
         error: err => {

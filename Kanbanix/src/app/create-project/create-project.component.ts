@@ -7,6 +7,8 @@ import { ManagerService } from '../services/manager.service';
 import { RouterService } from '../services/router.service';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { duration } from 'moment';
 @Component({
   selector: 'app-create-project',
   templateUrl: './create-project.component.html',
@@ -18,7 +20,8 @@ export class CreateProjectComponent implements CanComponentDeactivate,OnInit{
       private managerService: ManagerService, 
       private routerService: RouterService,
       private location:Location,
-    private activatedRoute:ActivatedRoute){}
+      private activatedRoute:ActivatedRoute,
+      private snackBar:MatSnackBar){}
     projectForm: FormGroup = new FormGroup({});
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(
@@ -49,7 +52,7 @@ export class CreateProjectComponent implements CanComponentDeactivate,OnInit{
     onSubmit(){
       this.managerService.saveManagerProject(this.projectForm.value).subscribe({
       next:res=>{
-        console.log(res);
+        this.snackBar.open("Project Saved Successfully!!","X")
         this.location.back();
       },
        error :err => {

@@ -6,6 +6,7 @@ import { CanComponentDeactivate } from '../guard/deactive-auth.guard';
 import { ManagerService } from '../services/manager.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-taskregister',
   templateUrl: './taskregister.component.html',
@@ -19,7 +20,8 @@ export class TaskregisterComponent implements OnInit, CanComponentDeactivate {
     private formBuilder: FormBuilder, 
     private managerService: ManagerService,
     private activatedRoute: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private snackBar:MatSnackBar
   ) {}
   ngOnInit(): void {
     this.managerService.fetchAllEmployee().subscribe(res => {
@@ -56,6 +58,7 @@ export class TaskregisterComponent implements OnInit, CanComponentDeactivate {
       next: res => {
         console.log(res);
         this.registrationForm.markAsPristine(); // Mark the form as pristine after successful submission
+        this.snackBar.open("Task added successfully!!","x");
         this.location.back(); // Navigate back after successful submission
       },
       error: err => {

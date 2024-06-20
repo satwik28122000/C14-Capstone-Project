@@ -4,6 +4,7 @@ import { EmployeeService } from '../services/employee.service';
 import { RouterService } from '../services/router.service';
 import { CanComponentDeactivate } from '../guard/deactive-auth.guard';
 import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-employee-register',
@@ -16,7 +17,8 @@ export class EmployeeRegisterComponent implements OnInit, CanComponentDeactivate
   constructor(
     private formBuilder: FormBuilder,
     private employeeService: EmployeeService,
-    private routerService: RouterService
+    private routerService: RouterService,
+    private snackBar:MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +36,7 @@ export class EmployeeRegisterComponent implements OnInit, CanComponentDeactivate
     this.employeeService.registerEmployee(this.registrationForm.value).subscribe({
       next: res => {
         console.log(res);
+        this.snackBar.open("User registered successfully","x")
         // Mark the form as pristine after successful submission
         this.registrationForm.markAsPristine();
         this.routerService.redirectToUserLogin();

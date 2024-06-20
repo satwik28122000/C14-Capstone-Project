@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Employee } from '../../Models/Employee';
 import { RouterService } from '../services/router.service';
 import { EmployeeService } from '../services/employee.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-employee-login',
@@ -12,7 +13,9 @@ import { EmployeeService } from '../services/employee.service';
 export class EmployeeLoginComponent
 {
     employee: Employee={ userId: '', password: '' };
-    constructor(private routerService:RouterService,private employeeService:EmployeeService){}
+    constructor(private routerService:RouterService,
+      private employeeService:EmployeeService,
+    private snackBar:MatSnackBar){}
 
     ngOnInit(): void { }
 
@@ -24,6 +27,7 @@ export class EmployeeLoginComponent
           next: (res:any) => {
             console.log(res);
             localStorage.setItem("token",res.Token);
+            this.snackBar.open("Logged in successfully!")
              this.routerService.redirectToUserView(form.value?.userId);
           },
           error: err =>{

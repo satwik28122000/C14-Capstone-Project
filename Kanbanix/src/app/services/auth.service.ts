@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private snackBar:MatSnackBar) { }
 
   isLoggedIn(): boolean {
     // Check if the user is logged in by verifying the token or session data
@@ -15,7 +16,7 @@ export class AuthService {
     // Clear user session data
     localStorage.removeItem('token');
     localStorage.removeItem('Token');
-    alert("Logging out..");
+    this.snackBar.open("Logging out!!","x")
     this.router.navigate(['/']);
   }
 }

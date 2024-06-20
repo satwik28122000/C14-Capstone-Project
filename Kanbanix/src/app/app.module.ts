@@ -34,6 +34,7 @@ import { customInterceptor } from './services/custom.interceptor';
 import { AuthGuard } from './guard/auth.guard';
 import { ChildAuthGuard } from './guard/child-auths.guard';
 import { DeactiveAuthGuard } from './guard/deactive-auth.guard';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,14 +69,15 @@ import { DeactiveAuthGuard } from './guard/deactive-auth.guard';
     MatRadioButton,
     MatRadioModule,
     MatError,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
   providers: [
     provideHttpClient(withInterceptors([customInterceptor])),
     provideAnimationsAsync(),
-    AuthGuard,
-    ChildAuthGuard,
-    DeactiveAuthGuard
+    // AuthGuard,
+    // ChildAuthGuard,
+    // DeactiveAuthGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -7,6 +7,7 @@ import { RouterService } from '../services/router.service';
 import { ActivatedRoute } from '@angular/router';
 import { Employee } from '../../Models/Employee';
 import { NgStyle } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-view',
@@ -24,7 +25,8 @@ export class UserViewComponent implements CanComponentDeactivate {
   constructor(
     private routerService: RouterService,
     private employeeService: EmployeeService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private snackBar:MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -66,7 +68,8 @@ export class UserViewComponent implements CanComponentDeactivate {
     this.employeeService.updateTaskFromEmployeeToManager(record).subscribe({
       next : (res:any) =>{
         console.log(res);
-       alert("data updated");
+        
+        this.snackBar.open("Data updated","x")
       },
       error : (err:any)=>{
           console.log(err);

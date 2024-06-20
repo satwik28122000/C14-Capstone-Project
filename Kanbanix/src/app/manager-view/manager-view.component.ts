@@ -4,6 +4,7 @@ import { RouterService } from '../services/router.service';
 import { ManagerService } from '../services/manager.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-manager-view',
@@ -13,7 +14,7 @@ import { Location } from '@angular/common';
 export class ManagerViewComponent implements OnInit {
 
   constructor(private routerService:RouterService,private managerService:ManagerService,
-    private activatedRoute:ActivatedRoute, private location:Location
+    private activatedRoute:ActivatedRoute, private location:Location,private snackBar:MatSnackBar
   ){}
 
   manager:Manager = {}
@@ -27,7 +28,8 @@ export class ManagerViewComponent implements OnInit {
             console.log(res);
             this.manager = res.find((m: { managerId: string; }) => m.managerId === managerId);
             if(this.manager){
-              alert("Welcome to "+this.manager.managerName+"'s Workspace")
+              //alert("Welcome to "+this.manager.managerName+"'s Workspace")
+              this.snackBar.open(`Welcome to ${this.manager.managerName}'s Workspace`,"x");
             }
             else{
               alert("Manager not found");
