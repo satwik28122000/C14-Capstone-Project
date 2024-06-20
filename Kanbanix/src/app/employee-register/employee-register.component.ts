@@ -24,9 +24,9 @@ export class EmployeeRegisterComponent implements OnInit, CanComponentDeactivate
   ngOnInit(): void {
     this.registrationForm = this.formBuilder.group({
       userId: ['', [Validators.required]],
-      userName: ['', [Validators.required, Validators.minLength(10), Validators.pattern(/^[A-Z a-z]+$/)]],
-      emailId: ['', [Validators.required]],
-      designation: ['', [Validators.required, Validators.minLength(10), Validators.pattern(/^[A-Z a-z]+$/)]],
+      userName: ['', [Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Z a-z]+$/)]],
+      emailId: ['', [Validators.required, Validators.pattern("^[a-zA-Z][a-zA-Z0-9.]*@[a-zA-Z-]+(\.[a-zA-Z]+)+$")]],
+      designation: ['', [Validators.required, Validators.minLength(2), Validators.pattern(/^[A-Z a-z]+$/)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
     }, { validator: this.passwordMatchValidator });

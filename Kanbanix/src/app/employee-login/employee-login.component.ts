@@ -27,7 +27,7 @@ export class EmployeeLoginComponent
           next: (res:any) => {
             console.log(res);
             localStorage.setItem("token",res.Token);
-            this.snackBar.open("Logged in successfully!")
+            this.snackBar.open("Logged in successfully!","x")
              this.routerService.redirectToUserView(form.value?.userId);
           },
           error: err =>{

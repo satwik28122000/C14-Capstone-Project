@@ -24,7 +24,7 @@ export class ManagerRegisterComponent implements OnInit {
     this.registrationForm = this.formBuilder.group({
       managerId: ['', [Validators.required]],
       managerName: ['', [Validators.required, Validators.minLength(10), Validators.pattern(/^[A-Z a-z]+$/)]],
-      managerEmail: ['', [Validators.required, Validators.email]],
+      managerEmail: ['', [Validators.required, Validators.pattern("^[a-zA-Z][a-zA-Z0-9.]*@[a-zA-Z-]+(\.[a-zA-Z]+)+$")]],
       managerPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
     }, { validators: this.passwordMatchValidator });

@@ -31,7 +31,7 @@
         <input matInput type="email" id="managerEmail" formControlName="managerEmail">
         <mat-error *ngIf="registrationForm.controls['managerEmail'].invalid && registrationForm.controls['managerEmail'].touched">
           <span *ngIf="registrationForm.controls['managerEmail'].errors?.['required']">Manager Email is required.</span>
-          <span *ngIf="registrationForm.controls['managerEmail'].errors?.['email']">Invalid email format.</span>
+          <span *ngIf="registrationForm.controls['managerEmail'].errors?.['pattern']">Invalid email format.</span>
         </mat-error>
       </mat-form-field>
     </div>

@@ -18,7 +18,7 @@
             <input matInput type="text" id="userName" formControlName="userName">
             <mat-error *ngIf="registrationForm.controls['userName'].invalid && registrationForm.controls['userName'].touched">
               <span *ngIf="registrationForm.controls['userName'].errors?.['required']">Employee Name is required.</span>
-              <span *ngIf="registrationForm.controls['userName'].errors?.['minlength']">Employee Name must be at least 10 characters long.</span>
+              <span *ngIf="registrationForm.controls['userName'].errors?.['minlength']">Employee Name must be at least 4 characters long.</span>
               <span *ngIf="registrationForm.controls['userName'].errors?.['pattern']">Employee Name must contain only alphabetic characters.</span>
             </mat-error>
           </mat-form-field>
@@ -31,7 +31,7 @@
           <input matInput type="email" id="emailId" formControlName="emailId">
           <mat-error *ngIf="registrationForm.controls['emailId'].invalid && registrationForm.controls['emailId'].touched">
             <span *ngIf="registrationForm.controls['emailId'].errors?.['required']">Email ID is required.</span>
-            <span *ngIf="registrationForm.controls['emailId'].errors?.['email']">Invalid email format.</span>
+            <span *ngIf="registrationForm.controls['emailId'].errors?.['pattern']">Invalid email format.</span>
           </mat-error>
         </mat-form-field>
       </div>
