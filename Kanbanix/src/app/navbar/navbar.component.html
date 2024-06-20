@@ -5,7 +5,7 @@
       </div>
       <div class="navbar-menu">
         <a (click)="navigateToHome()">Home</a>
-        <a routerLink="/logout" (click)="logout()">Logout</a>
+        <a *ngIf="loggedIn()" routerLink="/" (click)="logout()">Logout</a>
     </div>
  
 

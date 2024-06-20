@@ -13,6 +13,9 @@ export class NavbarComponent {
   logout() {
     this.as.logout();
   }
+  loggedIn():boolean{
+    return this.as.isLoggedIn();
+  }
   
   
   navigateToHome() {
