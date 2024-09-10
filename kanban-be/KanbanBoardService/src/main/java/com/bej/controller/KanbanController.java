@@ -2,6 +2,8 @@ package com.bej.controller;
 import com.bej.domain.*;
 import com.bej.domain.Task;
 import com.bej.exception.*;
+import com.bej.service.EmailService;
+import com.bej.service.IGenerateEmail;
 import com.bej.service.IKanbanService;
 import io.jsonwebtoken.Claims;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,10 +21,14 @@ import org.springframework.web.bind.annotation.*;
 public class KanbanController {
 
     private IKanbanService kanbanService;
+    private IGenerateEmail generateEmail;
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
-    public KanbanController(IKanbanService kanbanService) {
+    public KanbanController(IKanbanService kanbanService, IGenerateEmail generateEmail) {
         this.kanbanService = kanbanService;
+        this.generateEmail=generateEmail;
     }
    //OpenAPI
     @Operation(summary = "Register employee", description = "This will register new employee")
@@ -327,13 +333,21 @@ public class KanbanController {
         }
     }
 
+
+
+
+
+
+
     @Operation(summary = "Create task in project and Employee", description = "This will create task in project and employee")
     @ApiResponse(responseCode = "201", description = "Task created successfully")
     //Crucial methods for this application
     @PostMapping("/manager/project/{projectId}")
     public ResponseEntity<?> createTaskInProjectAndEmployee(@PathVariable String projectId,@RequestBody Task task){
         try{
-            return new ResponseEntity<>(kanbanService.saveTaskInProjectAndEmployee(projectId,task),HttpStatus.CREATED);
+            ResponseEntity<?> response= new ResponseEntity<>(kanbanService.saveTaskInProjectAndEmployee(projectId,task),HttpStatus.CREATED);
+
+            return response;
         } catch (ProjectNotFoundException | TaskAlreadyExistsException | EmployeeNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -341,6 +355,32 @@ public class KanbanController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Operation(summary = "Modify task in project and employee", description = "This will update task in project and employee")
     @ApiResponse(responseCode = "200", description = "task updated in project and employee successfully")
@@ -391,6 +431,8 @@ public class KanbanController {
             ProjectNotFoundException, ManagerNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException {
         try{
             String managerId = getManagerIdClaims(request);
+            emailService.sendEmail(task.getAssignedTo().getEmailId(),"NEW TASK ASSIGNED",
+                    generateEmail.taskAssignEmail(task.getTaskName(),task.getTaskDesc()));
             return new ResponseEntity<>(kanbanService.saveTaskInManagerAndEmployee(managerId,projectId,task),HttpStatus.CREATED);
         } catch(ProjectNotFoundException | ManagerNotFoundException | TaskAlreadyExistsException | EmployeeNotFoundException e){
             throw new RuntimeException(e);

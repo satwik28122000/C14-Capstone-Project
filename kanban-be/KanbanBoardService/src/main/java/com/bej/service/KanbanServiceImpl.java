@@ -28,14 +28,12 @@ public class KanbanServiceImpl implements IKanbanService {
     private ManagerRepository managerRepository;
     private ProjectRepository projectRepository;
     private UserProxy userProxy;
-   // private ManagerProxy managerProxy;
     @Autowired
     public KanbanServiceImpl(UserProxy userProxy,EmployeeRepository employeeRepository, ManagerRepository managerRepository,ProjectRepository projectRepository) {
         this.employeeRepository = employeeRepository;
         this.managerRepository = managerRepository;
         this.projectRepository = projectRepository;
         this.userProxy=userProxy;
-       // this.managerProxy=managerProxy;
     }
 
     //done
