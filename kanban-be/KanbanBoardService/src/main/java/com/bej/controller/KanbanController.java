@@ -15,7 +15,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-@CrossOrigin()
+
 @RestController
 @RequestMapping("/api/kanban")
 public class KanbanController {
@@ -61,22 +61,8 @@ public class KanbanController {
         }
     }
 
-
-//    @CrossOrigin(origins = "http://localhost:4200")
-//    @PostMapping("/managers/saveManager")
-//    public ResponseEntity createManager(@RequestBody Manager manager)
-//    {
-//        try {
-//            return new ResponseEntity<>(kanbanService.saveManager(manager), HttpStatus.CREATED);
-//        }catch(Exception e){
-//            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-
-
-
-    @Operation(summary = "Get employee by user id", description = "This will get employee by user id")
-    @ApiResponse(responseCode = "200", description = "Retrive employee successfully")
+//    @Operation(summary = "Get employee by user id", description = "This will get employee by user id")
+//    @ApiResponse(responseCode = "200", description = "Retrive employee successfully")
     @GetMapping("/user/getEmployeesByUserId")
     public ResponseEntity<?> fetchEmployeeByUserId(HttpServletRequest request) throws EmployeeNotFoundException {
 
@@ -109,8 +95,8 @@ public class KanbanController {
     }
 
 
-    @Operation(summary = "Fetch Manager", description = "This will fetch all manager")
-    @ApiResponse(responseCode = "200", description = "Manager fetched successfully")
+//    @Operation(summary = "Fetch Manager", description = "This will fetch all manager")
+//    @ApiResponse(responseCode = "200", description = "Manager fetched successfully")
     @GetMapping("/getAllManager")
     public ResponseEntity<?> fetchAllManager() throws Exception
     {
@@ -184,25 +170,7 @@ public class KanbanController {
     }
 
 
-//    @DeleteMapping("/deleteProject/{projectId}")
-//    public ResponseEntity<?> deleteProject(@PathVariable String projectId , @RequestBody String managerId) throws ManagerNotFoundException , ProjectNotFoundException
-//    {
-//        try {
-//            return new ResponseEntity<>(kanbanService.deleteProjectFromManager(projectId , managerId), HttpStatus.OK);
-//        }
-//        catch (ManagerNotFoundException mnf)
-//        {
-//            throw new ManagerNotFoundException();
-//        }
-//        catch (ProjectNotFoundException pnf)
-//        {
-//            throw new ProjectNotFoundException();
-//        }
-//        catch (Exception e)
-//        {
-//            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+
 @Operation(summary = "Get All Project from manager", description = "This will retrive all project from manager")
 @ApiResponse(responseCode = "200", description = "Project retrived successfully from manager")
     @GetMapping("/manager/projects")
@@ -424,8 +392,8 @@ public class KanbanController {
         }
     }
 
-    @Operation(summary = "Save Tak", description = "This will save new task")
-    @ApiResponse(responseCode = "201", description = "Task saved successfully")
+//    @Operation(summary = "Save Tak", description = "This will save new task")
+//    @ApiResponse(responseCode = "201", description = "Task saved successfully")
     @PostMapping("/manager/project/{projectId}/saveTask")
     public ResponseEntity<?> createTaskInManagerAndEmployee(HttpServletRequest request,@PathVariable String projectId,@RequestBody Task task) throws
             ProjectNotFoundException, ManagerNotFoundException, TaskAlreadyExistsException, EmployeeNotFoundException {
